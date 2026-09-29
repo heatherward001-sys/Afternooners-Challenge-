@@ -272,13 +272,13 @@ grid-template-columns:repeat(2,1fr)}
 <div class="wrap">
 <div class="hero">
 <h1 class="brand">Afternooners</h1>
-<div class="tag">Healthy Girls â¢ Happier Days</div>
+<div class="tag">Healthy Girls &bull; Happier Days</div>
 </div>
 
 <div id="homePage" class="page active">
 <div class="card">
 <div class="greeting" id="greeting">Good morning!</div>
-<div class="weather" id="weather">Mitchell weather loadingâ¦</div>
+<div class="weather" id="weather">Mitchell weather loading...</div>
 <div class="small" id="todayDate">
 </div>
 <div class="quote" id="quote">
@@ -286,9 +286,9 @@ grid-template-columns:repeat(2,1fr)}
 </div>
 <div class="card voiceCard">
 <h2>Tell me about your day</h2>
-<button class="mic" id="micButton" onclick="startListening()">ðï¸</button>
+<button class="mic" id="micButton" onclick="startListening()" aria-label="Microphone">&#127897;</button>
 <div id="heard">Tap the microphone and just talk normally.</div>
-<div class="small">Food â¢ Water â¢ Movement â¢ Sleep â¢ Weight â¢ Wellness</div>
+<div class="small">Food &bull; Water &bull; Movement &bull; Sleep &bull; Weight &bull; Wellness</div>
 </div>
 <div class="progressGrid">
 <div class="progress">
@@ -557,11 +557,7 @@ quote.textContent=quotes[d.getDate()%quotes.length]}
 async function loadWeather(){
 try{
 let r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=43.4668&longitude=-81.1960&current=temperature_2m,weather_code&temperature_unit=celsius"),j=await r.json(),t=Math.round(j.current.temperature_2m),c=j.current.weather_code,d=c===0?"Sunny":c<=3?"Partly cloudy":c<=48?"Foggy":c<=67?"Rainy":c<=77?"Snowy":c<=82?"Showers":c>=95?"Stormy":"Outside";
-weather.textContent=`Mitchell â¢ ${
-t}
-Â°C â¢ ${
-d}
-`}
+weather.textContent="Mitchell | "+t+" "+String.fromCharCode(176)+"C | "+d}
 catch(e){
 weather.textContent="Mitchell, Ontario"}
 }
@@ -1097,7 +1093,7 @@ recognition.lang="en-CA";
 recognition.interimResults=false;
 recognition.continuous=false;
 micButton.classList.add("listening");
-showHeard("ðï¸ Listeningâ¦");
+showHeard("Listening...");
 recognition.onresult=e=>{
 let t=e.results[0][0].transcript;
 showHeard(`I heard: â${
@@ -1132,14 +1128,10 @@ moveInput.value="";
 parseMovement(t)}
 
 function escapeHTML(s){
-return s.replace(/[&<>"']/g,c=>({
-"&":"&amp;
-","<":"&lt;
-",">":"&gt;
-",'"':"&quot;
-","'":"&#039;
-"}
-[c]))}
+return String(s).replace(/[&<>"']/g,function(c){
+return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c];
+});
+}
  function escapeAttr(s){
 return s.replace(/\\/g,"\\\\").replace(/'/g,"\\'")}
 
