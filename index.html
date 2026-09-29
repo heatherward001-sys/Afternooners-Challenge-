@@ -3,402 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f3ec">
+<meta name="theme-color" content="#fff8f4">
 <title>Afternooners Challenge</title>
 
 <style>
 :root{
-  --cream:#f7f3ec;
-  --paper:#fffdfa;
-  --sage:#78927c;
-  --sage2:#dfe9df;
-  --sage3:#eef4ed;
-  --rose:#c98291;
-  --rose2:#f4e2e6;
-  --pink:#e8b7c0;
-  --ink:#3e423d;
-  --muted:#7d817b;
-  --gold:#c7a56b;
-  --line:#e8e3dc;
-  --shadow:0 8px 26px rgba(65,55,45,.09);
+  --cream:#fff8f4;
+  --white:#ffffff;
+  --rose:#d96b8a;
+  --rose2:#f7dce5;
+  --sage:#78977c;
+  --sage2:#e4eee5;
+  --ink:#383636;
+  --muted:#777;
+  --gold:#d6a85f;
+  --shadow:0 5px 18px rgba(70,55,55,.10);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
   margin:0;
-  background:
-    radial-gradient(circle at top left,#f8e8eb 0,transparent 28%),
-    radial-gradient(circle at top right,#e5eee3 0,transparent 25%),
-    var(--cream);
-  color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
 }
-button,input{font:inherit}
-button{cursor:pointer}
-.app{
-  max-width:720px;
+.wrap{
+  max-width:650px;
   margin:auto;
-  padding:18px 15px 100px;
+  padding:18px 16px 105px;
 }
-.hidden{display:none!important}
-
-/* ONBOARDING */
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:
-    radial-gradient(circle at 10% 10%,#f2d7dc 0,transparent 30%),
-    radial-gradient(circle at 90% 85%,#dbe8da 0,transparent 32%),
-    #f8f4ee;
-}
-.welcome{
-  width:min(520px,100%);
-  background:rgba(255,253,250,.96);
-  border-radius:30px;
-  padding:30px 24px;
-  box-shadow:0 18px 60px rgba(65,55,45,.13);
+.hero{
   text-align:center;
-}
-.flower{
-  font-size:38px;
-  margin-bottom:5px;
-}
-.logo{
-  font-family:Georgia,serif;
-  font-style:italic;
-  font-size:42px;
-  color:#667d69;
-  letter-spacing:-1px;
-}
-.welcome h2{
-  font-family:Georgia,serif;
-  font-weight:400;
-  font-size:27px;
-  margin:15px 0 7px;
-}
-.welcome p{
-  color:var(--muted);
-  line-height:1.5;
-}
-.setupStep{display:none}
-.setupStep.active{display:block}
-.bigInput{
-  width:100%;
-  border:1px solid #dcd6ce;
-  border-radius:16px;
-  padding:15px;
-  font-size:18px;
-  margin:12px 0;
-  text-align:center;
-  background:white;
-}
-.primary{
-  width:100%;
-  border:0;
-  border-radius:16px;
-  padding:14px;
-  background:var(--sage);
-  color:white;
-  font-weight:800;
-  font-size:16px;
-}
-
-/* HEADER */
-.header{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:flex-start;
-  margin-bottom:13px;
+  padding:16px 8px 8px;
 }
 .brand{
   font-family:Georgia,serif;
-  font-style:italic;
-  color:#647a67;
-  font-size:30px;
+  font-size:35px;
+  color:var(--rose);
+  margin:0;
+}
+.tag{
+  color:var(--sage);
+  font-weight:700;
+  letter-spacing:.3px;
+  margin:4px 0 12px;
+}
+h2{
+  font-family:Georgia,serif;
+  margin:0 0 10px;
+  font-size:23px;
+}
+.small,.sub{
+  color:var(--muted);
+  font-size:14px;
+}
+.card,.section{
+  background:var(--white);
+  border-radius:22px;
+  padding:17px;
+  margin:14px 0;
+  box-shadow:var(--shadow);
 }
 .greeting{
   font-family:Georgia,serif;
-  font-size:25px;
-  margin-top:5px;
-}
-.date{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:3px;
+  font-size:26px;
+  margin-bottom:5px;
 }
 .weather{
-  background:rgba(255,255,255,.85);
-  border:1px solid rgba(255,255,255,.7);
-  border-radius:18px;
-  padding:10px 12px;
-  min-width:115px;
-  text-align:center;
-  box-shadow:var(--shadow);
+  color:var(--sage);
+  font-weight:700;
 }
-.weather strong{
-  font-size:19px;
-  display:block;
-}
-.weather small{color:var(--muted)}
-
-/* QUOTE */
 .quote{
-  border-radius:19px;
-  background:linear-gradient(110deg,#e5eee2,#f5e4e7);
-  padding:13px 16px;
-  margin-bottom:13px;
   font-family:Georgia,serif;
   font-style:italic;
-  line-height:1.45;
+  color:#777;
+  margin-top:8px;
 }
-
-/* VOICE */
-.voiceCard{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(120deg,#f2dfe3,#f7ebe7);
-  border-radius:24px;
-  padding:18px;
-  box-shadow:var(--shadow);
-  margin-bottom:14px;
-}
-.voiceCard:after{
-  content:"❀";
-  position:absolute;
-  right:13px;
-  top:-12px;
-  font-size:85px;
-  color:rgba(255,255,255,.45);
-}
-.voiceTop{
-  position:relative;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
+.voiceCard{text-align:center}
 .mic{
-  width:61px;
-  height:61px;
-  border:0;
-  border-radius:50%;
-  background:var(--rose);
-  color:white;
-  font-size:26px;
-  flex:none;
-  box-shadow:0 7px 18px rgba(180,100,120,.25);
-}
-.mic.listening{animation:pulse 1s infinite}
-@keyframes pulse{
-  50%{transform:scale(1.07);box-shadow:0 0 0 12px rgba(201,130,145,.15)}
-}
-.voiceTitle{
-  font-family:Georgia,serif;
-  font-size:20px;
-}
-.voiceHint{
-  font-size:13px;
-  color:#755f65;
-  margin-top:3px;
-}
-.voiceToggle{
-  margin-left:auto;
-  border:0;
-  border-radius:12px;
-  padding:8px 10px;
-  background:rgba(255,255,255,.7);
-  color:#765a62;
-  font-size:12px;
-  font-weight:700;
-  z-index:3;
-}
-.heard{
-  position:relative;
-  z-index:2;
-  background:rgba(255,255,255,.6);
-  border-radius:13px;
-  padding:9px 11px;
-  margin-top:11px;
-  min-height:37px;
-  font-size:13px;
-}
-
-/* CARDS */
-.section{
-  background:rgba(255,253,250,.94);
-  border-radius:23px;
-  padding:17px;
-  margin-top:13px;
-  box-shadow:var(--shadow);
-}
-.section h2{
-  font-family:Georgia,serif;
-  font-weight:400;
-  margin:0 0 4px;
-  font-size:21px;
-}
-.sub{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.45;
-}
-.progressGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-top:12px;
-}
-.progressCard{
-  text-align:center;
-  background:#faf8f4;
-  border-radius:18px;
-  padding:12px 5px;
-}
-.ring{
-  --p:0;
   width:68px;
   height:68px;
-  margin:auto;
   border-radius:50%;
+  border:0;
+  background:var(--rose);
+  color:#fff;
+  font-size:29px;
+  box-shadow:0 5px 14px rgba(217,107,138,.3);
+}
+.mic.listening{
+  animation:pulse 1s infinite;
+}
+@keyframes pulse{
+  50%{transform:scale(1.08);box-shadow:0 0 0 10px rgba(217,107,138,.14)}
+}
+#heard{
+  min-height:22px;
+  margin-top:9px;
+  font-weight:600;
+}
+.grid{
   display:grid;
-  place-items:center;
-  background:conic-gradient(var(--sage) calc(var(--p)*1%),#e8e4df 0);
-  position:relative;
-}
-.ring:after{
-  content:"";
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  background:#faf8f4;
-  position:absolute;
-}
-.ringValue{
-  position:relative;
-  z-index:2;
-  font-size:12px;
-  font-weight:800;
-}
-.progressLabel{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:6px;
-}
-.quickGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-top:11px;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 .quick{
   border:0;
-  border-radius:17px;
-  background:var(--sage3);
-  padding:12px 4px;
-  color:#586b5a;
-  font-size:12px;
+  border-radius:18px;
+  background:var(--sage2);
+  padding:16px 8px;
+  color:var(--ink);
+  font-size:16px;
   font-weight:700;
 }
-.quick span{
-  display:block;
-  font-size:22px;
-  margin-bottom:4px;
+.quick:nth-child(even){background:var(--rose2)}
+.progressGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
 }
-.nudge{
-  background:#f6f0df;
-  border-radius:15px;
-  padding:12px;
-  margin-top:10px;
-  font-size:14px;
-  line-height:1.45;
+.progress{
+  text-align:center;
+  background:#fafafa;
+  border-radius:17px;
+  padding:11px 4px;
 }
-.row{
-  display:flex;
-  gap:8px;
-  margin-top:9px;
+.progress .big{
+  font-size:20px;
+  font-weight:800;
+  color:var(--rose);
 }
-.row>*{flex:1}
-input{
-  width:100%;
-  min-width:0;
-  border:1px solid #ddd7cf;
-  border-radius:13px;
-  padding:11px;
-  background:white;
+.progress .label{
+  font-size:11px;
+  color:var(--muted);
 }
 .btn{
   border:0;
   border-radius:13px;
-  padding:10px;
-  background:var(--sage2);
-  color:#526755;
+  padding:12px 14px;
+  font-size:15px;
   font-weight:700;
-}
-.btnRose{
-  background:var(--rose2);
-  color:#925a67;
-}
-.btnDark{
-  background:var(--sage);
-  color:white;
-}
-.foodItem{
-  padding:10px 2px;
-  border-bottom:1px solid var(--line);
-  font-size:14px;
-}
-.foodItem:last-child{border-bottom:0}
-
-/* SLEEP */
-.sleepHero{
-  background:linear-gradient(125deg,#e4ece3,#f4e5e8);
-}
-.sleepGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:12px;
-}
-.sleepTool{
-  border:0;
-  text-align:left;
-  border-radius:18px;
-  padding:14px;
-  background:#fffdfa;
-  box-shadow:0 3px 12px rgba(70,60,50,.06);
+  background:var(--sage2);
   color:var(--ink);
 }
-.sleepTool b{
-  display:block;
-  font-family:Georgia,serif;
-  font-size:15px;
-  margin:4px 0;
+.btnRose{background:var(--rose);color:white}
+.primary{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  background:var(--rose);
+  color:white;
+  font-size:16px;
+  font-weight:800;
 }
-.sleepTool small{
-  color:var(--muted);
-  line-height:1.35;
+.danger{background:#f4dddd;color:#8d3e3e}
+.row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
-.sleepIcon{font-size:24px}
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin:6px 0;
+  font-size:16px;
+  background:white;
+}
+.foodItem,.moveItem,.historyItem{
+  border-bottom:1px solid #eee;
+  padding:9px 0;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.foodItem:last-child,.moveItem:last-child{border-bottom:0}
+.nudge{
+  background:#fff1d9;
+  border-left:5px solid var(--gold);
+}
 .soundGrid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:9px;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
 }
 .sound{
   border:0;
-  border-radius:14px;
-  padding:11px 5px;
-  background:#edf1ef;
-  color:#54665d;
-  font-size:12px;
-  font-weight:700;
+  padding:15px 8px;
+  border-radius:16px;
+  background:var(--sage2);
+  font-weight:800;
+  font-size:15px;
 }
 .sound.active{
   background:var(--sage);
@@ -406,310 +201,216 @@ input{
 }
 .timerRow{
   display:flex;
-  gap:7px;
-  margin-top:9px;
+  justify-content:center;
+  gap:8px;
+  margin:12px 0;
 }
 .timerRow button{
-  flex:1;
   border:0;
-  padding:8px;
-  border-radius:11px;
-  background:#f0ece7;
+  border-radius:20px;
+  padding:8px 13px;
 }
 .timerRow button.selected{
   background:var(--rose);
   color:white;
 }
-.soundTimer{
+#soundTimer{
   text-align:center;
-  font-size:20px;
+  font-size:28px;
   font-weight:800;
-  margin:8px 0 0;
+  margin:9px;
 }
-
-/* MODAL */
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid #eee;
+  display:flex;
+  justify-content:center;
+  z-index:20;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.bottom button{
+  width:20%;
+  max-width:130px;
+  border:0;
+  background:white;
+  padding:11px 2px;
+  font-size:11px;
+  color:#555;
+}
+.bottom .ico{
+  display:block;
+  font-size:22px;
+  margin-bottom:2px;
+}
+.page{display:none}
+.page.active{display:block}
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(45,45,40,.45);
-  z-index:500;
+  background:rgba(0,0,0,.45);
+  z-index:50;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:18px;
 }
 .modalBox{
-  width:min(500px,100%);
-  max-height:85vh;
-  overflow:auto;
-  background:#fffdfa;
-  border-radius:25px;
-  padding:22px;
-  box-shadow:0 20px 70px rgba(0,0,0,.2);
-}
-.modalBox h2{
-  font-family:Georgia,serif;
-  font-weight:400;
-  margin-top:0;
-}
-.choice{
+  background:white;
+  border-radius:22px;
+  padding:20px;
   width:100%;
-  border:0;
-  background:var(--sage3);
-  border-radius:14px;
-  padding:12px;
-  margin-top:7px;
-  text-align:left;
+  max-width:480px;
+  max-height:88vh;
+  overflow:auto;
 }
-.close{
-  float:right;
-  border:0;
-  background:#eee8e2;
-  border-radius:50%;
-  width:32px;
-  height:32px;
-}
-
-/* HISTORY SETTINGS */
-.historyDay{
-  background:#f8f5f0;
-  padding:11px;
-  border-radius:13px;
-  margin-top:7px;
-  font-size:13px;
-  line-height:1.5;
-}
-.danger{
-  background:#f6e4e4;
-  color:#9a4f4f;
-}
-.bottomnav{
-  position:fixed;
-  bottom:9px;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(95%,690px);
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(14px);
-  box-shadow:0 7px 30px rgba(0,0,0,.12);
+.hidden{display:none!important}
+.badge{
+  display:inline-block;
+  padding:5px 9px;
   border-radius:20px;
-  padding:9px;
-  display:flex;
-  justify-content:space-around;
-  z-index:100;
+  background:var(--rose2);
+  font-size:12px;
+  margin:3px;
 }
-.bottomnav button{
-  border:0;
-  background:none;
-  color:#6d716c;
-  font-size:11px;
+.voiceNote{
+  background:var(--sage2);
+  border-radius:14px;
+  padding:11px;
+  margin:8px 0;
+  font-size:13px;
 }
-.bottomnav span{
-  display:block;
-  font-size:19px;
-}
-@media(max-width:520px){
-  .progressGrid,.quickGrid{grid-template-columns:repeat(2,1fr)}
-  .progressCard{padding:11px}
-  .header{align-items:center}
+@media(max-width:390px){
+  .progressGrid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- FIRST-TIME SETUP -->
-<div class="overlay hidden" id="onboarding">
-  <div class="welcome">
-    <div class="flower">🌿🌸</div>
-    <div class="logo">Afternooners</div>
+<div class="wrap">
 
-    <div class="setupStep active" id="setup1">
-      <h2>Welcome, Beautiful 💕</h2>
-      <p>Let's make this little space yours. What should I call you?</p>
-      <input class="bigInput" id="setupName" placeholder="Your first name">
-      <button class="primary" onclick="nextSetup(1)">Continue</button>
-    </div>
+<div class="hero">
+  <h1 class="brand">Afternooners</h1>
+  <div class="tag">Healthy Girls • Happier Days</div>
+</div>
 
-    <div class="setupStep" id="setup2">
-      <h2>Where are we starting?</h2>
-      <p>Your starting weight is just a starting point — no judgment here.</p>
-      <input class="bigInput" id="setupStartWeight" type="number" step=".1" placeholder="Starting weight in lb">
-      <button class="primary" onclick="nextSetup(2)">Continue</button>
-    </div>
+<div id="homePage" class="page active">
 
-    <div class="setupStep" id="setup3">
-      <h2>And where are we headed?</h2>
-      <p>Enter your goal weight. You can change it later.</p>
-      <input class="bigInput" id="setupGoalWeight" type="number" step=".1" placeholder="Goal weight in lb">
-      <button class="primary" onclick="finishSetup()">Enter Afternooners ✨</button>
+  <div class="card">
+    <div class="greeting" id="greeting">Good morning!</div>
+    <div class="weather" id="weather">Mitchell weather loading…</div>
+    <div class="small" id="todayDate"></div>
+    <div class="quote" id="quote"></div>
+  </div>
+
+  <div class="card voiceCard">
+    <h2>Tell me about your day</h2>
+    <button class="mic" id="micButton" onclick="startListening()">🎙️</button>
+    <div id="heard">Tap the microphone and just talk normally.</div>
+    <div class="small">Food • Water • Movement • Sleep • Weight • Wellness</div>
+  </div>
+
+  <div class="progressGrid">
+    <div class="progress">
+      <div class="big" id="calTotal">0</div>
+      <div class="label">Calories</div>
     </div>
+    <div class="progress">
+      <div class="big" id="waterTotal">0</div>
+      <div class="label">mL Water</div>
+    </div>
+    <div class="progress">
+      <div class="big" id="stepTotal">0</div>
+      <div class="label">Steps</div>
+    </div>
+    <div class="progress">
+      <div class="big" id="sleepTotal">—</div>
+      <div class="label">Sleep</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Quick Add</h2>
+    <div class="grid">
+      <button class="quick" onclick="showPage('foodPage')">🍎 Add Food</button>
+      <button class="quick" onclick="addWater(500)">💧 Add Bottle</button>
+      <button class="quick" onclick="showPage('movementPage')">👟 Movement</button>
+      <button class="quick" onclick="showPage('sleepPage')">🌙 Sleep Help</button>
+    </div>
+  </div>
+
+  <div class="card nudge">
+    <strong>🌿 Gentle Nudge</strong>
+    <div id="nudgeText" style="margin-top:5px">
+      Small steps count. Tell me what you've been up to today.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Weight Journey</h2>
+    <div id="weightProgress">Add your starting and goal weight in Settings.</div>
+    <button class="btn" style="margin-top:10px" onclick="askWeight()">Update Weight</button>
+  </div>
+
+</div>
+
+<div id="foodPage" class="page">
+  <div class="section">
+    <h2>🍎 Food</h2>
+    <div class="sub">Tell me naturally what you ate. Estimates are approximate.</div>
+    <input id="foodInput" placeholder="e.g. banana and a granola bar">
+    <button class="primary" onclick="manualFood()">Add Food</button>
+  </div>
+
+  <div class="section">
+    <h2>Today's Food</h2>
+    <div id="foodList"></div>
+    <div style="margin-top:10px"><strong>Total: <span id="foodCalories">0</span> calories</strong></div>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal hidden" id="modal">
-  <div class="modalBox">
-    <button class="close" onclick="closeModal()">×</button>
-    <div id="modalContent"></div>
+<div id="movementPage" class="page">
+  <div class="section">
+    <h2>👟 Movement & Wellness</h2>
+    <div class="sub">Walking, gardening, pickleball, treadmill, yoga, swimming and more all count.</div>
+    <input id="moveInput" placeholder="e.g. I did yoga for 15 minutes">
+    <button class="primary" onclick="manualMovement()">Add Activity</button>
+  </div>
+
+  <div class="section">
+    <h2>Today's Activity</h2>
+    <div id="movementList"></div>
   </div>
 </div>
 
-<div class="app">
+<div id="sleepPage" class="page">
 
-  <div class="header">
-    <div>
-      <div class="brand">Afternooners</div>
-      <div class="greeting" id="greeting">Hi there, Beautiful!</div>
-      <div class="date" id="dateLine"></div>
-    </div>
-
-    <div class="weather" onclick="loadWeather()">
-      <strong id="weatherTemp">--°C</strong>
-      <small id="weatherText">Mitchell, ON</small>
-    </div>
-  </div>
-
-  <div class="quote" id="quote"></div>
-
-  <!-- VOICE -->
-  <div class="voiceCard">
-    <div class="voiceTop">
-      <button class="mic" id="mic">🎤</button>
-      <div>
-        <div class="voiceTitle">Talk to me</div>
-        <div class="voiceHint">Tell me what you ate, drank, did — or ask for help.</div>
-      </div>
-      <button class="voiceToggle" id="voiceToggle">🔊 On</button>
-    </div>
-    <div class="heard" id="heard">Tap the microphone and just talk naturally.</div>
-  </div>
-
-  <!-- PROGRESS -->
   <div class="section">
-    <h2>Today's Progress</h2>
-    <div class="sub">Small things add up.</div>
-
-    <div class="progressGrid">
-      <div class="progressCard">
-        <div class="ring" id="foodRing"><div class="ringValue" id="calories">0</div></div>
-        <div class="progressLabel">est. calories</div>
-      </div>
-
-      <div class="progressCard">
-        <div class="ring" id="waterRing"><div class="ringValue" id="water">0</div></div>
-        <div class="progressLabel">mL water</div>
-      </div>
-
-      <div class="progressCard">
-        <div class="ring" id="stepsRing"><div class="ringValue" id="steps">0</div></div>
-        <div class="progressLabel">steps</div>
-      </div>
-
-      <div class="progressCard">
-        <div class="ring" id="sleepRing"><div class="ringValue" id="sleep">—</div></div>
-        <div class="progressLabel">hours sleep</div>
-      </div>
-    </div>
-
-    <div class="quickGrid">
-      <button class="quick" onclick="openFood()"><span>🍎</span>Add Food</button>
-      <button class="quick" onclick="addWater(500,'one bottle')"><span>💧</span>Add Bottle</button>
-      <button class="quick" onclick="openMovement()"><span>🚶</span>Movement</button>
-      <button class="quick" onclick="goTo('sleepHelp')"><span>🌙</span>Sleep Help</button>
-    </div>
-  </div>
-
-  <!-- NUDGE -->
-  <div class="section">
-    <h2>🌿 A gentle nudge</h2>
-    <div class="nudge" id="nudge"></div>
-  </div>
-
-  <!-- WEIGHT -->
-  <div class="section">
-    <h2>💗 Your Progress</h2>
-    <div class="sub" id="weightProgress">Your journey starts here.</div>
-
-    <div class="row">
-      <input id="weightInput" type="number" step=".1" placeholder="Today's weight">
-      <button class="btn btnDark" onclick="saveWeight()">Save weight</button>
-    </div>
-  </div>
-
-  <!-- FOOD -->
-  <div class="section" id="foodSection">
-    <h2>🍓 Today's Food</h2>
-    <div class="sub">
-      Calories are estimates. If a food needs more detail, I'll ask instead of pretending I know.
-    </div>
-
-    <div class="row">
-      <input id="foodInput" placeholder="e.g. turkey sandwich">
-      <button class="btn btnDark" onclick="manualFood()">Add</button>
-    </div>
-
-    <div id="foodLog"></div>
-  </div>
-
-  <!-- MOVEMENT -->
-  <div class="section" id="movementSection">
-    <h2>🌿 Water & Movement</h2>
-
-    <div class="row">
-      <button class="btn" onclick="addWater(250,'one glass')">+ Glass</button>
-      <button class="btn" onclick="addWater(500,'one bottle')">+ Bottle</button>
-    </div>
-
-    <div class="row">
-      <input id="stepsInput" type="number" placeholder="Steps">
-      <button class="btn" onclick="saveSteps()">Add steps</button>
-    </div>
-
-    <div class="row">
-      <input id="exerciseInput" type="number" placeholder="Exercise minutes">
-      <button class="btn" onclick="saveExercise()">Add exercise</button>
-    </div>
-  </div>
-
-  <!-- SLEEP -->
-  <div class="section sleepHero" id="sleepHelp">
     <h2>🌙 Sleep Help</h2>
-    <div class="sub">Choose what your body needs tonight.</div>
-
-    <div class="row">
-      <input id="sleepInput" type="number" step=".5" placeholder="Hours slept last night">
-      <button class="btn btnDark" onclick="saveSleep()">Save</button>
+    <div class="grid">
+      <button class="quick" onclick="startRoutine('relax')">🧘 Guided Relaxation</button>
+      <button class="quick" onclick="startRoutine('breathe')">🌬️ Breathing</button>
+      <button class="quick" onclick="startRoutine('meditate')">✨ Meditation</button>
+      <button class="quick" onclick="startRoutine('stretch')">🤸 Gentle Stretch</button>
     </div>
+  </div>
 
-    <div class="sleepGrid">
-      <button class="sleepTool" onclick="openRelaxation()">
-        <span class="sleepIcon">🌸</span>
-        <b>Guided Relaxation</b>
-        <small>5 or 10 minutes · toes to head</small>
-      </button>
+  <div class="section">
+    <h2>Sleep Sounds</h2>
+    <div class="sub">Tap a sound. Tap another to switch.</div>
 
-      <button class="sleepTool" onclick="startBreathing()">
-        <span class="sleepIcon">🌬️</span>
-        <b>Breathing</b>
-        <small>Slow inhale and longer exhale</small>
-      </button>
-
-      <button class="sleepTool" onclick="startMeditation()">
-        <span class="sleepIcon">🧘</span>
-        <b>Meditation</b>
-        <small>A gentle quiet reset</small>
-      </button>
-
-      <button class="sleepTool" onclick="startStretching()">
-        <span class="sleepIcon">🌿</span>
-        <b>Gentle Stretching</b>
-        <small>Feet, legs, shoulders and neck</small>
-      </button>
+    <div class="soundGrid" style="margin-top:12px">
+      <button class="sound" data-sound="rain" onclick="startSound('rain',this)">🌧️ Rain</button>
+      <button class="sound" data-sound="ocean" onclick="startSound('ocean',this)">🌊 Ocean</button>
+      <button class="sound" data-sound="nature" onclick="startSound('nature',this)">🌲 Nature</button>
+      <button class="sound" data-sound="fire" onclick="startSound('fire',this)">🔥 Fireplace</button>
+      <button class="sound" data-sound="white" onclick="startSound('white',this)">☁️ White Noise</button>
+      <button class="sound" onclick="stopSound()">⏹ Stop</button>
     </div>
-
-    <h3 style="font-family:Georgia,serif;font-weight:400;margin-bottom:2px">🎧 Sleep Sounds</h3>
-    <div class="sub">Pick a sound and let it play while you settle in.</div>
 
     <div class="timerRow">
       <button class="selected" onclick="chooseTimer(15,this)">15 min</button>
@@ -717,1010 +418,1154 @@ input{
       <button onclick="chooseTimer(60,this)">60 min</button>
     </div>
 
-    <div class="soundGrid">
-      <button class="sound" onclick="startSound('rain',this)">🌧️ Rain</button>
-      <button class="sound" onclick="startSound('ocean',this)">🌊 Ocean</button>
-      <button class="sound" onclick="startSound('white',this)">☁️ White Noise</button>
-      <button class="sound" onclick="startSound('nature',this)">🌲 Nature</button>
-      <button class="sound" onclick="startSound('fire',this)">🔥 Fireplace</button>
-      <button class="sound" onclick="stopSound()">⏹ Stop</button>
-    </div>
-
-    <div class="soundTimer" id="soundTimer">15:00</div>
+    <div id="soundTimer">15:00</div>
+    <div class="small" style="text-align:center" id="soundStatus">Choose a sound above.</div>
   </div>
 
-  <!-- HISTORY -->
-  <div class="section" id="historySection">
-    <h2>📅 My History</h2>
-    <div class="sub">Previous days stay saved on this device.</div>
-    <div id="history"></div>
-  </div>
-
-  <!-- SETTINGS -->
-  <div class="section" id="settingsSection">
-    <h2>⚙️ Settings</h2>
-    <div class="sub" id="profileInfo"></div>
-
-    <div class="row">
-      <button class="btn" onclick="changeGoal()">Change goal</button>
-      <button class="btn btnRose" onclick="toggleVoice()">Voice on/off</button>
-    </div>
-
-    <button class="btn danger" style="width:100%;margin-top:10px" onclick="resetProfile()">
-      Reset My Profile
-    </button>
+  <div class="section">
+    <h2>Last Night</h2>
+    <input id="sleepInput" type="number" step=".25" placeholder="Hours slept">
+    <button class="primary" onclick="saveSleep()">Save Sleep</button>
   </div>
 
 </div>
 
-<div class="bottomnav">
-  <button onclick="scrollToTop()"><span>🏡</span>Home</button>
-  <button onclick="goTo('foodSection')"><span>🍓</span>Food</button>
-  <button onclick="goTo('sleepHelp')"><span>🌙</span>Sleep</button>
-  <button onclick="goTo('historySection')"><span>📅</span>History</button>
-  <button onclick="goTo('settingsSection')"><span>⚙️</span>Settings</button>
+<div id="historyPage" class="page">
+  <div class="section">
+    <h2>📖 History</h2>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<div id="settingsPage" class="page">
+  <div class="section" id="settingsSection">
+    <h2>⚙️ Settings</h2>
+    <div id="profileInfo" class="sub"></div>
+
+    <div style="margin-top:16px">
+      <strong>🗣️ Assistant Voice</strong>
+      <div class="voiceNote">
+        Each Afternooner can choose a voice available on her own device.
+      </div>
+
+      <select id="voiceSelect" onchange="saveVoiceChoice()">
+        <option>Loading voices…</option>
+      </select>
+
+      <div class="row">
+        <button class="btn btnRose" onclick="previewVoice()">▶ Preview Voice</button>
+        <button class="btn" id="voiceToggle" onclick="toggleVoice()">🔊 Voice On</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <strong>Weight Goal</strong>
+      <input id="startWeightSetting" type="number" step=".1" placeholder="Starting weight">
+      <input id="goalWeightSetting" type="number" step=".1" placeholder="Goal weight">
+      <button class="btn" onclick="saveGoal()">Save Goal</button>
+    </div>
+
+    <button class="btn danger" style="width:100%;margin-top:20px" onclick="resetProfile()">Reset My Profile</button>
+  </div>
+</div>
+
+</div>
+
+<div class="bottom">
+  <button onclick="showPage('homePage')"><span class="ico">🏡</span>Home</button>
+  <button onclick="showPage('foodPage')"><span class="ico">🍎</span>Food</button>
+  <button onclick="showPage('sleepPage')"><span class="ico">🌙</span>Sleep</button>
+  <button onclick="showPage('historyPage')"><span class="ico">📖</span>History</button>
+  <button onclick="showPage('settingsPage')"><span class="ico">⚙️</span>Settings</button>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modalBox" id="modalBox"></div>
 </div>
 
 <script>
-/* ========================================
-   STORAGE + PROFILE
-======================================== */
+
+/* =========================
+   STORAGE
+========================= */
 
 const PROFILE_KEY="afternoonersProfileV2";
 const TODAY_KEY="afternoonersTodayV2";
 const HISTORY_KEY="afternoonersHistoryV2";
 
-function getProfile(){
-  try{return JSON.parse(localStorage.getItem(PROFILE_KEY))||null}
-  catch(e){return null}
+function loadJSON(k,fallback){
+  try{
+    const x=JSON.parse(localStorage.getItem(k));
+    return x || fallback;
+  }catch(e){return fallback}
 }
-function saveProfile(p){
-  localStorage.setItem(PROFILE_KEY,JSON.stringify(p));
-}
-let profile=getProfile();
 
-function dateKey(){
+let profile=loadJSON(PROFILE_KEY,null);
+
+let today=loadJSON(TODAY_KEY,{
+  date:"",
+  foods:[],
+  water:0,
+  steps:0,
+  movement:[],
+  wellness:[],
+  sleep:null,
+  weight:null
+});
+
+let history=loadJSON(HISTORY_KEY,[]);
+
+function localDateKey(){
   const d=new Date();
-  return d.getFullYear()+"-"+
-    String(d.getMonth()+1).padStart(2,"0")+"-"+
-    String(d.getDate()).padStart(2,"0");
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
-function blankDay(){
-  return{
-    date:dateKey(),
-    water:0,
-    calories:0,
-    foods:[],
-    steps:0,
-    exercise:0,
-    sleep:null,
-    weight:null,
-    sleepTools:[]
-  };
-}
-function getHistory(){
-  try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[]}
-  catch(e){return[]}
-}
-function archive(day){
-  if(!day||!day.date)return;
-  let h=getHistory();
-  if(!h.some(x=>x.date===day.date)){
-    h.unshift(day);
-    localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(0,365)));
-  }
-}
-function loadToday(){
-  let d;
-  try{d=JSON.parse(localStorage.getItem(TODAY_KEY))}
-  catch(e){}
-  if(d&&d.date===dateKey())return Object.assign(blankDay(),d);
-  if(d)archive(d);
-  return blankDay();
-}
-let today=loadToday();
 
-function save(){
+function ensureToday(){
+  const key=localDateKey();
+
+  if(today.date && today.date!==key){
+    history.unshift({...today});
+    history=history.slice(0,60);
+    localStorage.setItem(HISTORY_KEY,JSON.stringify(history));
+
+    today={
+      date:key,
+      foods:[],
+      water:0,
+      steps:0,
+      movement:[],
+      wellness:[],
+      sleep:null,
+      weight:null
+    };
+  }
+
+  if(!today.date)today.date=key;
+  if(!today.foods)today.foods=[];
+  if(!today.movement)today.movement=[];
+  if(!today.wellness)today.wellness=[];
+  if(!today.water)today.water=0;
+  if(!today.steps)today.steps=0;
+}
+
+function saveToday(){
   localStorage.setItem(TODAY_KEY,JSON.stringify(today));
   render();
 }
-function rollover(){
-  if(today.date!==dateKey()){
-    archive(today);
-    today=blankDay();
-    save();
-  }
+
+function saveProfile(){
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
 }
-setInterval(rollover,60000);
 
-
-/* ========================================
+/* =========================
    ONBOARDING
-======================================== */
+========================= */
 
-function showSetup(){
-  document.getElementById("onboarding").classList.remove("hidden");
-}
-function nextSetup(n){
-  if(n===1){
-    const name=document.getElementById("setupName").value.trim();
-    if(!name){
-      alert("Tell me your first name first 💕");
-      return;
-    }
-    sessionStorage.setItem("newName",name);
-    document.getElementById("setup1").classList.remove("active");
-    document.getElementById("setup2").classList.add("active");
-  }
+function onboarding(){
+  if(profile)return;
 
-  if(n===2){
-    const w=Number(document.getElementById("setupStartWeight").value);
-    if(!w){
-      alert("Enter your starting weight.");
-      return;
-    }
-    sessionStorage.setItem("newStartWeight",w);
-    document.getElementById("setup2").classList.remove("active");
-    document.getElementById("setup3").classList.add("active");
-  }
+  showModal(`
+    <h2>Welcome to Afternooners 💕</h2>
+    <p>Small steps. Real life. No perfection required.</p>
+
+    <input id="newName" placeholder="Your first name">
+    <input id="newStart" type="number" step=".1" placeholder="Starting weight (lb)">
+    <input id="newGoal" type="number" step=".1" placeholder="Goal weight (lb)">
+
+    <button class="primary" onclick="finishOnboarding()">Let's Go</button>
+  `);
 }
-function finishSetup(){
-  const goal=Number(document.getElementById("setupGoalWeight").value);
-  if(!goal){
-    alert("Enter your goal weight.");
+
+function finishOnboarding(){
+  const name=document.getElementById("newName").value.trim();
+  if(!name){
+    alert("Please enter your first name.");
     return;
   }
 
   profile={
-    name:sessionStorage.getItem("newName"),
-    startingWeight:Number(sessionStorage.getItem("newStartWeight")),
-    goalWeight:goal,
+    name,
+    startingWeight:Number(document.getElementById("newStart").value)||null,
+    goalWeight:Number(document.getElementById("newGoal").value)||null,
     voiceOn:true,
+    voiceKey:"",
     created:new Date().toISOString()
   };
 
-  saveProfile(profile);
-  today.weight=profile.startingWeight;
-  save();
-
-  document.getElementById("onboarding").classList.add("hidden");
-
-  setupHeader();
-  render();
-
-  speak(`Welcome to Afternooners, ${profile.name}. Let's do this one little step at a time.`);
-}
-
-
-/* ========================================
-   FOOD LIBRARY
-   approximate calories
-======================================== */
-
-const foods={
-"white bread":{cal:80,unit:"slice",group:"grain"},
-"whole wheat bread":{cal:85,unit:"slice",group:"whole"},
-"whole grain bread":{cal:85,unit:"slice",group:"whole"},
-"toast":{cal:90,unit:"slice",group:"grain"},
-"butter":{cal:100,unit:"tablespoon",group:"other"},
-"mayo":{cal:95,unit:"tablespoon",group:"other"},
-"mayonnaise":{cal:95,unit:"tablespoon",group:"other"},
-"cheese":{cal:110,unit:"slice",group:"protein"},
-"turkey":{cal:100,unit:"serving",group:"protein"},
-"ham":{cal:120,unit:"serving",group:"protein"},
-"chicken":{cal:230,unit:"serving",group:"protein"},
-"chicken breast":{cal:230,unit:"serving",group:"protein"},
-"steak":{cal:350,unit:"serving",group:"protein"},
-"ground beef":{cal:280,unit:"serving",group:"protein"},
-"salmon":{cal:280,unit:"serving",group:"protein"},
-"tuna":{cal:180,unit:"serving",group:"protein"},
-"shrimp":{cal:120,unit:"serving",group:"protein"},
-"tofu":{cal:180,unit:"serving",group:"protein"},
-"beans":{cal:220,unit:"cup",group:"protein"},
-"lentils":{cal:230,unit:"cup",group:"protein"},
-
-"egg":{cal:78,unit:"egg",group:"protein"},
-"eggs":{cal:78,unit:"egg",group:"protein"},
-"scrambled egg":{cal:90,unit:"egg",group:"protein"},
-"scrambled eggs":{cal:90,unit:"egg",group:"protein"},
-"bacon":{cal:43,unit:"slice",group:"protein"},
-"sausage":{cal:170,unit:"sausage",group:"protein"},
-"oatmeal":{cal:160,unit:"bowl",group:"whole"},
-"cereal":{cal:160,unit:"bowl",group:"grain"},
-"granola":{cal:220,unit:"half cup",group:"whole"},
-"bagel":{cal:280,unit:"bagel",group:"grain"},
-"english muffin":{cal:135,unit:"muffin",group:"grain"},
-"pancake":{cal:175,unit:"pancake",group:"grain"},
-"waffle":{cal:210,unit:"waffle",group:"grain"},
-
-"pepperoni pizza":{cal:300,unit:"slice",group:"grain protein"},
-"cheese pizza":{cal:270,unit:"slice",group:"grain"},
-"pizza":{cal:285,unit:"slice",group:"grain"},
-"hamburger":{cal:430,unit:"burger",group:"grain protein"},
-"cheeseburger":{cal:520,unit:"burger",group:"grain protein"},
-"hot dog":{cal:290,unit:"hot dog",group:"grain protein"},
-"grilled cheese":{cal:400,unit:"sandwich",group:"grain protein"},
-"club sandwich":{cal:550,unit:"sandwich",group:"grain protein"},
-"wrap":{cal:400,unit:"wrap",group:"grain protein"},
-"french fries":{cal:365,unit:"serving",group:"other"},
-"fries":{cal:365,unit:"serving",group:"other"},
-"poutine":{cal:740,unit:"serving",group:"other"},
-
-"spaghetti":{cal:350,unit:"plate",group:"grain"},
-"pasta":{cal:330,unit:"plate",group:"grain"},
-"lasagna":{cal:420,unit:"piece",group:"grain protein"},
-"mac and cheese":{cal:400,unit:"bowl",group:"grain protein"},
-"rice":{cal:205,unit:"cup",group:"grain"},
-"brown rice":{cal:215,unit:"cup",group:"whole"},
-"quinoa":{cal:220,unit:"cup",group:"whole"},
-
-"salad":{cal:120,unit:"bowl",group:"veg"},
-"caesar salad":{cal:350,unit:"bowl",group:"veg"},
-"broccoli":{cal:55,unit:"cup",group:"veg"},
-"carrots":{cal:50,unit:"cup",group:"veg"},
-"green beans":{cal:45,unit:"cup",group:"veg"},
-"peas":{cal:120,unit:"cup",group:"veg"},
-"corn":{cal:130,unit:"cup",group:"veg"},
-"cauliflower":{cal:30,unit:"cup",group:"veg"},
-"cucumber":{cal:30,unit:"serving",group:"veg"},
-"tomato":{cal:25,unit:"tomato",group:"veg"},
-"potato":{cal:160,unit:"potato",group:"veg"},
-"sweet potato":{cal:115,unit:"potato",group:"veg"},
-
-"apple":{cal:95,unit:"apple",group:"fruit"},
-"banana":{cal:105,unit:"banana",group:"fruit"},
-"orange":{cal:65,unit:"orange",group:"fruit"},
-"pear":{cal:100,unit:"pear",group:"fruit"},
-"peach":{cal:60,unit:"peach",group:"fruit"},
-"strawberries":{cal:50,unit:"cup",group:"fruit"},
-"blueberries":{cal:85,unit:"cup",group:"fruit"},
-"raspberries":{cal:65,unit:"cup",group:"fruit"},
-"grapes":{cal:100,unit:"cup",group:"fruit"},
-"watermelon":{cal:45,unit:"cup",group:"fruit"},
-"pineapple":{cal:80,unit:"cup",group:"fruit"},
-
-"greek yogurt":{cal:130,unit:"container",group:"protein"},
-"yogurt":{cal:140,unit:"container",group:"protein"},
-"cottage cheese":{cal:180,unit:"cup",group:"protein"},
-"milk":{cal:120,unit:"cup",group:"protein"},
-"peanut butter":{cal:95,unit:"tablespoon",group:"protein"},
-"almonds":{cal:165,unit:"handful",group:"protein"},
-"nuts":{cal:180,unit:"handful",group:"protein"},
-"hummus":{cal:70,unit:"serving",group:"protein"},
-
-"chips":{cal:160,unit:"serving",group:"other"},
-"popcorn":{cal:120,unit:"3 cups",group:"whole"},
-"granola bar":{cal:150,unit:"bar",group:"whole"},
-"protein bar":{cal:210,unit:"bar",group:"protein"},
-"cookie":{cal:150,unit:"cookie",group:"other"},
-"brownie":{cal:250,unit:"brownie",group:"other"},
-"donut":{cal:280,unit:"donut",group:"other"},
-"muffin":{cal:350,unit:"muffin",group:"grain"},
-"cake":{cal:350,unit:"slice",group:"other"},
-"ice cream":{cal:270,unit:"cup",group:"other"},
-
-"coffee with cream":{cal:35,unit:"cup",group:"drink"},
-"coffee with milk":{cal:25,unit:"cup",group:"drink"},
-"black coffee":{cal:5,unit:"cup",group:"drink"},
-"latte":{cal:190,unit:"medium",group:"drink"},
-"cappuccino":{cal:120,unit:"medium",group:"drink"},
-"tea":{cal:2,unit:"cup",group:"drink"},
-"smoothie":{cal:250,unit:"glass",group:"fruit"},
-"orange juice":{cal:110,unit:"cup",group:"fruit"},
-"apple juice":{cal:115,unit:"cup",group:"fruit"},
-
-"tomato soup":{cal:160,unit:"bowl",group:"veg"},
-"chicken noodle soup":{cal:190,unit:"bowl",group:"protein"},
-"chili":{cal:350,unit:"bowl",group:"protein"}
-};
-
-const numWords={
-"a":1,"an":1,"one":1,"two":2,"three":3,"four":4,"five":5,
-"six":6,"seven":7,"eight":8,"nine":9,"ten":10,"half":.5
-};
-
-function qtyBefore(text,index){
-  const before=text.slice(Math.max(0,index-30),index);
-
-  let m=before.match(/(\d+(?:\.\d+)?)\s*(?:slices?|pieces?|cups?|bowls?|servings?)?\s*$/);
-  if(m)return Number(m[1]);
-
-  m=before.match(/\b(a|an|one|two|three|four|five|six|seven|eight|nine|ten|half)\s*(?:slices?|pieces?|cups?|bowls?|servings?)?\s*$/);
-  if(m)return numWords[m[1]];
-
-  if(/\banother\s*$/.test(before))return 1;
-  return 1;
-}
-
-function findFoods(text){
-  const lower=text.toLowerCase();
-  const names=Object.keys(foods).sort((a,b)=>b.length-a.length);
-  const results=[];
-  const used=[];
-
-  for(const name of names){
-    let from=0;
-    while(true){
-      const i=lower.indexOf(name,from);
-      if(i<0)break;
-      const end=i+name.length;
-
-      if(!used.some(r=>i<r.end&&end>r.start)){
-        const f=foods[name];
-        const qty=qtyBefore(lower,i);
-        results.push({
-          label:`${prettyQty(qty)} ${f.unit} ${name}`,
-          calories:Math.round(f.cal*qty),
-          group:f.group
-        });
-        used.push({start:i,end});
-      }
-      from=end;
-    }
-  }
-  return results;
-}
-
-function prettyQty(q){return q===.5?"½":q}
-
-
-/* ========================================
-   CONVERSATIONAL FOLLOW-UPS
-======================================== */
-
-let pending=null;
-
-function needsFoodFollowup(text){
-  const t=text.toLowerCase();
-
-  if(/\bturkey sandwich\b/.test(t)){
-    const hasBread=/white|whole wheat|whole grain|bread/.test(t);
-    const hasExtras=/mayo|mayonnaise|cheese|butter|lettuce|mustard/.test(t);
-
-    if(!hasBread || !hasExtras){
-      pending={type:"turkeySandwich",original:text};
-      respond(
-        "Got it — turkey sandwich. What was on it? White or whole-wheat bread, and did you have mayo, cheese, butter, mustard, lettuce, or anything else?",
-        "🥪 Tell me the bread and toppings."
-      );
-      return true;
-    }
-  }
-
-  if(/\bcoffee\b/.test(t) &&
-     !/cream|milk|black|sugar|latte|cappuccino/.test(t)){
-    pending={type:"coffee",original:text};
-    respond(
-      "Sure. Was your coffee black, or did you have cream, milk or sugar in it?",
-      "☕ How did you take your coffee?"
-    );
-    return true;
-  }
-
-  return false;
-}
-
-function handlePending(answer){
-  if(!pending)return false;
-
-  if(pending.type==="turkeySandwich"){
-    const a=answer.toLowerCase();
-
-    let total=100;
-    const parts=["turkey"];
-
-    if(/whole wheat|whole-wheat|whole grain/.test(a)){
-      total+=170;
-      parts.push("2 slices whole-wheat bread");
-    }else{
-      total+=160;
-      parts.push("2 slices white bread");
-    }
-
-    if(/mayo|mayonnaise/.test(a)){
-      total+=95;
-      parts.push("mayo");
-    }
-    if(/cheese/.test(a)){
-      total+=110;
-      parts.push("cheese");
-    }
-    if(/butter/.test(a)){
-      total+=100;
-      parts.push("butter");
-    }
-    if(/lettuce/.test(a)){
-      total+=5;
-      parts.push("lettuce");
-    }
-    if(/tomato/.test(a)){
-      total+=10;
-      parts.push("tomato");
-    }
-
-    today.foods.push({
-      label:"Turkey sandwich — "+parts.join(", "),
-      calories:total,
-      group:"protein grain",
-      time:timeNow()
-    });
-    today.calories+=total;
-    pending=null;
-    save();
-
-    respond(
-      `Perfect. I added your turkey sandwich. That's about ${total} calories.`,
-      `🥪 Turkey sandwich added · ≈ ${total} calories`
-    );
-    return true;
-  }
-
-  if(pending.type==="coffee"){
-    const a=answer.toLowerCase();
-    let cal=5;
-    let label="Black coffee";
-
-    if(/cream/.test(a)){
-      let creams=1;
-      if(/\btwo\b|\b2\b/.test(a))creams=2;
-      if(/\bthree\b|\b3\b/.test(a))creams=3;
-      cal=5+(30*creams);
-      label=`Coffee with ${creams} cream${creams>1?"s":""}`;
-    }else if(/milk/.test(a)){
-      cal=25;
-      label="Coffee with milk";
-    }
-
-    if(/sugar/.test(a)){
-      let sugars=1;
-      if(/\btwo\b|\b2\b/.test(a))sugars=2;
-      cal+=16*sugars;
-      label+=` and ${sugars} sugar${sugars>1?"s":""}`;
-    }
-
-    today.foods.push({
-      label,
-      calories:cal,
-      group:"drink",
-      time:timeNow()
-    });
-    today.calories+=cal;
-    pending=null;
-    save();
-
-    respond(
-      `Got it. I added your coffee, about ${cal} calories.`,
-      `☕ ${label} added · ≈ ${cal} calories`
-    );
-    return true;
-  }
-
-  return false;
-}
-
-
-/* ========================================
-   FOOD LOGGING
-======================================== */
-
-function logFood(text){
-  if(needsFoodFollowup(text))return;
-
-  const found=findFoods(text);
-
-  if(!found.length){
-    pending=null;
-
-    showModal(`
-      <h2>🍽️ One quick detail</h2>
-      <p>I don't have a reliable built-in estimate for <b>${escapeHTML(text)}</b> yet.</p>
-      <p class="sub">You can save it and enter an estimated calorie amount if you know it.</p>
-      <input id="unknownCalories" type="number" placeholder="Estimated calories (optional)">
-      <button class="primary" style="margin-top:10px"
-        onclick="saveUnknownFood('${escapeJS(text)}')">Save Food</button>
-    `);
-    return;
-  }
-
-  let total=0;
-  found.forEach(f=>{
-    total+=f.calories;
-    today.foods.push({...f,time:timeNow()});
-  });
-
-  today.calories+=total;
-  save();
-
-  const names=found.map(x=>x.label).join(", ");
-
-  respond(
-    `Perfect. I added ${names}. About ${total} calories.`,
-    `🍓 Added ${names} · ≈ ${total} calories`
-  );
-}
-
-function saveUnknownFood(text){
-  const c=Number(document.getElementById("unknownCalories").value)||0;
-
-  today.foods.push({
-    label:text,
-    calories:c,
-    group:"unknown",
-    time:timeNow()
-  });
-  today.calories+=c;
+  saveProfile();
   closeModal();
-  save();
-
-  respond("Got it. I saved that for today.","🍽️ Food saved.");
+  render();
+  speak(`Welcome to Afternooners, ${name}.`);
 }
 
-function manualFood(){
-  const el=document.getElementById("foodInput");
-  const t=el.value.trim();
-  if(!t)return;
-  el.value="";
-  logFood(t);
+/* =========================
+   BASIC UI
+========================= */
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(id==="settingsPage")populateVoices();
 }
 
-
-/* ========================================
-   WATER
-======================================== */
-
-function addWater(ml,label="water"){
-  ml=Math.round(Number(ml)||0);
-  if(!ml)return;
-
-  today.water+=ml;
-  save();
-
-  const litres=(today.water/1000).toFixed(1).replace(".0","");
-
-  respond(
-    `Perfect. ${label} added. You're at ${litres} litres today.`,
-    `💧 ${ml} mL added · ${today.water} mL today`
-  );
+function showModal(html){
+  document.getElementById("modalBox").innerHTML=
+    html+
+    `<button class="btn" style="width:100%;margin-top:10px" onclick="closeModal()">Close</button>`;
+  document.getElementById("modal").classList.remove("hidden");
 }
 
-function waterFromSpeech(text){
-  const t=text.toLowerCase()
-    .replace(/millilitres|milliliters/g,"ml")
-    .replace(/litres|liters/g,"litres");
-
-  let m=t.match(/(\d+(?:\.\d+)?)\s*ml/);
-  if(m){
-    addWater(Number(m[1]),`${m[1]} millilitres`);
-    return true;
-  }
-
-  m=t.match(/(\d+(?:\.\d+)?)\s*litres?/);
-  if(m){
-    addWater(Number(m[1])*1000,`${m[1]} litres`);
-    return true;
-  }
-
-  let count=1;
-  if(/\b(two|2)\b/.test(t))count=2;
-  else if(/\b(three|3)\b/.test(t))count=3;
-  else if(/\b(four|4)\b/.test(t))count=4;
-
-  if(/bottle/.test(t) && /water|drink|drank|add|another/.test(t)){
-    addWater(500*count,`${count===1?"one":count} bottle${count>1?"s":""}`);
-    return true;
-  }
-
-  if(/glass/.test(t) && /water|drink|drank|add|another/.test(t)){
-    addWater(250*count,`${count===1?"one":count} glass${count>1?"es":""}`);
-    return true;
-  }
-
-  return false;
+function closeModal(){
+  document.getElementById("modal").classList.add("hidden");
 }
 
-
-/* ========================================
-   MOVEMENT / WEIGHT / SLEEP
-======================================== */
-
-function addSteps(n){
-  n=Math.round(Number(n)||0);
-  if(!n)return;
-  today.steps+=n;
-  save();
-  respond(`Nice. ${n.toLocaleString()} steps added.`,`🚶 ${n.toLocaleString()} steps added.`);
-}
-function saveSteps(){
-  const e=document.getElementById("stepsInput");
-  addSteps(e.value);
-  e.value="";
-}
-function addExercise(n,label="exercise"){
-  n=Math.round(Number(n)||0);
-  if(!n)return;
-  today.exercise+=n;
-  save();
-  respond(`Nice work. ${n} minutes added.`,`🌿 ${n} minutes of ${label} added.`);
-}
-function saveExercise(){
-  const e=document.getElementById("exerciseInput");
-  addExercise(e.value);
-  e.value="";
-}
-function saveSleep(){
-  const e=document.getElementById("sleepInput");
-  const n=Number(e.value);
-  if(!n)return;
-  today.sleep=n;
-  e.value="";
-  save();
-  respond(`Got it. ${n} hours of sleep saved.`,`🌙 ${n} hours saved.`);
-}
-function saveWeight(){
-  const e=document.getElementById("weightInput");
-  const n=Number(e.value);
-  if(!n)return;
-  today.weight=n;
-  e.value="";
-  save();
-  respond("Got it. Today's weight is saved.","⚖️ Weight saved.");
+function showHeard(t){
+  document.getElementById("heard").textContent=t;
 }
 
+const quotes=[
+  "Small steps make big changes.",
+  "Progress beats perfection.",
+  "Do something today your future self will thank you for.",
+  "A good day doesn't have to be a perfect day.",
+  "Keep going — it all adds up.",
+  "Healthy girls, happier days."
+];
 
-/* ========================================
-   VOICE COMMANDS
-======================================== */
+function header(){
+  const d=new Date();
+  const hour=d.getHours();
+  const part=hour<12?"Good morning":hour<17?"Good afternoon":"Good evening";
+  document.getElementById("greeting").textContent=
+    `${part}${profile?.name?", "+profile.name:""}!`;
 
-function processSpeech(raw){
-  const t=raw.toLowerCase().trim();
-  showHeard(`I heard: “${raw}”`);
+  document.getElementById("todayDate").textContent=
+    d.toLocaleDateString("en-CA",{weekday:"long",month:"long",day:"numeric"});
 
-  if(handlePending(raw))return;
-
-  /* sleep commands */
-  if(/play.*rain|rain.*sound/.test(t)){
-    goTo("sleepHelp");
-    startSound("rain",findSoundButton("Rain"));
-    respond("Rain is on. Rest easy.","🌧️ Rain started.");
-    return;
-  }
-
-  if(/play.*ocean|ocean.*sound|water sounds/.test(t)){
-    goTo("sleepHelp");
-    startSound("ocean",findSoundButton("Ocean"));
-    respond("Ocean sounds are on.","🌊 Ocean sounds started.");
-    return;
-  }
-
-  if(/white noise/.test(t)){
-    goTo("sleepHelp");
-    startSound("white",findSoundButton("White Noise"));
-    respond("White noise is on.","☁️ White noise started.");
-    return;
-  }
-
-  if(/fireplace|fire sound/.test(t)){
-    goTo("sleepHelp");
-    startSound("fire",findSoundButton("Fireplace"));
-    respond("Fireplace sounds are on.","🔥 Fireplace started.");
-    return;
-  }
-
-  if(/sleep sound|sleep noise|play.*noise/.test(t)){
-    goTo("sleepHelp");
-    respond(
-      "Sure. Choose rain, ocean, white noise, nature or fireplace.",
-      "🎧 What would you like: Rain, Ocean, White Noise, Nature or Fireplace?"
-    );
-    return;
-  }
-
-  if(/help me sleep|help.*relax|guided relaxation/.test(t)){
-    goTo("sleepHelp");
-    openRelaxation();
-    return;
-  }
-
-  if(/meditat/.test(t)){
-    startMeditation();
-    return;
-  }
-
-  if(/breathing|breathe|breath exercise/.test(t)){
-    startBreathing();
-    return;
-  }
-
-  if(/stretch/.test(t)){
-    startStretching();
-    return;
-  }
-
-  /* water */
-  if(waterFromSpeech(t))return;
-
-  /* steps */
-  let m=t.match(/(\d+)\s*steps/);
-  if(m){
-    addSteps(Number(m[1]));
-    return;
-  }
-
-  /* exercise */
-  m=t.match(/(\d+)\s*(?:minutes?|mins?)/);
-  if(m && /walk|exercise|workout|worked out|bike|cycling|yoga/.test(t)){
-    let label="exercise";
-    if(/walk/.test(t))label="walking";
-    if(/bike|cycl/.test(t))label="cycling";
-    if(/yoga/.test(t))label="yoga";
-    addExercise(Number(m[1]),label);
-    return;
-  }
-
-  /* sleep */
-  m=t.match(/(\d+(?:\.\d+)?)\s*(?:hours?|hrs?)/);
-  if(m && /slept|sleep/.test(t)){
-    today.sleep=Number(m[1]);
-    save();
-    respond(`Got it. ${m[1]} hours of sleep saved.`,`🌙 ${m[1]} hours saved.`);
-    return;
-  }
-
-  /* weight */
-  m=t.match(/(\d+(?:\.\d+)?)\s*(?:pounds?|lbs?)/);
-  if(m && /weigh|weight|weighed/.test(t)){
-    today.weight=Number(m[1]);
-    save();
-    respond("Got it. Today's weight is saved.","⚖️ Weight saved.");
-    return;
-  }
-
-  /* food */
-  if(
-    /ate|had|eaten|breakfast|lunch|dinner|supper|snack|sandwich|pizza|coffee|egg|toast|fruit|salad|chicken|turkey|yogurt|apple|banana/.test(t)
-  ){
-    let cleaned=raw
-      .replace(/^(i\s+)?(just\s+)?(ate|had|have eaten)\s+/i,"")
-      .trim();
-    logFood(cleaned||raw);
-    return;
-  }
-
-  respond(
-    "I heard you, but I don't know what to do with that yet.",
-    `🤔 I heard “${raw}”. Try telling me about food, water, movement, sleep, weight, or ask for Sleep Help.`
-  );
+  document.getElementById("quote").textContent=
+    quotes[d.getDate()%quotes.length];
 }
 
-function findSoundButton(word){
-  return [...document.querySelectorAll(".sound")]
-    .find(b=>b.textContent.includes(word));
-}
+/* =========================
+   WEATHER
+========================= */
 
+async function loadWeather(){
+  try{
+    const url="https://api.open-meteo.com/v1/forecast?latitude=43.4668&longitude=-81.1960&current=temperature_2m,weather_code&temperature_unit=celsius";
+    const r=await fetch(url);
+    const j=await r.json();
+    const t=Math.round(j.current.temperature_2m);
+    const code=j.current.weather_code;
 
-/* ========================================
-   SPEECH RECOGNITION
-======================================== */
+    let desc="Outside";
+    if(code===0)desc="Sunny";
+    else if(code<=3)desc="Partly cloudy";
+    else if(code<=48)desc="Foggy";
+    else if(code<=67)desc="Rainy";
+    else if(code<=77)desc="Snowy";
+    else if(code<=82)desc="Showers";
+    else if(code>=95)desc="Stormy";
 
-const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-let recognition=null;
-
-if(Recognition){
-  recognition=new Recognition();
-  recognition.lang="en-CA";
-  recognition.continuous=false;
-  recognition.interimResults=false;
-
-  recognition.onstart=()=>{
-    document.getElementById("mic").classList.add("listening");
-    showHeard("Listening…");
-  };
-
-  recognition.onend=()=>{
-    document.getElementById("mic").classList.remove("listening");
-  };
-
-  recognition.onerror=()=>{
-    document.getElementById("mic").classList.remove("listening");
-    showHeard("I missed that. Tap the microphone and try again.");
-  };
-
-  recognition.onresult=e=>{
-    processSpeech(e.results[0][0].transcript);
-  };
-}
-
-document.getElementById("mic").onclick=()=>{
-  if(!recognition){
-    alert("Voice recognition isn't available in this browser.");
-    return;
+    document.getElementById("weather").textContent=
+      `Mitchell • ${t}°C • ${desc}`;
+  }catch(e){
+    document.getElementById("weather").textContent="Mitchell, Ontario";
   }
-  try{recognition.start()}catch(e){}
-};
+}
 
-
-/* ========================================
-   SPOKEN VOICE
-======================================== */
+/* =========================
+   VOICES
+========================= */
 
 function voiceEnabled(){
   return !profile || profile.voiceOn!==false;
 }
-function toggleVoice(){
+
+function voiceKey(v){
+  return `${v.name}|||${v.lang}`;
+}
+
+function englishVoices(){
+  if(!("speechSynthesis" in window))return [];
+  return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+}
+
+function populateVoices(){
+  const select=document.getElementById("voiceSelect");
+  if(!select)return;
+
+  const voices=englishVoices();
+
+  if(!voices.length){
+    select.innerHTML="<option>Voices are still loading…</option>";
+    return;
+  }
+
+  select.innerHTML="";
+
+  voices.forEach(v=>{
+    const o=document.createElement("option");
+    o.value=voiceKey(v);
+    o.textContent=`${v.name} (${v.lang})`;
+    select.appendChild(o);
+  });
+
+  if(profile?.voiceKey && [...select.options].some(o=>o.value===profile.voiceKey)){
+    select.value=profile.voiceKey;
+  }else{
+    const preferred=
+      voices.find(v=>/Samantha/i.test(v.name))||
+      voices.find(v=>/Ava/i.test(v.name))||
+      voices.find(v=>/Karen/i.test(v.name))||
+      voices.find(v=>/^en-CA/i.test(v.lang))||
+      voices[0];
+
+    if(preferred)select.value=voiceKey(preferred);
+  }
+}
+
+function saveVoiceChoice(){
   if(!profile)return;
-  profile.voiceOn=!voiceEnabled();
-  saveProfile(profile);
-  updateVoiceButton();
-  if(profile.voiceOn)speak("Voice is on.");
-  else speechSynthesis.cancel();
+  profile.voiceKey=document.getElementById("voiceSelect").value;
+  saveProfile();
 }
-function updateVoiceButton(){
-  document.getElementById("voiceToggle").textContent=
-    voiceEnabled()?"🔊 On":"🔇 Off";
+
+function selectedVoice(){
+  const voices=speechSynthesis.getVoices();
+
+  if(profile?.voiceKey){
+    const v=voices.find(x=>voiceKey(x)===profile.voiceKey);
+    if(v)return v;
+  }
+
+  return voices.find(v=>/^en-CA/i.test(v.lang))||
+         voices.find(v=>/^en/i.test(v.lang))||
+         null;
 }
-document.getElementById("voiceToggle").onclick=toggleVoice;
 
 function speak(text){
   if(!voiceEnabled()||!("speechSynthesis" in window))return;
 
   speechSynthesis.cancel();
+
   const u=new SpeechSynthesisUtterance(text);
-
-  u.rate=.86;
-  u.pitch=.98;
-  u.volume=.82;
-
-  const vs=speechSynthesis.getVoices();
-
-  const v=
-    vs.find(x=>/Samantha/i.test(x.name))||
-    vs.find(x=>/Ava/i.test(x.name))||
-    vs.find(x=>/Serena/i.test(x.name))||
-    vs.find(x=>/Karen/i.test(x.name))||
-    vs.find(x=>/^en-CA/i.test(x.lang))||
-    vs.find(x=>/^en/i.test(x.lang));
+  const v=selectedVoice();
 
   if(v)u.voice=v;
+
+  u.rate=.9;
+  u.pitch=1;
+  u.volume=.9;
+
   speechSynthesis.speak(u);
 }
+
+function previewVoice(){
+  saveVoiceChoice();
+
+  if(!profile)return;
+
+  speak(`Hi ${profile.name}. I'm your Afternooners assistant. Pick the voice you like best.`);
+}
+
+function toggleVoice(){
+  if(!profile)return;
+
+  profile.voiceOn=!voiceEnabled();
+  saveProfile();
+  updateVoiceButton();
+
+  if(profile.voiceOn)speak("Voice is on.");
+  else if("speechSynthesis" in window)speechSynthesis.cancel();
+}
+
+function updateVoiceButton(){
+  const b=document.getElementById("voiceToggle");
+  if(!b)return;
+  b.textContent=voiceEnabled()?"🔊 Voice On":"🔇 Voice Off";
+}
+
+if("speechSynthesis" in window){
+  speechSynthesis.addEventListener?.("voiceschanged",populateVoices);
+  setTimeout(populateVoices,300);
+  setTimeout(populateVoices,1200);
+}
+
+/* =========================
+   NUMBER WORDS
+========================= */
+
+const SMALL_NUM={
+  zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,
+  ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,
+  sixteen:16,seventeen:17,eighteen:18,nineteen:19,
+  twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90
+};
+
+function wordsToNumber(text){
+  const numeric=text.match(/[\d,]+(?:\.\d+)?/);
+  if(numeric)return Number(numeric[0].replace(/,/g,""));
+
+  const words=text.toLowerCase().replace(/-/g," ").split(/\s+/);
+  let total=0,current=0,found=false;
+
+  for(const w of words){
+    if(SMALL_NUM[w]!==undefined){
+      current+=SMALL_NUM[w];
+      found=true;
+    }else if(w==="hundred"){
+      current=(current||1)*100;
+      found=true;
+    }else if(w==="thousand"){
+      total+=(current||1)*1000;
+      current=0;
+      found=true;
+    }
+  }
+
+  return found?total+current:null;
+}
+
+function durationMinutes(text){
+  const t=text.toLowerCase();
+
+  if(/half (an )?hour/.test(t))return 30;
+  if(/quarter (of an |of a |an |a )?hour/.test(t))return 15;
+
+  let m=t.match(/(\d+(?:\.\d+)?)\s*(minutes?|mins?)/);
+  if(m)return Math.round(Number(m[1]));
+
+  m=t.match(/(\d+(?:\.\d+)?)\s*(hours?|hrs?)/);
+  if(m)return Math.round(Number(m[1])*60);
+
+  if(/\b(hour|an hour|one hour)\b/.test(t))return 60;
+
+  const number=wordsToNumber(t);
+
+  if(number!==null){
+    if(/\b(hours?|hrs?)\b/.test(t))return Math.round(number*60);
+    if(/\b(minutes?|mins?)\b/.test(t))return Math.round(number);
+  }
+
+  return null;
+}
+
+/* =========================
+   FOOD LIBRARY
+========================= */
+
+const FOOD_LIBRARY=[
+["granola bar",150,"other"],
+["protein bar",200,"protein"],
+["celery stick",6,"veg"],
+["celery",10,"veg"],
+["red pepper",30,"veg"],
+["green pepper",30,"veg"],
+["yellow pepper",30,"veg"],
+["bell pepper",30,"veg"],
+["tomato",22,"veg"],
+["cherry tomatoes",30,"veg"],
+["carrots",35,"veg"],
+["carrot",25,"veg"],
+["cucumber",30,"veg"],
+["broccoli",55,"veg"],
+["cauliflower",30,"veg"],
+["lettuce",10,"veg"],
+["spinach",20,"veg"],
+["peas",65,"veg"],
+["green beans",40,"veg"],
+["corn",90,"veg"],
+["potato",160,"veg"],
+["sweet potato",115,"veg"],
+["banana",105,"fruit"],
+["apple",95,"fruit"],
+["orange",65,"fruit"],
+["pear",100,"fruit"],
+["peach",60,"fruit"],
+["plum",30,"fruit"],
+["kiwi",45,"fruit"],
+["grapes",60,"fruit"],
+["strawberries",50,"fruit"],
+["blueberries",85,"fruit"],
+["raspberries",65,"fruit"],
+["blackberries",60,"fruit"],
+["watermelon",85,"fruit"],
+["cantaloupe",55,"fruit"],
+["pineapple",80,"fruit"],
+["mango",100,"fruit"],
+["avocado",240,"veg"],
+["egg",75,"protein"],
+["eggs",150,"protein"],
+["scrambled eggs",180,"protein"],
+["boiled egg",75,"protein"],
+["yogurt",120,"protein"],
+["greek yogurt",130,"protein"],
+["cottage cheese",120,"protein"],
+["cheese",110,"protein"],
+["cheese slice",80,"protein"],
+["milk",120,"protein"],
+["almond milk",40,"other"],
+["chicken breast",220,"protein"],
+["chicken",220,"protein"],
+["turkey",100,"protein"],
+["ham",120,"protein"],
+["beef",250,"protein"],
+["steak",350,"protein"],
+["pork chop",250,"protein"],
+["salmon",230,"protein"],
+["tuna",140,"protein"],
+["shrimp",120,"protein"],
+["tofu",150,"protein"],
+["beans",200,"protein"],
+["toast",90,"grain"],
+["whole wheat toast",90,"grain"],
+["bread",80,"grain"],
+["whole wheat bread",85,"grain"],
+["bagel",280,"grain"],
+["english muffin",130,"grain"],
+["tortilla",140,"grain"],
+["rice",205,"grain"],
+["brown rice",215,"grain"],
+["pasta",220,"grain"],
+["oatmeal",160,"grain"],
+["cereal",160,"grain"],
+["crackers",120,"grain"],
+["popcorn",100,"grain"],
+["pizza slice",285,"other"],
+["pizza",285,"other"],
+["hamburger",400,"other"],
+["burger",400,"other"],
+["hot dog",290,"other"],
+["french fries",365,"other"],
+["fries",365,"other"],
+["soup",150,"other"],
+["salad",100,"veg"],
+["caesar salad",350,"veg"],
+["peanut butter",95,"protein"],
+["almond butter",100,"protein"],
+["nuts",170,"protein"],
+["almonds",165,"protein"],
+["walnuts",185,"protein"],
+["chips",160,"other"],
+["cookie",90,"other"],
+["cookies",180,"other"],
+["brownie",220,"other"],
+["cake",300,"other"],
+["ice cream",270,"other"],
+["chocolate",150,"other"],
+["mayo",95,"other"],
+["mayonnaise",95,"other"],
+["mustard",10,"other"],
+["ketchup",20,"other"],
+["ranch dressing",130,"other"],
+["salad dressing",100,"other"],
+["butter",100,"other"],
+["cream cheese",100,"other"],
+["jam",50,"other"],
+["honey",65,"other"],
+["sugar",16,"other"],
+["coffee",5,"other"],
+["latte",150,"other"],
+["cappuccino",100,"other"],
+["orange juice",110,"fruit"],
+["apple juice",115,"fruit"],
+["smoothie",200,"fruit"]
+];
+
+FOOD_LIBRARY.sort((a,b)=>b[0].length-a[0].length);
+
+let pending=null;
+
+function quantityForFood(text,name){
+  const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+
+  let re=new RegExp("(\\d+)\\s+(?:pieces? of |slices? of |stalks? of |sticks? of )?"+escaped);
+  let m=text.match(re);
+  if(m)return Number(m[1]);
+
+  const wordQty={
+    two:2,three:3,four:4,five:5,six:6
+  };
+
+  for(const [w,n] of Object.entries(wordQty)){
+    re=new RegExp("\\b"+w+"\\s+(?:pieces? of |slices? of |stalks? of |sticks? of )?"+escaped);
+    if(re.test(text))return n;
+  }
+
+  if(new RegExp("\\bhalf (?:a |an )?"+escaped).test(text))return .5;
+
+  return 1;
+}
+
+function addFood(name,cal,group="other"){
+  today.foods.push({
+    name,
+    calories:Math.round(cal),
+    group,
+    time:new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})
+  });
+
+  saveToday();
+}
+
+function foodTotal(){
+  return today.foods.reduce((s,f)=>s+(Number(f.calories)||0),0);
+}
+
+function parseFood(text){
+  const t=text.toLowerCase()
+    .replace(/red peppers/g,"red pepper")
+    .replace(/green peppers/g,"green pepper")
+    .replace(/yellow peppers/g,"yellow pepper")
+    .replace(/bananas/g,"banana")
+    .replace(/apples/g,"apple");
+
+  if(/\bturkey sandwich\b/.test(t)){
+    pending={type:"turkeySandwich"};
+    respond(
+      "Sure. What kind of bread, and did you have anything on it like mayo, mustard, cheese, lettuce or tomato?",
+      "🥪 Turkey sandwich — tell me the bread and toppings."
+    );
+    return true;
+  }
+
+  if(/\bcoffee\b/.test(t) && !/(black|cream|milk|sugar|latte|cappuccino)/.test(t)){
+    pending={type:"coffee"};
+    respond(
+      "Got it. Was your coffee black, or did you have cream, milk or sugar?",
+      "☕ Coffee — black, cream, milk or sugar?"
+    );
+    return true;
+  }
+
+  if(/\bsalad\b/.test(t) && !/(caesar|dressing|ranch|chicken|tomato|lettuce|cucumber|pepper)/.test(t)){
+    pending={type:"salad"};
+    respond(
+      "Sure. What was in your salad, and did you have dressing?",
+      "🥗 Salad — what was in it and what dressing?"
+    );
+    return true;
+  }
+
+  let found=[];
+  let occupied=[];
+
+  for(const item of FOOD_LIBRARY){
+    const [name,cal,group]=item;
+    const index=t.indexOf(name);
+
+    if(index<0)continue;
+
+    const end=index+name.length;
+    const overlaps=occupied.some(r=>index<r[1] && end>r[0]);
+    if(overlaps)continue;
+
+    occupied.push([index,end]);
+
+    const qty=quantityForFood(t,name);
+    found.push({name,cal:cal*qty,group,qty});
+  }
+
+  if(!found.length)return false;
+
+  found.forEach(f=>{
+    const display=f.qty!==1?`${f.qty} × ${f.name}`:f.name;
+    addFood(display,f.cal,f.group);
+  });
+
+  const c=found.reduce((s,f)=>s+f.cal,0);
+
+  respond(
+    `Got it. I added ${found.map(f=>f.name).join(" and ")}. About ${Math.round(c)} calories.`,
+    `🍎 Added ${found.map(f=>f.name).join(" + ")} • ~${Math.round(c)} cal`
+  );
+
+  return true;
+}
+
+function handlePending(text){
+  const t=text.toLowerCase();
+
+  if(!pending)return false;
+
+  if(pending.type==="turkeySandwich"){
+    let cal=100;
+    let parts=["turkey"];
+
+    if(/whole wheat|whole grain/.test(t)){cal+=170;parts.push("whole wheat bread")}
+    else{cal+=160;parts.push("bread")}
+
+    if(/mayo|mayonnaise/.test(t)){cal+=95;parts.push("mayo")}
+    if(/mustard/.test(t)){cal+=10;parts.push("mustard")}
+    if(/cheese/.test(t)){cal+=110;parts.push("cheese")}
+    if(/butter/.test(t)){cal+=100;parts.push("butter")}
+    if(/lettuce/.test(t)){cal+=5;parts.push("lettuce")}
+    if(/tomato/.test(t)){cal+=10;parts.push("tomato")}
+
+    addFood("Turkey sandwich: "+parts.join(", "),cal,"mixed");
+    pending=null;
+
+    respond(
+      `Perfect. I added your turkey sandwich at about ${cal} calories.`,
+      `🥪 Turkey sandwich added • ~${cal} cal`
+    );
+
+    return true;
+  }
+
+  if(pending.type==="coffee"){
+    let cal=5;
+    let parts=["coffee"];
+
+    if(/cream/.test(t)){cal+=30;parts.push("cream")}
+    if(/milk/.test(t)){cal+=25;parts.push("milk")}
+    if(/sugar/.test(t)){cal+=16;parts.push("sugar")}
+    if(/black/.test(t))parts.push("black");
+
+    addFood(parts.join(" + "),cal,"other");
+    pending=null;
+
+    respond(
+      `Got it. I added your coffee at about ${cal} calories.`,
+      `☕ Coffee added • ~${cal} cal`
+    );
+
+    return true;
+  }
+
+  if(pending.type==="movementTime"){
+    const mins=durationMinutes(t);
+
+    if(mins){
+      addMovement(pending.activity,mins,pending.wellness);
+      const a=pending.activity;
+      pending=null;
+
+      respond(
+        `Perfect. I added ${mins} minutes of ${a}.`,
+        `👟 ${a} • ${mins} minutes added`
+      );
+
+      return true;
+    }
+
+    respond(
+      "I didn't catch the time. About how many minutes?",
+      "⏱️ About how many minutes?"
+    );
+    return true;
+  }
+
+  if(pending.type==="steps"){
+    const n=wordsToNumber(t);
+
+    if(n!==null){
+      today.steps=n;
+      saveToday();
+      pending=null;
+
+      respond(
+        `Perfect. I put down ${n.toLocaleString()} steps for today.`,
+        `👟 ${n.toLocaleString()} steps saved`
+      );
+      return true;
+    }
+
+    respond("How many steps did you get today?","👟 How many steps?");
+    return true;
+  }
+
+  if(pending.type==="salad"){
+    pending=null;
+
+    let base=100;
+    if(/ranch/.test(t))base+=130;
+    else if(/dressing/.test(t))base+=100;
+
+    if(/chicken/.test(t))base+=220;
+    if(/cheese/.test(t))base+=110;
+    if(/avocado/.test(t))base+=120;
+
+    addFood("Salad: "+text,base,"veg");
+
+    respond(
+      `Got it. I added your salad at roughly ${base} calories.`,
+      `🥗 Salad added • ~${base} cal`
+    );
+
+    return true;
+  }
+
+  return false;
+}
+
+/* =========================
+   MOVEMENT
+========================= */
+
+const ACTIVITIES=[
+  ["pickleball","Pickleball",false],
+  ["tread mill","Treadmill",false],
+  ["treadmill","Treadmill",false],
+  ["yoga","Yoga",false],
+  ["flowerbed","Gardening",false],
+  ["flower bed","Gardening",false],
+  ["gardening","Gardening",false],
+  ["garden","Gardening",false],
+  ["yard work","Yard work",false],
+  ["yardwork","Yard work",false],
+  ["walking the dog","Walking",false],
+  ["walked the dog","Walking",false],
+  ["dog walk","Walking",false],
+  ["walking","Walking",false],
+  ["walk","Walking",false],
+  ["bike ride","Cycling",false],
+  ["biking","Cycling",false],
+  ["cycling","Cycling",false],
+  ["swimming","Swimming",false],
+  ["swim","Swimming",false],
+  ["dancing","Dancing",false],
+  ["dance","Dancing",false],
+  ["cleaning","Housework",false],
+  ["housework","Housework",false],
+  ["vacuuming","Housework",false],
+  ["mopping","Housework",false],
+  ["hiking","Hiking",false],
+  ["weights","Strength training",false],
+  ["weight lifting","Strength training",false],
+  ["strength training","Strength training",false],
+  ["workout","Workout",false],
+  ["exercise","Exercise",false],
+  ["golf","Golf",false],
+  ["sauna","Sauna",true],
+  ["shaky machine","Vibration plate",true],
+  ["vibration machine","Vibration plate",true],
+  ["vibration plate","Vibration plate",true]
+];
+
+function addMovement(activity,mins,wellness=false){
+  const obj={
+    activity,
+    minutes:mins,
+    time:new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})
+  };
+
+  if(wellness)today.wellness.push(obj);
+  else today.movement.push(obj);
+
+  saveToday();
+}
+
+function parseMovement(text){
+  const t=text.toLowerCase();
+
+  if(/\bsteps?\b/.test(t)){
+    const n=wordsToNumber(t);
+
+    if(n!==null && n>=100){
+      today.steps=n;
+      saveToday();
+
+      respond(
+        `Great. I put down ${n.toLocaleString()} steps for today.`,
+        `👟 ${n.toLocaleString()} steps saved`
+      );
+
+      return true;
+    }
+
+    pending={type:"steps"};
+
+    respond(
+      "Sure. How many steps did you get today?",
+      "👟 How many steps did you get today?"
+    );
+
+    return true;
+  }
+
+  const found=ACTIVITIES.find(a=>t.includes(a[0]));
+
+  if(!found)return false;
+
+  const [,activity,wellness]=found;
+  const mins=durationMinutes(t);
+
+  if(mins){
+    addMovement(activity,mins,wellness);
+
+    let spoken=`Nice. I added ${activity} for ${mins} minutes.`;
+
+    if(activity==="Sauna")
+      spoken=`Nice. I recorded ${mins} minutes in the sauna under wellness.`;
+
+    if(activity==="Vibration plate")
+      spoken=`Got it. I recorded ${mins} minutes on the vibration plate under wellness.`;
+
+    respond(
+      spoken,
+      `${wellness?"🌿":"👟"} ${activity} • ${mins} minutes added`
+    );
+
+    return true;
+  }
+
+  pending={type:"movementTime",activity,wellness};
+
+  respond(
+    `Nice. About how many minutes did you do ${activity}?`,
+    `⏱️ ${activity} — about how many minutes?`
+  );
+
+  return true;
+}
+
+/* =========================
+   WATER / SLEEP / WEIGHT
+========================= */
+
+function parseWater(text){
+  const t=text.toLowerCase();
+
+  if(!/(water|bottle|glass|litre|liter)/.test(t))return false;
+
+  let ml=0;
+  const n=wordsToNumber(t);
+
+  if(/half (a )?(litre|liter)/.test(t))ml=500;
+  else if(/litre|liter/.test(t) && n!==null)ml=n*1000;
+  else if(/bottle/.test(t))ml=(n||1)*500;
+  else if(/glass/.test(t))ml=(n||1)*250;
+  else{
+    const m=t.match(/(\d+)\s*ml/);
+    if(m)ml=Number(m[1]);
+  }
+
+  if(!ml)ml=250;
+
+  addWater(ml);
+
+  respond(
+    `Great. I added ${ml} millilitres of water.`,
+    `💧 ${ml} mL water added`
+  );
+
+  return true;
+}
+
+function addWater(ml){
+  today.water=(today.water||0)+ml;
+  saveToday();
+}
+
+function parseSleep(text){
+  const t=text.toLowerCase();
+
+  if(!/(slept|sleep)/.test(t))return false;
+  if(/sleep help|help me sleep/.test(t)){
+    showPage("sleepPage");
+    respond("I've opened Sleep Help for you.","🌙 Sleep Help is open.");
+    return true;
+  }
+
+  const n=wordsToNumber(t);
+
+  if(n!==null && n<=24){
+    today.sleep=n;
+    saveToday();
+
+    respond(
+      `Got it. I recorded ${n} hours of sleep.`,
+      `🌙 ${n} hours sleep saved`
+    );
+
+    return true;
+  }
+
+  return false;
+}
+
+function saveSleep(){
+  const n=Number(document.getElementById("sleepInput").value);
+
+  if(!n)return;
+
+  today.sleep=n;
+  saveToday();
+  document.getElementById("sleepInput").value="";
+  speak(`I recorded ${n} hours of sleep.`);
+}
+
+function parseWeight(text){
+  const t=text.toLowerCase();
+
+  if(!/(weigh|weight|pounds|lbs)/.test(t))return false;
+
+  const n=wordsToNumber(t);
+
+  if(n!==null && n>50 && n<500){
+    today.weight=n;
+    saveToday();
+
+    respond(
+      `Got it. I recorded your weight as ${n} pounds.`,
+      `⚖️ Weight saved • ${n} lb`
+    );
+
+    return true;
+  }
+
+  return false;
+}
+
+function askWeight(){
+  showModal(`
+    <h2>Update Weight</h2>
+    <input id="modalWeight" type="number" step=".1" placeholder="Today's weight">
+    <button class="primary" onclick="saveModalWeight()">Save</button>
+  `);
+}
+
+function saveModalWeight(){
+  const n=Number(document.getElementById("modalWeight").value);
+  if(!n)return;
+
+  today.weight=n;
+  saveToday();
+  closeModal();
+}
+
+/* =========================
+   VOICE CONVERSATION
+========================= */
 
 function respond(spoken,screen){
   showHeard(screen||spoken);
   speak(spoken);
 }
 
+function understand(text){
+  if(!text)return;
 
-/* ========================================
-   REAL GUIDED SLEEP ROUTINES
-======================================== */
+  if(handlePending(text))return;
+  if(parseWater(text))return;
+  if(parseMovement(text))return;
+  if(parseSleep(text))return;
+  if(parseWeight(text))return;
+  if(parseFood(text))return;
 
-let routineTimers=[];
-
-function clearRoutine(){
-  routineTimers.forEach(clearTimeout);
-  routineTimers=[];
-  speechSynthesis.cancel();
+  respond(
+    "I heard you, but I'm not completely sure what to log. Can you tell me a little more?",
+    `🤔 I heard “${text}”. Tell me a little more so I log it correctly.`
+  );
 }
 
-function sayLater(text,delay){
-  const id=setTimeout(()=>speak(text),delay);
-  routineTimers.push(id);
+let recognition=null;
+
+function startListening(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+  if(!SR){
+    showHeard("Voice recognition isn't available in this browser.");
+    return;
+  }
+
+  try{
+    recognition?.abort();
+  }catch(e){}
+
+  recognition=new SR();
+  recognition.lang="en-CA";
+  recognition.interimResults=false;
+  recognition.continuous=false;
+
+  const b=document.getElementById("micButton");
+  b.classList.add("listening");
+  showHeard("🎙️ Listening…");
+
+  recognition.onresult=e=>{
+    const text=e.results[0][0].transcript;
+    showHeard(`I heard: “${text}”`);
+    understand(text);
+  };
+
+  recognition.onerror=e=>{
+    b.classList.remove("listening");
+
+    if(e.error==="not-allowed"){
+      showHeard("Microphone permission is turned off.");
+    }else{
+      showHeard("I didn't catch that. Tap the microphone and try again.");
+    }
+  };
+
+  recognition.onend=()=>{
+    b.classList.remove("listening");
+  };
+
+  recognition.start();
 }
 
-function logSleepTool(name){
-  if(!today.sleepTools.includes(name)){
-    today.sleepTools.push(name);
-    save();
+/* =========================
+   MANUAL ENTRY
+========================= */
+
+function manualFood(){
+  const input=document.getElementById("foodInput");
+  const text=input.value.trim();
+  if(!text)return;
+
+  input.value="";
+
+  if(!parseFood(text)){
+    showModal(`
+      <h2>I don't know that food yet</h2>
+      <p>You said: <strong>${escapeHTML(text)}</strong></p>
+      <p class="small">If you know roughly how many calories it was, enter them below.</p>
+      <input id="unknownCal" type="number" placeholder="Estimated calories">
+      <button class="primary" onclick="saveUnknownFood('${escapeAttr(text)}')">Add It</button>
+    `);
   }
 }
 
-function openRelaxation(){
-  showModal(`
-    <h2>🌸 Guided Relaxation</h2>
-    <p>Get comfortable. I'll slowly guide you from your toes to your face with real quiet pauses in between.</p>
-    <button class="choice" onclick="startRelaxation(5)">🌸 5-minute relaxation</button>
-    <button class="choice" onclick="startRelaxation(10)">🌙 10-minute relaxation</button>
-    <button class="choice" onclick="clearRoutine();closeModal()">Stop guided routine</button>
-  `);
-}
-
-function startRelaxation(minutes){
-  clearRoutine();
+function saveUnknownFood(name){
+  const cal=Number(document.getElementById("unknownCal").value)||0;
+  addFood(name,cal,"other");
   closeModal();
-  logSleepTool(`Guided relaxation ${minutes} min`);
-
-  respond(
-    "Get comfortable. Close your eyes if that feels good. We'll start with one slow breath.",
-    `🌸 ${minutes}-minute guided relaxation started.`
-  );
-
-  const scale=minutes===10?1.8:1;
-
-  const script=[
-    [12000,"Breathe in slowly through your nose... and let the breath out gently."],
-    [26000,"Bring your attention to your toes. Curl them gently. Hold... and now let them completely relax."],
-    [44000,"Notice your feet. Gently tighten them... hold... and release. Let them feel heavy."],
-    [62000,"Move up to your calves. Tighten them gently... hold... and let go."],
-    [80000,"Now your thighs. Gently tense the muscles... hold... and release. Let your legs sink into the bed."],
-    [101000,"Take another slow breath in... and a longer breath out."],
-    [119000,"Bring your attention to your stomach. Let it soften. You don't need to hold anything in."],
-    [139000,"Gently make fists with your hands. Hold... and release. Let your fingers become loose."],
-    [158000,"Now your arms. Tighten gently... hold... and let them become heavy."],
-    [178000,"Lift your shoulders slightly toward your ears... hold... and release them down."],
-    [198000,"Soften your jaw. Let your tongue rest. Relax the muscles around your eyes."],
-    [220000,"Smooth your forehead. Let your whole face become quiet."],
-    [241000,"Notice your whole body now, from your toes all the way to the top of your head."],
-    [260000,"One last slow breath in... and breathe out. Nothing else needs your attention right now. Rest."]
-  ];
-
-  script.forEach(([delay,text])=>{
-    sayLater(text,delay*scale);
-  });
 }
 
-function startBreathing(){
-  clearRoutine();
-  logSleepTool("Breathing");
+function manualMovement(){
+  const input=document.getElementById("moveInput");
+  const text=input.value.trim();
+  if(!text)return;
 
-  showModal(`
-    <h2>🌬️ Slow Breathing</h2>
-    <p>I'll guide you through a few slow breaths. Let the exhale be a little longer than the inhale.</p>
-    <button class="primary" onclick="closeModal()">Continue with voice</button>
-  `);
+  input.value="";
 
-  speak("Get comfortable. Breathe in gently for four.");
-  sayLater("One... two... three... four. Now breathe out slowly for six.",5000);
-  sayLater("Breathe in... two... three... four.",13000);
-  sayLater("And out... two... three... four... five... six.",19000);
-  sayLater("Again. Breathe in slowly.",28000);
-  sayLater("And breathe out. Let your shoulders soften.",35000);
-  sayLater("One more easy breath in... and a long, quiet breath out.",45000);
+  if(!parseMovement(text)){
+    showHeard("Tell me the activity and about how long you did it.");
+  }
 }
 
-function startMeditation(){
-  clearRoutine();
-  logSleepTool("Meditation");
-
-  showModal(`
-    <h2>🧘 Gentle Meditation</h2>
-    <p>Nothing to accomplish. Just a few quiet minutes to let the day settle.</p>
-    <button class="primary" onclick="closeModal()">Continue with voice</button>
-  `);
-
-  speak("Get comfortable and let your eyes close if you'd like. Notice the bed or chair supporting you.");
-  sayLater("Take a quiet breath. You don't have to change anything. Just notice it.",15000);
-  sayLater("If your mind wanders, that's okay. Gently come back to your breath.",35000);
-  sayLater("Let today's unfinished thoughts wait until tomorrow. They don't need an answer tonight.",60000);
-  sayLater("Relax your jaw. Drop your shoulders. Let yourself simply be still.",85000);
-  sayLater("You're finished. Stay here as long as you'd like.",110000);
+function escapeHTML(s){
+  return s.replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
 }
 
-function startStretching(){
-  clearRoutine();
-  logSleepTool("Gentle stretching");
-
-  showModal(`
-    <h2>🌿 Gentle Bedtime Stretch</h2>
-    <p>Move only within a comfortable range. Stop anything that hurts.</p>
-    <button class="primary" onclick="closeModal()">Continue with voice</button>
-  `);
-
-  speak("Let's start with your feet. Point your toes gently away, then bring them back toward you.");
-  sayLater("Now slowly circle both ankles. No rush.",18000);
-  sayLater("Stretch your legs long and gently tighten your thighs. Hold... and release.",38000);
-  sayLater("Roll your shoulders backward slowly three times.",58000);
-  sayLater("Let your right ear move gently toward your right shoulder. Don't force it.",76000);
-  sayLater("Come back to centre, and gently move your left ear toward your left shoulder.",94000);
-  sayLater("Finish with one comfortable full-body stretch... and relax.",115000);
+function escapeAttr(s){
+  return s.replace(/\\/g,"\\\\").replace(/'/g,"\\'");
 }
 
-
-/* ========================================
-   GENERATED SLEEP SOUNDS
-======================================== */
+/* =========================
+   DISTINCT SLEEP SOUNDS
+========================= */
 
 let audioCtx=null;
 let soundNodes=[];
+let soundIntervals=[];
+let soundTimeouts=[];
 let soundTimer=null;
 let countdown=null;
 let chosenMinutes=15;
@@ -1737,100 +1582,254 @@ function chooseTimer(n,b){
   updateTimer();
 }
 
-function noiseBuffer(ctx){
-  const length=ctx.sampleRate*3;
-  const b=ctx.createBuffer(1,length,ctx.sampleRate);
-  const d=b.getChannelData(0);
-  for(let i=0;i<length;i++)d[i]=Math.random()*2-1;
-  return b;
+function makeNoiseBuffer(ctx,seconds=4,brown=false){
+  const length=ctx.sampleRate*seconds;
+  const buffer=ctx.createBuffer(1,length,ctx.sampleRate);
+  const data=buffer.getChannelData(0);
+
+  let last=0;
+
+  for(let i=0;i<length;i++){
+    const white=Math.random()*2-1;
+
+    if(brown){
+      last=(last+.02*white)/1.02;
+      data[i]=last*3.5;
+    }else{
+      data[i]=white;
+    }
+  }
+
+  return buffer;
 }
 
-function startSound(type,button){
-  stopSound(false);
+function track(...nodes){
+  soundNodes.push(...nodes);
+}
 
-  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-
-  const master=audioCtx.createGain();
-  master.gain.value=.12;
-  master.connect(audioCtx.destination);
-  soundNodes.push(master);
-
-  const noise=audioCtx.createBufferSource();
-  noise.buffer=noiseBuffer(audioCtx);
-  noise.loop=true;
+function backgroundNoise(filterType,freq,volume,brown=false){
+  const source=audioCtx.createBufferSource();
+  source.buffer=makeNoiseBuffer(audioCtx,4,brown);
+  source.loop=true;
 
   const filter=audioCtx.createBiquadFilter();
+  filter.type=filterType;
+  filter.frequency.value=freq;
 
-  if(type==="rain"){
-    filter.type="highpass";
-    filter.frequency.value=1000;
-    master.gain.value=.12;
+  const gain=audioCtx.createGain();
+  gain.gain.value=volume;
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  source.start();
+  track(source,filter,gain);
+
+  return {source,filter,gain};
+}
+
+function makeRain(){
+  const rain=backgroundNoise("highpass",900,.11,false);
+
+  const soft=backgroundNoise("lowpass",1800,.035,false);
+
+  document.getElementById("soundStatus").textContent="🌧️ Soft steady rain";
+}
+
+function makeWhiteNoise(){
+  backgroundNoise("lowpass",8500,.075,false);
+  document.getElementById("soundStatus").textContent="☁️ Smooth white noise";
+}
+
+function makeOcean(){
+  const source=audioCtx.createBufferSource();
+  source.buffer=makeNoiseBuffer(audioCtx,6,true);
+  source.loop=true;
+
+  const filter=audioCtx.createBiquadFilter();
+  filter.type="lowpass";
+  filter.frequency.value=650;
+
+  const gain=audioCtx.createGain();
+  gain.gain.value=.06;
+
+  const lfo=audioCtx.createOscillator();
+  const lfoGain=audioCtx.createGain();
+
+  lfo.type="sine";
+  lfo.frequency.value=.10;
+  lfoGain.gain.value=.055;
+
+  lfo.connect(lfoGain);
+  lfoGain.connect(gain.gain);
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  source.start();
+  lfo.start();
+
+  track(source,filter,gain,lfo,lfoGain);
+
+  document.getElementById("soundStatus").textContent="🌊 Slow rolling ocean waves";
+}
+
+function birdChirp(){
+  if(!audioCtx||audioCtx.state!=="running")return;
+
+  const now=audioCtx.currentTime;
+  const osc=audioCtx.createOscillator();
+  const gain=audioCtx.createGain();
+
+  osc.type="sine";
+  osc.frequency.setValueAtTime(1700+Math.random()*800,now);
+  osc.frequency.exponentialRampToValueAtTime(2500+Math.random()*900,now+.12);
+  osc.frequency.exponentialRampToValueAtTime(1900+Math.random()*500,now+.28);
+
+  gain.gain.setValueAtTime(.0001,now);
+  gain.gain.exponentialRampToValueAtTime(.035,now+.03);
+  gain.gain.exponentialRampToValueAtTime(.0001,now+.32);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start(now);
+  osc.stop(now+.35);
+
+  track(osc,gain);
+}
+
+function makeNature(){
+  backgroundNoise("lowpass",1300,.025,true);
+
+  birdChirp();
+
+  const interval=setInterval(()=>{
+    birdChirp();
+    if(Math.random()>.55){
+      const t=setTimeout(birdChirp,250+Math.random()*500);
+      soundTimeouts.push(t);
+    }
+  },2800+Math.random()*1600);
+
+  soundIntervals.push(interval);
+
+  document.getElementById("soundStatus").textContent="🌲 Gentle nature with soft bird sounds";
+}
+
+function fireCrackle(){
+  if(!audioCtx||audioCtx.state!=="running")return;
+
+  const now=audioCtx.currentTime;
+  const source=audioCtx.createBufferSource();
+  source.buffer=makeNoiseBuffer(audioCtx,.12,false);
+
+  const filter=audioCtx.createBiquadFilter();
+  filter.type="highpass";
+  filter.frequency.value=1100+Math.random()*1500;
+
+  const gain=audioCtx.createGain();
+
+  gain.gain.setValueAtTime(.0001,now);
+  gain.gain.exponentialRampToValueAtTime(.10+Math.random()*.08,now+.008);
+  gain.gain.exponentialRampToValueAtTime(.0001,now+.09);
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  source.start(now);
+
+  track(source,filter,gain);
+}
+
+function makeFire(){
+  backgroundNoise("lowpass",700,.055,true);
+
+  const interval=setInterval(()=>{
+    fireCrackle();
+
+    if(Math.random()>.45){
+      const t=setTimeout(fireCrackle,80+Math.random()*250);
+      soundTimeouts.push(t);
+    }
+  },450);
+
+  soundIntervals.push(interval);
+
+  document.getElementById("soundStatus").textContent="🔥 Warm fireplace with crackles";
+}
+
+async function startSound(type,button){
+  stopSound(false);
+
+  const AC=window.AudioContext||window.webkitAudioContext;
+
+  if(!AC){
+    document.getElementById("soundStatus").textContent=
+      "Sleep sounds aren't supported by this browser.";
+    return;
   }
 
-  if(type==="ocean"){
-    filter.type="lowpass";
-    filter.frequency.value=700;
-    master.gain.value=.20;
+  try{
+    audioCtx=new AC();
 
-    const lfo=audioCtx.createOscillator();
-    const lg=audioCtx.createGain();
-    lfo.frequency.value=.11;
-    lg.gain.value=.07;
-    lfo.connect(lg);
-    lg.connect(master.gain);
-    lfo.start();
-    soundNodes.push(lfo,lg);
-  }
+    if(audioCtx.state==="suspended"){
+      await audioCtx.resume();
+    }
 
-  if(type==="white"){
-    filter.type="lowpass";
-    filter.frequency.value=7000;
-    master.gain.value=.09;
-  }
+    if(audioCtx.state!=="running"){
+      document.getElementById("soundStatus").textContent=
+        "Tap the sound button once more to start audio.";
+      return;
+    }
 
-  if(type==="nature"){
-    filter.type="lowpass";
-    filter.frequency.value=1800;
-    master.gain.value=.08;
-  }
+    if(type==="rain")makeRain();
+    else if(type==="ocean")makeOcean();
+    else if(type==="nature")makeNature();
+    else if(type==="fire")makeFire();
+    else if(type==="white")makeWhiteNoise();
 
-  if(type==="fire"){
-    filter.type="lowpass";
-    filter.frequency.value=1100;
-    master.gain.value=.11;
-  }
+    document.querySelectorAll(".sound").forEach(x=>x.classList.remove("active"));
+    if(button)button.classList.add("active");
 
-  noise.connect(filter);
-  filter.connect(master);
-  noise.start();
-
-  soundNodes.push(noise,filter);
-
-  document.querySelectorAll(".sound").forEach(x=>x.classList.remove("active"));
-  if(button)button.classList.add("active");
-
-  secondsLeft=chosenMinutes*60;
-  updateTimer();
-
-  countdown=setInterval(()=>{
-    secondsLeft--;
+    secondsLeft=chosenMinutes*60;
     updateTimer();
-    if(secondsLeft<=0)stopSound();
-  },1000);
 
-  soundTimer=setTimeout(stopSound,chosenMinutes*60000);
+    countdown=setInterval(()=>{
+      secondsLeft--;
+      updateTimer();
+      if(secondsLeft<=0)stopSound();
+    },1000);
+
+    soundTimer=setTimeout(()=>stopSound(),chosenMinutes*60000);
+
+  }catch(e){
+    console.error(e);
+    document.getElementById("soundStatus").textContent=
+      "The sound didn't start. Tap it again.";
+  }
 }
 
 function stopSound(reset=true){
   clearInterval(countdown);
   clearTimeout(soundTimer);
+
+  soundIntervals.forEach(i=>clearInterval(i));
+  soundTimeouts.forEach(i=>clearTimeout(i));
+
+  soundIntervals=[];
+  soundTimeouts=[];
   countdown=null;
   soundTimer=null;
 
   soundNodes.forEach(n=>{
-    try{n.stop?.()}catch(e){}
-    try{n.disconnect?.()}catch(e){}
+    try{if(typeof n.stop==="function")n.stop()}catch(e){}
+    try{if(typeof n.disconnect==="function")n.disconnect()}catch(e){}
   });
+
   soundNodes=[];
 
   if(audioCtx){
@@ -1843,341 +1842,257 @@ function stopSound(reset=true){
   if(reset){
     secondsLeft=chosenMinutes*60;
     updateTimer();
+
+    const s=document.getElementById("soundStatus");
+    if(s)s.textContent="Sound stopped.";
   }
 }
 
 function updateTimer(){
   const m=Math.floor(secondsLeft/60);
   const s=secondsLeft%60;
+
   document.getElementById("soundTimer").textContent=
     `${m}:${String(s).padStart(2,"0")}`;
 }
 
+/* =========================
+   SLEEP ROUTINES
+========================= */
 
-/* ========================================
+let routineTimers=[];
+
+function clearRoutine(){
+  routineTimers.forEach(clearTimeout);
+  routineTimers=[];
+}
+
+function later(ms,text){
+  const id=setTimeout(()=>speak(text),ms);
+  routineTimers.push(id);
+}
+
+function startRoutine(type){
+  clearRoutine();
+
+  if(type==="relax"){
+    speak("Get comfortable. Let your shoulders soften and take a slow breath.");
+    later(6500,"Breathe in gently. And slowly let it go.");
+    later(14000,"Relax your jaw. Let your hands become heavy.");
+    later(22000,"There is nowhere else you need to be right now.");
+  }
+
+  if(type==="breathe"){
+    speak("Let's slow everything down. Breathe in through your nose.");
+    later(5000,"Hold gently.");
+    later(8000,"And slowly breathe out.");
+    later(15000,"Again. Breathe in slowly.");
+    later(20000,"And breathe out.");
+  }
+
+  if(type==="meditate"){
+    speak("Close your eyes if that feels comfortable. Notice your breathing.");
+    later(7000,"You don't need to solve anything right now.");
+    later(15000,"Let each thought pass without following it.");
+    later(23000,"Bring your attention back to your breath.");
+  }
+
+  if(type==="stretch"){
+    speak("Let's do a few gentle stretches before bed.");
+    later(6000,"Slowly roll your shoulders back.");
+    later(12000,"Gently tilt your head toward one shoulder, then the other.");
+    later(20000,"Take one slow breath and let your whole body relax.");
+  }
+}
+
+/* =========================
    NUDGES
-======================================== */
+========================= */
 
-function foodGroups(){
-  const result={produce:false,protein:false,whole:false};
+function nutritionCounts(){
+  const counts={fruit:0,veg:0,protein:0,grain:0};
 
   today.foods.forEach(f=>{
-    const g=f.group||"";
-    if(/veg|fruit/.test(g))result.produce=true;
-    if(/protein/.test(g))result.protein=true;
-    if(/whole/.test(g))result.whole=true;
+    if(counts[f.group]!==undefined)counts[f.group]++;
   });
 
-  return result;
+  return counts;
 }
 
-function nudge(){
-  const h=new Date().getHours();
-  const g=foodGroups();
+function updateNudge(){
+  const c=nutritionCounts();
+  let msg="Small steps count. Keep going.";
 
-  if(today.water<500&&h>=11)
-    return "💧 Water is a little light so far. A glass or bottle would be an easy win.";
-
-  if(today.foods.length===0)
-    return "🍓 Tell me what you've eaten and I'll help you notice the balance of your day.";
-
-  if(!g.produce&&h>=12)
-    return "🥕 You haven't logged much vegetable or fruit yet. Maybe add some to your next meal or snack.";
-
-  if(!g.protein&&h>=12)
-    return "🥚 Protein foods look a little light so far. Eggs, yogurt, beans, fish, chicken, tofu or nuts are some options.";
-
-  if(!g.whole&&h>=15)
-    return "🌾 You haven't logged a whole-grain food yet today. Oats, whole-grain bread, brown rice or quinoa are a few ideas.";
-
-  if(today.steps<2500&&h>=15)
-    return "🚶 A short walk could be a nice little movement break. Even ten minutes counts.";
-
-  return "💗 You're building your day one choice at a time. Keep going.";
-}
-
-
-/* ========================================
-   WEATHER — MITCHELL ONTARIO
-======================================== */
-
-async function loadWeather(){
-  try{
-    const u=
-      "https://api.open-meteo.com/v1/forecast"+
-      "?latitude=43.4668&longitude=-81.1960"+
-      "&current=temperature_2m,weather_code"+
-      "&temperature_unit=celsius"+
-      "&timezone=America%2FToronto";
-
-    const r=await fetch(u,{cache:"no-store"});
-    if(!r.ok)throw new Error();
-
-    const j=await r.json();
-    const c=j.current.weather_code;
-
-    document.getElementById("weatherTemp").textContent=
-      `${Math.round(j.current.temperature_2m)}°C`;
-
-    document.getElementById("weatherText").textContent=
-      `${weatherIcon(c)} Mitchell, ON`;
-  }catch(e){
-    document.getElementById("weatherTemp").textContent="Mitchell";
-    document.getElementById("weatherText").textContent="Weather unavailable";
-  }
-}
-
-function weatherIcon(c){
-  if(c===0)return"☀️";
-  if(c<=3)return"⛅";
-  if(c===45||c===48)return"🌫️";
-  if(c>=51&&c<=67)return"🌧️";
-  if(c>=71&&c<=77)return"❄️";
-  if(c>=80&&c<=82)return"🌦️";
-  if(c>=85&&c<=86)return"🌨️";
-  if(c>=95)return"⛈️";
-  return"🌤️";
-}
-
-
-/* ========================================
-   DISPLAY
-======================================== */
-
-const quotes=[
-"Small choices, repeated often, become big changes.",
-"Progress doesn't have to be dramatic to count.",
-"Drink the water. Take the walk. Be kind to yourself.",
-"Your next good choice matters more than your last imperfect one.",
-"A ten-minute walk still counts. So does starting again.",
-"Nourish yourself, move a little, and keep going.",
-"Consistency doesn't have to look perfect.",
-"Today doesn't need to be perfect to be worthwhile."
-];
-
-function setupHeader(){
-  const d=new Date();
-  const h=d.getHours();
-  let hello=h<12?"Good morning":h<17?"Good afternoon":"Good evening";
-
-  const name=profile?.name||"Beautiful";
-
-  document.getElementById("greeting").textContent=
-    `${hello}, ${name} 💕`;
-
-  document.getElementById("dateLine").textContent=
-    d.toLocaleDateString("en-CA",{
-      weekday:"long",
-      month:"long",
-      day:"numeric"
-    });
-
-  document.getElementById("quote").textContent=
-    quotes[(d.getDate()+d.getMonth())%quotes.length];
-}
-
-function render(){
-  document.getElementById("water").textContent=today.water;
-  document.getElementById("calories").textContent=today.calories;
-  document.getElementById("steps").textContent=today.steps.toLocaleString();
-  document.getElementById("sleep").textContent=today.sleep??"—";
-
-  setRing("waterRing",Math.min(100,today.water/2000*100));
-  setRing("stepsRing",Math.min(100,today.steps/8000*100));
-  setRing("sleepRing",today.sleep?Math.min(100,today.sleep/8*100):0);
-
-  /* calories shown as total only — no personal calorie target assumed */
-  setRing("foodRing",today.foods.length?Math.min(100,today.foods.length*18):0);
-
-  document.getElementById("nudge").textContent=nudge();
-
-  renderFood();
-  renderHistory();
-  renderWeight();
-
-  if(profile){
-    document.getElementById("profileInfo").textContent=
-      `${profile.name} · Starting ${profile.startingWeight} lb · Goal ${profile.goalWeight} lb`;
+  if(today.water<750){
+    msg="💧 A little water nudge — you may want another glass or bottle.";
+  }else if(c.fruit+c.veg<2 && today.foods.length>=3){
+    msg="🥕 You could use a little more fruit or vegetables today.";
+  }else if(!today.movement.length && today.steps<3000){
+    msg="👟 A little movement would be a nice win today — even a short walk counts.";
+  }else if(c.fruit+c.veg>=3){
+    msg="🌿 Nice job getting some fruit and vegetables in today.";
   }
 
-  updateVoiceButton();
+  document.getElementById("nudgeText").textContent=msg;
 }
 
-function setRing(id,p){
-  document.getElementById(id).style.setProperty("--p",p);
-}
+/* =========================
+   SETTINGS
+========================= */
 
-function renderFood(){
-  const e=document.getElementById("foodLog");
-
-  if(!today.foods.length){
-    e.innerHTML=`<div class="sub" style="margin-top:11px">Nothing logged yet today.</div>`;
-    return;
-  }
-
-  e.innerHTML=today.foods.map(f=>`
-    <div class="foodItem">
-      <b>🍴 ${escapeHTML(f.label)}</b><br>
-      <span class="sub">
-        ${f.calories?`≈ ${f.calories} calories`:"Calories not estimated"}
-        ${f.time?` · ${f.time}`:""}
-      </span>
-    </div>
-  `).join("");
-}
-
-function renderHistory(){
-  const h=getHistory();
-  const e=document.getElementById("history");
-
-  if(!h.length){
-    e.innerHTML=`<div class="sub" style="margin-top:8px">Your completed days will appear here.</div>`;
-    return;
-  }
-
-  e.innerHTML=h.slice(0,14).map(d=>`
-    <div class="historyDay">
-      <b>${escapeHTML(d.date)}</b><br>
-      💧 ${d.water||0} mL ·
-      🍓 ≈ ${d.calories||0} cal ·
-      🚶 ${(d.steps||0).toLocaleString()} steps ·
-      🌙 ${d.sleep||"—"} hrs
-      ${d.weight?` · ⚖️ ${d.weight} lb`:""}
-    </div>
-  `).join("");
-}
-
-function renderWeight(){
+function saveGoal(){
   if(!profile)return;
 
-  const current=today.weight||latestWeight()||profile.startingWeight;
-  const lost=profile.startingWeight-current;
-  const remaining=current-profile.goalWeight;
+  const s=Number(document.getElementById("startWeightSetting").value);
+  const g=Number(document.getElementById("goalWeightSetting").value);
 
-  let text=
-    `Started at ${profile.startingWeight} lb · Current ${current} lb · Goal ${profile.goalWeight} lb.`;
+  if(s)profile.startingWeight=s;
+  if(g)profile.goalWeight=g;
 
-  if(lost>0)
-    text+=` You're ${lost.toFixed(1)} lb down.`;
-
-  if(remaining>0)
-    text+=` ${remaining.toFixed(1)} lb to your goal.`;
-
-  if(remaining<=0)
-    text+=` You've reached your goal range. 💕`;
-
-  document.getElementById("weightProgress").textContent=text;
-}
-
-function latestWeight(){
-  const h=getHistory();
-  const d=h.find(x=>x.weight);
-  return d?.weight||null;
-}
-
-
-/* ========================================
-   SETTINGS / RESET
-======================================== */
-
-function changeGoal(){
-  if(!profile)return;
-  const n=Number(prompt("What would you like your goal weight to be?",profile.goalWeight));
-  if(n){
-    profile.goalWeight=n;
-    saveProfile(profile);
-    render();
-  }
+  saveProfile();
+  render();
+  speak("Your goal is saved.");
 }
 
 function resetProfile(){
-  const ok=confirm(
-    "Reset this Afternooners profile?\n\n"+
-    "This will erase the name, weights, food, water, movement, sleep and history saved in THIS browser. "+
-    "It will not affect anyone else's device."
-  );
-
-  if(!ok)return;
+  if(!confirm("Reset your Afternooners profile and today's entries on this device?"))return;
 
   localStorage.removeItem(PROFILE_KEY);
   localStorage.removeItem(TODAY_KEY);
   localStorage.removeItem(HISTORY_KEY);
-
   location.reload();
 }
 
+/* =========================
+   RENDER
+========================= */
 
-/* ========================================
-   MODAL / NAV / HELPERS
-======================================== */
+function renderFood(){
+  const el=document.getElementById("foodList");
 
-function showModal(html){
-  document.getElementById("modalContent").innerHTML=html;
-  document.getElementById("modal").classList.remove("hidden");
+  if(!today.foods.length){
+    el.innerHTML='<div class="small">Nothing logged yet.</div>';
+  }else{
+    el.innerHTML=today.foods.map(f=>`
+      <div class="foodItem">
+        <span>${escapeHTML(f.name)}</span>
+        <strong>~${Math.round(f.calories)} cal</strong>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("foodCalories").textContent=foodTotal();
 }
-function closeModal(){
-  document.getElementById("modal").classList.add("hidden");
-}
-function openFood(){
-  goTo("foodSection");
-  setTimeout(()=>document.getElementById("foodInput").focus(),400);
-}
-function openMovement(){
-  goTo("movementSection");
-}
-function goTo(id){
-  document.getElementById(id).scrollIntoView({
-    behavior:"smooth",
-    block:"start"
+
+function renderMovement(){
+  const el=document.getElementById("movementList");
+
+  let html="";
+
+  today.movement.forEach(m=>{
+    html+=`
+      <div class="moveItem">
+        <span>👟 ${escapeHTML(m.activity)}</span>
+        <strong>${m.minutes} min</strong>
+      </div>
+    `;
   });
-}
-function scrollToTop(){
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function showHeard(t){
-  document.getElementById("heard").textContent=t;
-}
-function timeNow(){
-  return new Date().toLocaleTimeString("en-CA",{
-    hour:"numeric",
-    minute:"2-digit"
+
+  today.wellness.forEach(m=>{
+    html+=`
+      <div class="moveItem">
+        <span>🌿 ${escapeHTML(m.activity)}</span>
+        <strong>${m.minutes} min</strong>
+      </div>
+    `;
   });
-}
-function escapeHTML(s){
-  return String(s).replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  })[c]);
-}
-function escapeJS(s){
-  return String(s)
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'")
-    .replace(/\n/g," ");
+
+  if(!html)html='<div class="small">Nothing logged yet.</div>';
+
+  el.innerHTML=html;
 }
 
+function renderHistory(){
+  const el=document.getElementById("historyList");
 
-/* ========================================
+  if(!history.length){
+    el.innerHTML='<div class="small">Your daily history will build as you use Afternooners.</div>';
+    return;
+  }
+
+  el.innerHTML=history.slice(0,14).map(d=>{
+    const cal=(d.foods||[]).reduce((s,f)=>s+(Number(f.calories)||0),0);
+
+    return `
+      <div class="historyItem">
+        <span>${escapeHTML(d.date||"")}</span>
+        <span>${cal} cal • ${d.steps||0} steps • ${d.water||0} mL</span>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderWeight(){
+  const el=document.getElementById("weightProgress");
+
+  if(!profile?.startingWeight||!profile?.goalWeight){
+    el.textContent="Add your starting and goal weight in Settings.";
+    return;
+  }
+
+  const current=today.weight||profile.startingWeight;
+  const lost=profile.startingWeight-current;
+  const target=profile.startingWeight-profile.goalWeight;
+
+  el.innerHTML=`
+    <strong>${current} lb</strong><br>
+    <span class="small">
+      Start ${profile.startingWeight} • Goal ${profile.goalWeight}
+      ${lost>0?` • ${lost.toFixed(1)} lb down`:""}
+    </span>
+  `;
+}
+
+function renderSettings(){
+  if(!profile)return;
+
+  document.getElementById("profileInfo").innerHTML=
+    `<strong>${escapeHTML(profile.name)}</strong><br>Your settings are saved on this device.`;
+
+  document.getElementById("startWeightSetting").value=profile.startingWeight||"";
+  document.getElementById("goalWeightSetting").value=profile.goalWeight||"";
+
+  updateVoiceButton();
+}
+
+function render(){
+  ensureToday();
+  header();
+
+  document.getElementById("calTotal").textContent=foodTotal();
+  document.getElementById("waterTotal").textContent=today.water||0;
+  document.getElementById("stepTotal").textContent=(today.steps||0).toLocaleString();
+  document.getElementById("sleepTotal").textContent=
+    today.sleep!==null && today.sleep!==undefined ? today.sleep+"h" : "—";
+
+  renderFood();
+  renderMovement();
+  renderHistory();
+  renderWeight();
+  renderSettings();
+  updateNudge();
+}
+
+/* =========================
    START
-======================================== */
+========================= */
 
-if(!profile){
-  showSetup();
-}
-
-setupHeader();
+ensureToday();
 render();
 updateTimer();
 loadWeather();
+onboarding();
 
-/* load browser voices */
-if("speechSynthesis" in window){
-  speechSynthesis.getVoices();
-  speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
-}
 </script>
 </body>
 </html>
