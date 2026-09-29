@@ -304,21 +304,21 @@ grid-template-columns:repeat(2,1fr)}
 <div class="label">Steps</div>
 </div>
 <div class="progress">
-<div class="big" id="sleepTotal">â</div>
+<div class="big" id="sleepTotal">&#8212;</div>
 <div class="label">Sleep</div>
 </div>
 </div>
 <div class="card">
 <h2>Quick Add</h2>
 <div class="grid">
-<button class="quick" onclick="showPage('foodPage')">ð Add Food</button>
-<button class="quick" onclick="addWater(500,true)">ð§ Add Bottle</button>
-<button class="quick" onclick="showPage('movementPage')">ð Movement</button>
-<button class="quick" onclick="showPage('sleepPage')">ð Sleep Help</button>
+<button class="quick" onclick="showPage('foodPage')">&#127822; Add Food</button>
+<button class="quick" onclick="addWater(500,true)">&#128167; Add Bottle</button>
+<button class="quick" onclick="showPage('movementPage')">&#128095; Movement</button>
+<button class="quick" onclick="showPage('sleepPage')">&#127769; Sleep Help</button>
 </div>
 </div>
 <div class="card nudge">
-<strong>ð¿ Gentle Nudge</strong>
+<strong>&#127807; Gentle Nudge</strong>
 <div id="nudgeText" style="margin-top:5px">
 </div>
 </div>
@@ -332,7 +332,7 @@ grid-template-columns:repeat(2,1fr)}
 
 <div id="foodPage" class="page">
 <div class="section">
-<h2>ð Food</h2>
+<h2>&#127822; Food</h2>
 <div class="sub">Tell me naturally what you ate. Estimates are approximate.</div>
 <input id="foodInput" placeholder="e.g. I had a peanut butter sandwich">
 <button class="primary" onclick="manualFood()">Add Food</button>
@@ -349,7 +349,7 @@ grid-template-columns:repeat(2,1fr)}
 
 <div id="movementPage" class="page">
 <div class="section">
-<h2>ð Movement & Wellness</h2>
+<h2>&#128095; Movement & Wellness</h2>
 <div class="sub">Walking, gardening, pickleball, treadmill, yoga, swimming and more all count.</div>
 <input id="moveInput" placeholder="e.g. I walked for 30 minutes">
 <button class="primary" onclick="manualMovement()">Add Activity</button>
@@ -363,24 +363,24 @@ grid-template-columns:repeat(2,1fr)}
 
 <div id="sleepPage" class="page">
 <div class="section">
-<h2>ð Sleep Help</h2>
+<h2>&#127769; Sleep Help</h2>
 <div class="grid">
-<button class="quick" onclick="startRoutine('relax')">ð§ Guided Relaxation</button>
-<button class="quick" onclick="startRoutine('breathe')">ð¬ï¸ Breathing</button>
-<button class="quick" onclick="startRoutine('meditate')">â¨ Meditation</button>
-<button class="quick" onclick="startRoutine('stretch')">ð¤¸ Gentle Stretch</button>
+<button class="quick" onclick="startRoutine('relax')">&#129496; Guided Relaxation</button>
+<button class="quick" onclick="startRoutine('breathe')">&#127788;&#65039; Breathing</button>
+<button class="quick" onclick="startRoutine('meditate')">&#10024; Meditation</button>
+<button class="quick" onclick="startRoutine('stretch')">&#129336; Gentle Stretch</button>
 </div>
 </div>
 <div class="section">
 <h2>Real Sleep Sounds</h2>
 <div class="sub">Real recordings rather than computer-generated effects.</div>
 <div class="soundGrid" style="margin-top:12px">
-<button class="sound" onclick="startSound('rain',this)">ð§ï¸ Tin Roof Rain</button>
-<button class="sound" onclick="startSound('ocean',this)">ð Ocean</button>
-<button class="sound" onclick="startSound('nature',this)">ð² Nature</button>
-<button class="sound" onclick="startSound('fire',this)">ð¥ Fireplace</button>
-<button class="sound" onclick="startSound('white',this)">âï¸ White Noise</button>
-<button class="sound" onclick="stopSound()">â¹ Stop</button>
+<button class="sound" onclick="startSound('rain',this)">&#127783;&#65039; Tin Roof Rain</button>
+<button class="sound" onclick="startSound('ocean',this)">&#127754; Ocean</button>
+<button class="sound" onclick="startSound('nature',this)">&#127794; Nature</button>
+<button class="sound" onclick="startSound('fire',this)">&#128293; Fireplace</button>
+<button class="sound" onclick="startSound('white',this)">&#9729;&#65039; White Noise</button>
+<button class="sound" onclick="stopSound()">&#9209; Stop</button>
 </div>
 <div class="timerRow">
 <button class="selected" onclick="chooseTimer(15,this)">15 min</button>
@@ -399,22 +399,22 @@ grid-template-columns:repeat(2,1fr)}
 
 <div id="historyPage" class="page">
 <div class="section">
-<h2>ð History</h2>
+<h2>&#128214; History</h2>
 <div id="historyList">
 </div>
 </div>
 </div>
 <div id="settingsPage" class="page">
 <div class="section">
-<h2>âï¸ Settings</h2>
+<h2>&#9881;&#65039; Settings</h2>
 <div id="profileInfo" class="sub">
 </div>
 <div style="margin-top:16px">
-<strong>ð£ï¸ Afternooners Voice</strong>
+<strong>&#128483;&#65039; Afternooners Voice</strong>
 <div class="voiceNote">One warm, friendly voice is chosen automatically from the best English voice available on this device.</div>
 <div class="row">
-<button class="btn" onclick="previewVoice()">â¶ Hear Her</button>
-<button class="btn" id="voiceToggle" onclick="toggleVoice()">ð Voice On</button>
+<button class="btn" onclick="previewVoice()">&#9654; Hear Her</button>
+<button class="btn" id="voiceToggle" onclick="toggleVoice()">&#128266; Voice On</button>
 </div>
 </div>
 <div style="margin-top:18px">
@@ -438,15 +438,15 @@ margin-top:20px" onclick="resetProfile()">Reset My Profile</button>
 
 <div class="bottom">
 <button onclick="showPage('homePage')">
-<span class="ico">ð¡</span>Home</button>
+<span class="ico">&#127969;</span>Home</button>
 <button onclick="showPage('foodPage')">
-<span class="ico">ð</span>Food</button>
+<span class="ico">&#127822;</span>Food</button>
 <button onclick="showPage('sleepPage')">
-<span class="ico">ð</span>Sleep</button>
+<span class="ico">&#127769;</span>Sleep</button>
 <button onclick="showPage('historyPage')">
-<span class="ico">ð</span>History</button>
+<span class="ico">&#128214;</span>History</button>
 <button onclick="showPage('settingsPage')">
-<span class="ico">âï¸</span>Settings</button>
+<span class="ico">&#9881;&#65039;</span>Settings</button>
 </div>
 <div id="modal" class="modal hidden">
 <div class="modalBox" id="modalBox">
@@ -514,7 +514,7 @@ modal.classList.add("hidden")}
 
 function onboarding(){
 if(profile)return;
-showModal(`<h2>Welcome to Afternooners ð</h2>
+showModal(`<h2>Welcome to Afternooners \uD83D\uDC95</h2>
 <p>Small steps. Real life. No perfection required.</p>
 <input id="newName" placeholder="Your first name">
 <input id="newStart" type="number" step=".1" placeholder="Starting weight (lb)">
@@ -544,7 +544,7 @@ top:0,behavior:"smooth"}
 function showHeard(t){
 heard.textContent=t}
 
-const quotes=["Small steps make big changes.","Progress beats perfection.","Do something today your future self will thank you for.","A good day doesn't have to be a perfect day.","Keep going â it all adds up.","Healthy girls, happier days."];
+const quotes=["Small steps make big changes.","Progress beats perfection.","Do something today your future self will thank you for.","A good day doesn't have to be a perfect day.","Keep going \u2014 it all adds up.","Healthy girls, happier days."];
 
 function header(){
 let d=new Date(),h=d.getHours(),p=h<12?"Good morning":h<17?"Good afternoon":"Good evening";
@@ -563,34 +563,30 @@ weather.textContent="Mitchell, Ontario"}
 }
 
 
-/* ONE VOICE: closest warm device voice available. Exact ChatGPT app voice cannot be embedded in a static page. */
-function voiceEnabled(){
-return !profile||profile.voiceOn!==false}
-
+/* VOICE: use the best natural English voice available on this device. */
+function voiceEnabled(){return !profile||profile.voiceOn!==false}
+let cachedVoice=null;
 function bestVoice(){
-if(!("speechSynthesis"in window))return null;
-let v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
-let names=["Ava","Samantha","Zoe","Serena","Karen","Moira","Tessa"];
-for(let n of names){
-let q=v.find(x=>x.name.includes(n));
-if(q)return q}
-return v.find(x=>/^en-CA/i.test(x.lang))||v.find(x=>/^en-US/i.test(x.lang))||v[0]||null}
-
+ if(!("speechSynthesis" in window))return null;
+ const voices=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+ const preferred=["Ava (Premium)","Ava (Enhanced)","Ava","Samantha (Enhanced)","Samantha","Serena","Karen","Moira","Tessa"];
+ for(const name of preferred){const v=voices.find(x=>x.name.includes(name)); if(v){cachedVoice=v;return v}}
+ cachedVoice=voices.find(x=>x.localService&&/^en-CA/i.test(x.lang))||voices.find(x=>x.localService&&/^en-US/i.test(x.lang))||voices[0]||null;
+ return cachedVoice;
+}
+if("speechSynthesis" in window){speechSynthesis.onvoiceschanged=()=>{cachedVoice=null;bestVoice()}}
 function speak(text,soft=false){
-if(!voiceEnabled()||!("speechSynthesis"in window))return;
-speechSynthesis.cancel();
-let u=new SpeechSynthesisUtterance(text),v=bestVoice();
-if(v)u.voice=v;
-u.rate=soft?.82:.96;
-u.pitch=soft?1:1.06;
-u.volume=.95;
-speechSynthesis.speak(u)}
-
-function previewVoice(){
-speak(`Hi ${
-profile?.name||"there"}
-. I'm your Afternooners assistant. I'm here to make this easy, encouraging, and a little more fun.`)}
-
+ if(!voiceEnabled()||!("speechSynthesis" in window))return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ const v=bestVoice(); if(v)u.voice=v;
+ u.lang=v?.lang||"en-CA";
+ u.rate=soft?0.72:0.92;
+ u.pitch=soft?0.96:1.02;
+ u.volume=soft?0.82:0.95;
+ speechSynthesis.speak(u);
+}
+function previewVoice(){speak(`Hi ${profile?.name||"there"}. I'm your Afternooners assistant. Take your time. Small steps are enough today.`,true)}
 function toggleVoice(){
 if(!profile)return;
 profile.voiceOn=!voiceEnabled();
@@ -598,7 +594,7 @@ saveProfile();
 updateVoiceButton();
 if(profile.voiceOn)speak("Voice is on.")}
  function updateVoiceButton(){
-if(document.getElementById("voiceToggle"))voiceToggle.textContent=voiceEnabled()?"ð Voice On":"ð Voice Off"}
+if(document.getElementById("voiceToggle"))voiceToggle.textContent=voiceEnabled()?"\uD83D\uDD0A Voice On":"\uD83D\uDD07 Voice Off"}
 
 
 const SMALL={
@@ -697,7 +693,7 @@ return null}
 function finishSandwich(t,p){
 let bread=breadInfo(t),parts=[p.filling],cal=p.fillCal;
 if(!bread){
-respond("What kind of bread did you have â white, whole wheat, rye, sourdough or something else?","ð¥ª What kind of bread?");
+respond("What kind of bread did you have \u2014 white, whole wheat, rye, sourdough or something else?","\uD83E\uDD6A What kind of bread?");
 pending=p;
 return true}
 cal+=bread[1];
@@ -728,7 +724,7 @@ if(/\bhoney\b/.test(t)){
 cal+=65;
 extras.push("honey")}
 parts.push(...extras);
-addFood(parts.join(" sandwich â¢ "),cal,"mixed");
+addFood(parts.join(" sandwich \u2022 "),cal,"mixed");
 pending=null;
 respond(`Perfect. I added your ${
 p.filling}
@@ -738,7 +734,7 @@ ${
 extras.length?" with "+extras.join(" and "):""}
 . About ${
 cal}
- calories.`,`ð¥ª Sandwich added â¢ ~${
+ calories.`,`\uD83E\uDD6A Sandwich added \u2022 ~${
 cal}
  cal`);
 return true}
@@ -752,16 +748,16 @@ if(!s.filling){
 pending={
 type:"sandwichFilling"}
 ;
-respond("Sure. What kind of sandwich was it?","ð¥ª What kind of sandwich?");
+respond("Sure. What kind of sandwich was it?","\uD83E\uDD6A What kind of sandwich?");
 return true}
 let b=breadInfo(t);
 if(!b){
 pending={
 type:"sandwich",...s}
 ;
-respond(`Got it â ${
+respond(`Got it \u2014 ${
 s.filling}
- sandwich. What kind of bread, and did you have butter or anything else on it?`,"ð¥ª What kind of bread, and any butter or toppings?");
+ sandwich. What kind of bread, and did you have butter or anything else on it?`,"\uD83E\uDD6A What kind of bread, and any butter or toppings?");
 return true}
 return finishSandwich(t,{
 type:"sandwich",...s}
@@ -771,14 +767,14 @@ if(/\bcoffee\b/.test(t)&&!/(black|cream|milk|sugar|latte|cappuccino)/.test(t)){
 pending={
 type:"coffee"}
 ;
-respond("Got it. Was your coffee black, or did you have cream, milk or sugar?","â Black, cream, milk or sugar?");
+respond("Got it. Was your coffee black, or did you have cream, milk or sugar?","\u2615 Black, cream, milk or sugar?");
 return true}
 
 if(/\bsalad\b/.test(t)&&!/(caesar|dressing|ranch|chicken|tomato|lettuce|cucumber|pepper)/.test(t)){
 pending={
 type:"salad"}
 ;
-respond("What was in your salad, and did you have dressing?","ð¥ What was in it and what dressing?");
+respond("What was in your salad, and did you have dressing?","\uD83E\uDD57 What was in it and what dressing?");
 return true}
 
 let found=[],used=[];
@@ -798,9 +794,9 @@ respond(`Got it. I added ${
 found.map(f=>f.name).join(" and ")}
 . About ${
 c}
- calories.`,`ð Added ${
+ calories.`,`\uD83C\uDF4E Added ${
 found.map(f=>f.name).join(" + ")}
- â¢ ~${
+ \u2022 ~${
 c}
  cal`);
 return true}
@@ -815,15 +811,15 @@ if(pending.type==="sandwich")return finishSandwich(t,pending);
 if(pending.type==="sandwichFilling"){
 let s=sandwichInfo(t);
 if(!s.filling){
-respond("I didn't catch the filling. Was it peanut butter, turkey, ham, tuna, chicken, cheese, or something else?","ð¥ª What was the filling?");
+respond("I didn't catch the filling. Was it peanut butter, turkey, ham, tuna, chicken, cheese, or something else?","\uD83E\uDD6A What was the filling?");
 return true}
 pending={
 type:"sandwich",...s}
 ;
 if(breadInfo(t))return finishSandwich(t,pending);
-respond(`Okay â ${
+respond(`Okay \u2014 ${
 s.filling}
-. What kind of bread, and did you have butter or anything else on it?`,"ð¥ª Bread and toppings?");
+. What kind of bread, and did you have butter or anything else on it?`,"\uD83E\uDD6A Bread and toppings?");
 return true}
 
 if(pending.type==="coffee"){
@@ -841,7 +837,7 @@ addFood(parts.join(" + "),cal);
 pending=null;
 respond(`Got it. About ${
 cal}
- calories.`,`â Coffee added â¢ ~${
+ calories.`,`\u2615 Coffee added \u2022 ~${
 cal}
  cal`);
 return true}
@@ -856,12 +852,12 @@ respond(`Perfect. I added ${
 m}
  minutes of ${
 p.activity}
-.`,`ð ${
+.`,`\uD83D\uDC5F ${
 p.activity}
- â¢ ${
+ \u2022 ${
 m}
  minutes`)}
-else respond("About how many minutes?","â±ï¸ About how many minutes?");
+else respond("About how many minutes?","\u23F1\uFE0F About how many minutes?");
 return true}
 
 if(pending.type==="steps"){
@@ -872,7 +868,7 @@ pending=null;
 saveToday();
 respond(`Perfect. ${
 n.toLocaleString()}
- steps saved.`,`ð ${
+ steps saved.`,`\uD83D\uDC5F ${
 n.toLocaleString()}
  steps saved`)}
 return true}
@@ -888,7 +884,7 @@ addFood("Salad: "+text,cal,"veg");
 pending=null;
 respond(`Got it. Roughly ${
 cal}
- calories.`,`ð¥ Salad added â¢ ~${
+ calories.`,`\uD83E\uDD57 Salad added \u2022 ~${
 cal}
  cal`);
 return true}
@@ -915,14 +911,14 @@ today.steps=n;
 saveToday();
 respond(`Great. ${
 n.toLocaleString()}
- steps saved.`,`ð ${
+ steps saved.`,`\uD83D\uDC5F ${
 n.toLocaleString()}
  steps saved`)}
 else{
 pending={
 type:"steps"}
 ;
-respond("How many steps did you get today?","ð How many steps?")}
+respond("How many steps did you get today?","\uD83D\uDC5F How many steps?")}
 return true}
 
 let f=ACTIVITIES.find(a=>t.includes(a[0]));
@@ -941,10 +937,10 @@ m}
  minutes of ${
 a}
 .`,`${
-w?"ð¿":"ð"}
+w?"\uD83C\uDF3F":"\uD83D\uDC5F"}
  ${
 a}
- â¢ ${
+ \u2022 ${
 m}
  minutes`)}
 else{
@@ -953,9 +949,9 @@ type:"movementTime",activity:a,wellness:w}
 ;
 respond(`Nice. About how many minutes did you do ${
 a}
-?`,`â±ï¸ ${
+?`,`\u23F1\uFE0F ${
 a}
- â how many minutes?`)}
+ \u2014 how many minutes?`)}
 return true}
 
 
@@ -985,17 +981,17 @@ ml=q*250}
 else if(/\bglass of water\b/.test(t))ml=250;
 
 else{
-respond("Sure â how much water did you have? A glass, a bottle, or how many millilitres?","ð§ How much water?");
+respond("Sure \u2014 how much water did you have? A glass, a bottle, or how many millilitres?","\uD83D\uDCA7 How much water?");
 return true}
 
 if(!ml||ml>5000){
-respond("That amount doesn't look right, so I didn't add it. Tell me the amount again.","ð§ That amount looked wrong â nothing was added.");
+respond("That amount doesn't look right, so I didn't add it. Tell me the amount again.","\uD83D\uDCA7 That amount looked wrong \u2014 nothing was added.");
 return true}
 
 addWater(ml);
 respond(`Great. I added ${
 ml}
- millilitres of water.`,`ð§ ${
+ millilitres of water.`,`\uD83D\uDCA7 ${
 ml}
  mL water added`);
 return true}
@@ -1007,7 +1003,7 @@ today.water=(Number(today.water)||0)+ml;
 if(today.water>20000)today.water=ml;
 saveToday();
 if(announce){
-showHeard(`ð§ ${
+showHeard(`\uD83D\uDCA7 ${
 ml}
  mL water added`);
 speak(`Great. I added one bottle of water.`)}
@@ -1025,7 +1021,7 @@ today.sleep=n;
 saveToday();
 respond(`Got it. ${
 n}
- hours of sleep.`,`ð ${
+ hours of sleep.`,`\uD83C\uDF19 ${
 n}
  hours sleep saved`);
 return true}
@@ -1050,7 +1046,7 @@ today.weight=n;
 saveToday();
 respond(`Got it. ${
 n}
- pounds.`,`âï¸ Weight saved â¢ ${
+ pounds.`,`\u2696\uFE0F Weight saved \u2022 ${
 n}
  lb`);
 return true}
@@ -1074,9 +1070,9 @@ speak(spoken)}
 function understand(text){
 if(!text)return;
 if(handlePending(text)||parseWater(text)||parseMovement(text)||parseSleep(text)||parseWeight(text)||parseFood(text))return;
-respond("I heard you, but I'm not completely sure what to log. Can you tell me a little more?",`ð¤ I heard â${
+respond("I heard you, but I'm not completely sure what to log. Can you tell me a little more?",`\uD83E\uDD14 I heard \u201C${
 text}
-â. Tell me a little more.`)}
+\u201D. Tell me a little more.`)}
 
 let recognition=null;
 function startListening(){
@@ -1096,9 +1092,9 @@ micButton.classList.add("listening");
 showHeard("Listening...");
 recognition.onresult=e=>{
 let t=e.results[0][0].transcript;
-showHeard(`I heard: â${
+showHeard(`I heard: \u201C${
 t}
-â`);
+\u201D`);
 understand(t)}
 ;
 recognition.onerror=e=>showHeard(e.error==="not-allowed"?"Microphone permission is turned off.":"I didn't catch that. Tap and try again.");
@@ -1175,7 +1171,7 @@ async function startSound(type,b){
 stopSound(false);
 document.querySelectorAll(".sound").forEach(x=>x.classList.remove("active"));
 b.classList.add("active");
-soundStatus.textContent=type==="rain"?"ð§ï¸ Real rain on a metal roof":type==="ocean"?"ð Real ocean waves":type==="nature"?"ð² Real forest ambience":type==="fire"?"ð¥ Real crackling fireplace":"âï¸ Smooth white noise";
+soundStatus.textContent=type==="rain"?"\uD83C\uDF27\uFE0F Real rain on a metal roof":type==="ocean"?"\uD83C\uDF0A Real ocean waves":type==="nature"?"\uD83C\uDF32 Real forest ambience":type==="fire"?"\uD83D\uDD25 Real crackling fireplace":"\u2601\uFE0F Smooth white noise";
 try{
 if(type==="white")startWhite();
 else{
@@ -1252,10 +1248,10 @@ return c}
 
 function updateNudge(){
 let c=nutritionCounts(),m="Small steps count. Keep going.";
-if(today.water<750)m="ð§ A little water nudge â you may want another glass or bottle.";
-else if(c.fruit+c.veg<2&&today.foods.length>=3)m="ð¥ You could use a little more fruit or vegetables today.";
-else if(!today.movement.length&&today.steps<3000)m="ð A little movement would be a nice win today â even a short walk counts.";
-else if(c.fruit+c.veg>=3)m="ð¿ Nice job getting some fruit and vegetables in today.";
+if(today.water<750)m="\uD83D\uDCA7 A little water nudge \u2014 you may want another glass or bottle.";
+else if(c.fruit+c.veg<2&&today.foods.length>=3)m="\uD83E\uDD55 You could use a little more fruit or vegetables today.";
+else if(!today.movement.length&&today.steps<3000)m="\uD83D\uDC5F A little movement would be a nice win today \u2014 even a short walk counts.";
+else if(c.fruit+c.veg>=3)m="\uD83C\uDF3F Nice job getting some fruit and vegetables in today.";
 nudgeText.textContent=m}
 
 function saveGoal(){
@@ -1271,7 +1267,7 @@ function resetWater(){
 if(confirm("Reset today's water to zero?")){
 today.water=0;
 saveToday();
-showHeard("ð§ Today's water was reset.")}
+showHeard("\uD83D\uDCA7 Today's water was reset.")}
 }
 
 function resetToday(){
@@ -1305,14 +1301,14 @@ escapeHTML(f.name)}
 Math.round(f.calories)}
  cal</strong> <button class="tiny" onclick="deleteFood(${
 i}
-)">Ã</button>
+)">\u00D7</button>
 </span>
 </div>`).join(""):'<div class="small">Nothing logged yet.</div>';
 foodCalories.textContent=foodTotal()}
 
 function renderMovement(){
 let h=today.movement.map((m,i)=>`<div class="moveItem">
-<span>ð ${
+<span>\uD83D\uDC5F ${
 escapeHTML(m.activity)}
 </span>
 <span>
@@ -1320,11 +1316,11 @@ escapeHTML(m.activity)}
 m.minutes}
  min</strong> <button class="tiny" onclick="deleteMove(${
 i}
-,false)">Ã</button>
+,false)">\u00D7</button>
 </span>
 </div>`).join("");
 h+=today.wellness.map((m,i)=>`<div class="moveItem">
-<span>ð¿ ${
+<span>\uD83C\uDF3F ${
 escapeHTML(m.activity)}
 </span>
 <span>
@@ -1332,7 +1328,7 @@ escapeHTML(m.activity)}
 m.minutes}
  min</strong> <button class="tiny" onclick="deleteMove(${
 i}
-,true)">Ã</button>
+,true)">\u00D7</button>
 </span>
 </div>`).join("");
 movementList.innerHTML=h||'<div class="small">Nothing logged yet.</div>'}
@@ -1344,9 +1340,9 @@ escapeHTML(d.date||"")}
 </span>
 <span>${
 (d.foods||[]).reduce((s,f)=>s+(+f.calories||0),0)}
- cal â¢ ${
+ cal \u2022 ${
 d.steps||0}
- steps â¢ ${
+ steps \u2022 ${
 d.water||0}
  mL</span>
 </div>`).join(""):'<div class="small">Your daily history will build as you use Afternooners.</div>'}
@@ -1362,10 +1358,10 @@ c}
 <br>
 <span class="small">Start ${
 profile.startingWeight}
- â¢ Goal ${
+ \u2022 Goal ${
 profile.goalWeight}
 ${
-l>0?` â¢ ${
+l>0?` \u2022 ${
 l.toFixed(1)}
  lb down`:""}
 </span>`}
@@ -1386,7 +1382,7 @@ header();
 calTotal.textContent=foodTotal();
 waterTotal.textContent=today.water||0;
 stepTotal.textContent=(today.steps||0).toLocaleString();
-sleepTotal.textContent=today.sleep!=null?today.sleep+"h":"â";
+sleepTotal.textContent=today.sleep!=null?today.sleep+"h":"\u2014";
 renderFood();
 renderMovement();
 renderHistory();
