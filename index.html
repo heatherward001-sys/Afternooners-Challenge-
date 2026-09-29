@@ -424,6 +424,18 @@ grid-template-columns:repeat(2,1fr)}
 <button class="btn" onclick="saveGoal()">Save Goal</button>
 </div>
 <div style="margin-top:18px">
+<strong>&#128241; Put Afternooners on My Phone</strong>
+<div class="voiceNote" style="margin-top:6px">Save Afternooners to your Home Screen so you can tap it like an app.</div>
+<details style="margin-top:10px">
+<summary><strong>&#127822; iPhone / iPad</strong></summary>
+<div class="voiceNote" style="margin-top:8px">Open Afternooners in Safari &rarr; tap Share &rarr; Add to Home Screen &rarr; Add.</div>
+</details>
+<details style="margin-top:10px">
+<summary><strong>&#128241; Samsung / Android</strong></summary>
+<div class="voiceNote" style="margin-top:8px">Open Afternooners in your browser &rarr; open the browser menu &rarr; choose Add to Home screen or Install app &rarr; confirm.</div>
+</details>
+</div>
+<div style="margin-top:18px">
 <strong>Fix Today's Entries</strong>
 <div class="row" style="margin-top:8px">
 <button class="btn" onclick="resetWater()">Reset Water</button>
@@ -807,9 +819,40 @@ function parseFastFood(text){
  return true;
 }
 
+function parseAlcohol(text){
+let t=text.toLowerCase();
+let alcoholWord=/\b(beer|beers|lager|ale|wine|wines|red wine|white wine|rose|rosÃ©|prosecco|champagne|cooler|coolers|seltzer|seltzers|white claw|white claws|vodka|rum|rye|whisky|whiskey|gin|tequila|cocktail|cocktails|margarita|margaritas|caesar|caesars)\b/.test(t);
+if(!alcoholWord)return false;
+
+let m=t.match(/\b(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\b/);
+let words={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
+let qty=m?(words[m[1]]||Number(m[1])||1):1;
+let each=0,label="alcohol";
+
+if(/\b(red wine|white wine|wine|wines|rose|rosÃ©|prosecco|champagne)\b/.test(t)){each=125;label="glass of wine"}
+else if(/\b(beer|beers|lager|ale)\b/.test(t)){each=150;label="beer"}
+else if(/\b(cooler|coolers|seltzer|seltzers|white claw|white claws)\b/.test(t)){each=110;label="cooler / seltzer"}
+else if(/\b(vodka|rum|rye|whisky|whiskey|gin|tequila)\b/.test(t)){
+  if(/\b(soda|water|diet)\b/.test(t)){each=100;label="spirit + low-cal mixer"}
+  else {pending={type:"alcoholDetails",qty:qty,drink:text};respond("Got it. What size or brand was it, and what was it mixed with?","ð¸ Tell me the size/brand and mixer.");return true}
+}
+else if(/\b(cocktail|cocktails|margarita|margaritas|caesar|caesars)\b/.test(t)){
+ pending={type:"alcoholDetails",qty:qty,drink:text};
+ respond("Got it. What kind and size was it? I don't want to guess the calories.","ð¹ What kind and size?");
+ return true;
+}
+
+let total=Math.round(each*qty);
+let plural=qty===1?label:label+"s";
+addFood(`${qty} ${plural}`,total,"other");
+respond(`Added ${qty} ${plural}. About ${total} calories.`, `ð· ${qty} ${plural} â¢ ~${total} cal ð­`);
+return true;
+}
+
 function parseFood(text){
 let t=text.toLowerCase().replace(/bananas/g,"banana").replace(/apples/g,"apple");
 
+if(parseAlcohol(text))return true;
 if(fastFoodBrand(t))return parseFastFood(text);
 
 if(/\bsandwich\b/.test(t)){
@@ -949,6 +992,26 @@ if(pending.type==="happyMeal"){
  if(/sauce|bbq|barbecue|sweet.?and.?sour/.test(t)){cal+=45;parts.push("sauce")}
  addRestaurantFood(`McDonald's Happy Meal â¢ ${parts.join(" + ")}`,cal);
  pending=null; return true;
+}
+
+if(pending.type==="alcoholDetails"){
+ let p=pending;
+ let detail=t;
+ let each=null;
+ if(/\b(single|1 oz|one ounce)\b/.test(detail))each=100;
+ if(/\b(double|2 oz|two ounce)\b/.test(detail))each=200;
+ if(/\b(margarita)\b/.test(detail))each=250;
+ if(/\b(caesar)\b/.test(detail))each=180;
+ if(/\b(diet|soda water|water)\b/.test(detail)&&each===null)each=100;
+ if(each===null){
+   respond("I still don't want to guess. Tell me the calories from the can, bottle or menu and I'll log it.","ð¹ Tell me the calories shown on the can, bottle or menu.");
+   return true;
+ }
+ let total=Math.round(each*p.qty);
+ addFood(`${p.qty} alcohol drink${p.qty===1?"":"s"}`,total,"other");
+ pending=null;
+ respond(`Added ${p.qty} drink${p.qty===1?"":"s"}. About ${total} calories.`,`ð¹ ${p.qty} drink${p.qty===1?"":"s"} â¢ ~${total} cal ð­`);
+ return true;
 }
 
 if(pending.type==="fastFoodDetails"){
@@ -1404,7 +1467,8 @@ function resetProfile(){
 if(!confirm("Reset your Afternooners profile and all saved history on this device?"))return;
 localStorage.removeItem(PROFILE_KEY);
 localStorage.removeItem(TODAY_KEY);
-localStorage.removeItem(HISTORY_KEY);\nlocalStorage.removeItem(PREFS_KEY);
+localStorage.removeItem(HISTORY_KEY);
+localStorage.removeItem(PREFS_KEY);
 location.reload()}
 
 function deleteFood(i){
