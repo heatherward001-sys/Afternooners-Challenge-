@@ -456,7 +456,7 @@ margin-top:20px" onclick="resetProfile()">Reset My Profile</button>
 </audio>
 
 <script>
-const PROFILE_KEY="afternoonersProfileV2",TODAY_KEY="afternoonersTodayV2",HISTORY_KEY="afternoonersHistoryV2";
+const PROFILE_KEY="afternoonersProfileV2",TODAY_KEY="afternoonersTodayV2",HISTORY_KEY="afternoonersHistoryV2",PREFS_KEY="afternoonersPrefsV1";
 
 function loadJSON(k,f){
 try{
@@ -467,7 +467,15 @@ return f}
 
 let profile=loadJSON(PROFILE_KEY,null),today=loadJSON(TODAY_KEY,{
 date:"",foods:[],water:0,steps:0,movement:[],wellness:[],sleep:null,weight:null}
-),history=loadJSON(HISTORY_KEY,[]),pending=null;
+),history=loadJSON(HISTORY_KEY,[]),prefs=loadJSON(PREFS_KEY,{drinks:{}}),pending=null;
+
+function savePrefs(){localStorage.setItem(PREFS_KEY,JSON.stringify(prefs))}
+function drinkUsual(kind){return prefs&&prefs.drinks?prefs.drinks[kind]:null}
+function rememberDrink(kind,name,cal,details){
+  prefs.drinks=prefs.drinks||{};
+  prefs.drinks[kind]={name:name,calories:Math.round(cal),details:details||"",saved:new Date().toISOString()};
+  savePrefs();
+}
 
 function dateKey(){
 let d=new Date();
@@ -739,8 +747,70 @@ cal}
  cal`);
 return true}
 
+
+const CANADIAN_FAST_FOOD=[
+ {re:/\b(mcdonald'?s|mcdonalds|mcdonald)\b/i,brand:"McDonald's"},
+ {re:/\bwendy'?s\b/i,brand:"Wendy's"},
+ {re:/\b(tim hortons|tim horton'?s|timmies|tim'?s)\b/i,brand:"Tim Hortons"}
+];
+
+function fastFoodBrand(t){
+ for(const b of CANADIAN_FAST_FOOD)if(b.re.test(t))return b.brand;
+ return null;
+}
+function addRestaurantFood(name,cal){
+ addFood(name,cal,"other");
+ respond(`Got it. I added ${name}. About ${Math.round(cal)} calories.`,`ð ${name} â¢ ~${Math.round(cal)} cal`);
+}
+function parseFastFood(text){
+ let t=text.toLowerCase(),brand=fastFoodBrand(t);
+ if(!brand)return false;
+
+ if(brand==="Tim Hortons"){
+   if(/\b(double[- ]?double)\b/.test(t)){
+     let size=/\blarge\b/.test(t)?"large":/\bsmall\b/.test(t)?"small":"medium";
+     let cal=size==="large"?270:size==="small"?140:200;
+     addRestaurantFood(`Tim Hortons ${size} double-double`,cal); return true;
+   }
+   if(/\bcoffee\b/.test(t)){
+     let size=/\blarge\b/.test(t)?"large":/\bsmall\b/.test(t)?"small":/\bmedium\b/.test(t)?"medium":"";
+     pending={type:"restaurantCoffee",brand:"Tim Hortons",size:size};
+     respond("Got it. How do you take your Tim Hortons coffee â and what size?","â How do you take it, and what size?");
+     return true;
+   }
+   if(/\b(iced capp|ice capp)\b/.test(t)){
+     pending={type:"fastFoodDetails",brand,meal:"Iced Capp"};
+     respond("What size Iced Capp did you have â small, medium or large?","ð¥¤ What size?");
+     return true;
+   }
+   pending={type:"fastFoodDetails",brand,meal:""};
+   respond("Got it â Tim Hortons. What did you have, and what size was it?","ð What did you have at Tim Hortons?");
+   return true;
+ }
+
+ if(/\bhappy meal\b/.test(t)){
+   pending={type:"happyMeal",brand:"McDonald's"};
+   respond("Got it â a McDonald's Happy Meal. Was it hamburger or nuggets, and what did you have for the side and drink?","ð Happy Meal: hamburger or nuggets, side and drink?");
+   return true;
+ }
+
+ if(brand==="Wendy's" && /\bbaconator\b/.test(t)){
+   let cal=960;
+   if(/\bfries\b/.test(t))cal+=350;
+   if(/\b(pop|soda|coke|sprite)\b/.test(t))cal+=180;
+   addRestaurantFood(`Wendy's Baconator${/\bfries\b/.test(t)?" + fries":""}${/\b(pop|soda|coke|sprite)\b/.test(t)?" + drink":""}`,cal);
+   return true;
+ }
+
+ pending={type:"fastFoodDetails",brand,meal:""};
+ respond(`Got it â ${brand}. What menu item did you have? Include the size, side, drink or sauce if you remember.`,`ð ${brand}: what did you have?`);
+ return true;
+}
+
 function parseFood(text){
 let t=text.toLowerCase().replace(/bananas/g,"banana").replace(/apples/g,"apple");
+
+if(fastFoodBrand(t))return parseFastFood(text);
 
 if(/\bsandwich\b/.test(t)){
 let s=sandwichInfo(t);
@@ -763,11 +833,16 @@ return finishSandwich(t,{
 type:"sandwich",...s}
 )}
 
-if(/\bcoffee\b/.test(t)&&!/(black|cream|milk|sugar|latte|cappuccino)/.test(t)){
-pending={
-type:"coffee"}
-;
-respond("Got it. Was your coffee black, or did you have cream, milk or sugar?","\u2615 Black, cream, milk or sugar?");
+if(/\b(coffee|tea)\b/.test(t)&&!/(black|cream|milk|sugar|sweetener|latte|cappuccino|double[- ]?double)/.test(t)){
+let kind=/\btea\b/.test(t)?"tea":"coffee";
+let usual=drinkUsual(kind);
+if(usual){
+ addFood(usual.name,usual.calories,"other");
+ respond(`Got it. I logged your usual ${kind}${usual.details?" â "+usual.details:""}. About ${usual.calories} calories.`,`â Usual ${kind} added â¢ ~${usual.calories} cal`);
+ return true;
+}
+pending={type:"coffee",kind:kind};
+respond(`Got it. How do you take your ${kind} â black, cream, milk, sugar or sweetener? I can remember it for next time.`,`â How do you take your ${kind}?`);
 return true}
 
 if(/\bsalad\b/.test(t)&&!/(caesar|dressing|ranch|chicken|tomato|lettuce|cucumber|pepper)/.test(t)){
@@ -823,24 +898,72 @@ s.filling}
 return true}
 
 if(pending.type==="coffee"){
-let cal=5,parts=["coffee"];
-if(/cream/.test(t)){
-cal+=30;
-parts.push("cream")}
-if(/milk/.test(t)){
-cal+=25;
-parts.push("milk")}
-if(/sugar/.test(t)){
-cal+=16;
-parts.push("sugar")}
-addFood(parts.join(" + "),cal);
+let kind=pending.kind||"coffee",cal=kind==="tea"?2:5,parts=[kind],details=[];
+let creamMatch=t.match(/(\d+|one|two|three|four)\s*(cream|creams)/);
+let sugarMatch=t.match(/(\d+|one|two|three|four)\s*(sugar|sugars)/);
+let milkMatch=t.match(/(\d+|one|two|three|four)?\s*(milk)/);
+let num=v=>({"one":1,"two":2,"three":3,"four":4}[v]||Number(v)||1);
+if(/\bblack\b/.test(t)){details.push("black")}
+if(/cream/.test(t)){let q=creamMatch?num(creamMatch[1]):1;cal+=30*q;details.push(`${q} cream${q>1?"s":""}`)}
+if(/\bmilk\b/.test(t)){let q=milkMatch&&milkMatch[1]?num(milkMatch[1]):1;cal+=20*q;details.push(`${q} milk`)}
+if(/sugar/.test(t)){let q=sugarMatch?num(sugarMatch[1]):1;cal+=16*q;details.push(`${q} sugar${q>1?"s":""}`)}
+if(/sweetener|splenda|stevia/.test(t)){details.push("sweetener")}
+let desc=details.join(", ")||"plain";
+let name=`${kind} â¢ ${desc}`;
+addFood(name,cal);
+rememberDrink(kind,name,cal,desc);
 pending=null;
-respond(`Got it. About ${
-cal}
- calories.`,`\u2615 Coffee added \u2022 ~${
-cal}
- cal`);
+respond(`Perfect. I added it and I'll remember that your usual ${kind} is ${desc}. About ${Math.round(cal)} calories.`,`â ${kind} added â¢ usual saved â¢ ~${Math.round(cal)} cal`);
 return true}
+
+if(pending.type==="restaurantCoffee"){
+ let size=pending.size||(/\blarge\b/.test(t)?"large":/\bsmall\b/.test(t)?"small":/\bmedium\b/.test(t)?"medium":"medium");
+ let cal=5,details=[];
+ let cream=t.match(/(\d+|one|two|three|four)\s*(cream|creams)/);
+ let sugar=t.match(/(\d+|one|two|three|four)\s*(sugar|sugars)/);
+ let num=v=>({"one":1,"two":2,"three":3,"four":4}[v]||Number(v)||1);
+ if(/\bblack\b/.test(t))details.push("black");
+ if(/cream/.test(t)){let q=cream?num(cream[1]):1;cal+=30*q;details.push(`${q} cream${q>1?"s":""}`)}
+ if(/sugar/.test(t)){let q=sugar?num(sugar[1]):1;cal+=16*q;details.push(`${q} sugar${q>1?"s":""}`)}
+ if(/\bmilk\b/.test(t)){cal+=20;details.push("milk")}
+ if(/sweetener|splenda|stevia/.test(t))details.push("sweetener");
+ let desc=`${size} ${details.join(", ")||"plain"}`;
+ let name=`Tim Hortons coffee â¢ ${desc}`;
+ addFood(name,cal);
+ rememberDrink("coffee",name,cal,desc);
+ pending=null;
+ respond(`Perfect. I added your Tim Hortons coffee and saved ${desc} as your usual coffee.`,`â Tim Hortons coffee added â¢ usual saved`);
+ return true;
+}
+
+if(pending.type==="happyMeal"){
+ let entree=/nugget/.test(t)?(/6/.test(t)?"6-piece nuggets":"4-piece nuggets"):/hamburger/.test(t)?"hamburger":"Happy Meal entree";
+ let cal=/6/.test(t)&&/nugget/.test(t)?250:/nugget/.test(t)?170:/hamburger/.test(t)?240:220;
+ let parts=[entree];
+ if(/fries/.test(t)){cal+=110;parts.push("fries")}
+ else if(/apple/.test(t)){cal+=40;parts.push("apple slices")}
+ if(/chocolate milk/.test(t)){cal+=130;parts.push("chocolate milk")}
+ else if(/\bmilk\b/.test(t)){cal+=100;parts.push("milk")}
+ else if(/\b(pop|soda|coke|sprite)\b/.test(t)){cal+=110;parts.push("soft drink")}
+ else if(/water/.test(t)){parts.push("water")}
+ if(/sauce|bbq|barbecue|sweet.?and.?sour/.test(t)){cal+=45;parts.push("sauce")}
+ addRestaurantFood(`McDonald's Happy Meal â¢ ${parts.join(" + ")}`,cal);
+ pending=null; return true;
+}
+
+if(pending.type==="fastFoodDetails"){
+ let brand=pending.brand,meal=pending.meal||"";
+ let combined=(meal+" "+text).trim();
+ let estimate=0;
+ if(brand==="Tim Hortons"&&/iced capp|ice capp/i.test(combined)){
+   estimate=/large/i.test(combined)?470:/small/i.test(combined)?250:360;
+   addRestaurantFood(`Tim Hortons ${/large/i.test(combined)?"large":/small/i.test(combined)?"small":"medium"} Iced Capp`,estimate);
+   pending=null; return true;
+ }
+ pending=null;
+ respond(`I heard ${brand}: ${combined}. I don't have a reliable estimate for that exact item yet, so I won't guess. You can tell me the calories from the menu, or try another item.`,`ð ${brand}: ${combined} â need calories to log accurately`);
+ return true;
+}
 
 if(pending.type==="movementTime"){
 let m=durationMinutes(t);
@@ -1281,7 +1404,7 @@ function resetProfile(){
 if(!confirm("Reset your Afternooners profile and all saved history on this device?"))return;
 localStorage.removeItem(PROFILE_KEY);
 localStorage.removeItem(TODAY_KEY);
-localStorage.removeItem(HISTORY_KEY);
+localStorage.removeItem(HISTORY_KEY);\nlocalStorage.removeItem(PREFS_KEY);
 location.reload()}
 
 function deleteFood(i){
