@@ -5,21 +5,144 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Afternooners Challenge</title>
 <style>
-body{font-family:Arial,sans-serif;background:#fff7f9;margin:0;color:#333}
+body{font-family:Arial,sans-serif;background:#fff7fa;margin:0;color:#333}
 .wrap{max-width:600px;margin:auto;padding:18px}
 h1{text-align:center;color:#d64f7b;margin-bottom:4px}
 .sub{text-align:center;margin-top:0;color:#777}
-.card{background:white;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 3px 12px #ddd}
-button{border:0;border-radius:14px;padding:13px 16px;font-size:16px;margin:4px;background:#f2dce4}
-.mic{font-size:30px;background:#d64f7b;color:white;width:70px;height:70px;border-radius:50%}
-input,textarea{box-sizing:border-box;width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0;font-size:16px}
+.card{background:white;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 2px 10px #ddd}
+button{border:0;border-radius:14px;padding:12px;font-size:16px;cursor:pointer}
+.mic{font-size:30px;background:#d64f7b;color:white;width:72px;height:72px;border-radius:50%}
+input,textarea{box-sizing:border-box;width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:10px;font-size:16px}
 .row{display:flex;gap:8px}
 .row button{flex:1}
 #status{text-align:center;font-weight:bold;color:#d64f7b}
+.save{background:#d64f7b;color:white;width:100%;margin-top:8px}
 </style>
 </head>
 
 <body>
 <div class="wrap">
 <h1>Afternooners Challenge</h1>
-<p class="sub">Small
+<p class="sub">Small choices. Strong women. 💕</p>
+
+<div class="card">
+<label>Your name</label>
+<input id="name" placeholder="Heather, Kate, Karen...">
+
+<div style="text-align:center;margin:16px">
+<button class="mic" id="mic">🎤</button>
+<p id="status">Tap the microphone and tell me about your day</p>
+</div>
+
+<textarea id="voice" rows="4" placeholder="Example: I had eggs and toast for breakfast, drank 4 glasses of water and walked 6,000 steps."></textarea>
+</div>
+
+<div class="card">
+<h3>💧 Water</h3>
+<div class="row">
+<button onclick="water(-1)">−</button>
+<button id="water">0 glasses</button>
+<button onclick="water(1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<h3>🚶 Movement</h3>
+<input id="steps" type="number" placeholder="Steps today">
+<input id="exercise" placeholder="Exercise — walk, workout, gardening...">
+</div>
+
+<div class="card">
+<h3>🥗 Food</h3>
+<textarea id="food" rows="3" placeholder="What did you eat today?"></textarea>
+</div>
+
+<div class="card">
+<h3>😴 Sleep</h3>
+<input id="sleep" type="number" step=".5" placeholder="Hours of sleep">
+</div>
+
+<div class="card">
+<h3>⚖️ Progress</h3>
+<input id="weight" type="number" step=".1" placeholder="Weight — optional">
+</div>
+
+<div class="card">
+<h3>💗 Today's nudge</h3>
+<p id="nudge">Log your day and I'll give you a little nudge — no guilt, just progress.</p>
+</div>
+
+<button class="save" onclick="save()">Save My Day</button>
+<p id="saved" style="text-align:center"></p>
+</div>
+
+<script>
+let glasses=Number(localStorage.getItem("water")||0);
+const fields=["name","voice","steps","exercise","food","sleep","weight"];
+
+function showWater(){
+ document.getElementById("water").textContent=glasses+" glasses";
+}
+function water(n){
+ glasses=Math.max(0,glasses+n);
+ localStorage.setItem("water",glasses);
+ showWater();
+ nudge();
+}
+function save(){
+ fields.forEach(id=>localStorage.setItem(id,document.getElementById(id).value));
+ localStorage.setItem("water",glasses);
+ document.getElementById("saved").textContent="Saved 💕";
+ nudge();
+}
+function nudge(){
+ let msg="You're showing up — that counts. 💕";
+ let steps=Number(document.getElementById("steps").value||0);
+ let food=document.getElementById("food").value.toLowerCase();
+ if(glasses<5) msg="💧 A little low on water — grab a glass when you can.";
+ else if(steps>0&&steps<5000) msg="🚶 A short walk could give today's movement a boost.";
+ else if(food&&!/(fruit|apple|banana|berry|berries|vegetable|salad|broccoli|carrot)/.test(food))
+   msg="🥕 Could you sneak in a fruit or veggie today?";
+ document.getElementById("nudge").textContent=msg;
+}
+fields.forEach(id=>{
+ let el=document.getElementById(id);
+ el.value=localStorage.getItem(id)||"";
+ el.addEventListener("input",()=>localStorage.setItem(id,el.value));
+});
+showWater();
+nudge();
+
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+const mic=document.getElementById("mic");
+if(SpeechRecognition){
+ const recognition=new SpeechRecognition();
+ recognition.lang="en-CA";
+ recognition.continuous=false;
+ recognition.interimResults=false;
+
+ mic.onclick=()=>{
+   document.getElementById("status").textContent="Listening… 🎤";
+   recognition.start();
+ };
+ recognition.onresult=e=>{
+   const words=e.results[0][0].transcript;
+   const box=document.getElementById("voice");
+   box.value+=(box.value?" ":"")+words;
+   localStorage.setItem("voice",box.value);
+   document.getElementById("status").textContent="Got it! 💕 Tap again to add more.";
+ };
+ recognition.onerror=e=>{
+   document.getElementById("status").textContent="Microphone error: "+e.error;
+ };
+ recognition.onend=()=>{
+   if(document.getElementById("status").textContent==="Listening… 🎤")
+      document.getElementById("status").textContent="Tap the microphone to keep talking";
+ };
+}else{
+ mic.disabled=true;
+ document.getElementById("status").textContent="Voice isn't supported in this browser.";
+}
+</script>
+</body>
+</html>
