@@ -2,147 +2,690 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d95682">
 <title>Afternooners Challenge</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#fff7fa;margin:0;color:#333}
-.wrap{max-width:600px;margin:auto;padding:18px}
-h1{text-align:center;color:#d64f7b;margin-bottom:4px}
-.sub{text-align:center;margin-top:0;color:#777}
-.card{background:white;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 2px 10px #ddd}
-button{border:0;border-radius:14px;padding:12px;font-size:16px;cursor:pointer}
-.mic{font-size:30px;background:#d64f7b;color:white;width:72px;height:72px;border-radius:50%}
-input,textarea{box-sizing:border-box;width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:10px;font-size:16px}
-.row{display:flex;gap:8px}
-.row button{flex:1}
-#status{text-align:center;font-weight:bold;color:#d64f7b}
-.save{background:#d64f7b;color:white;width:100%;margin-top:8px}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(180deg,#fff3f7,#fffaf5);
+  color:#382f34
+}
+.wrap{max-width:650px;margin:auto;padding:18px}
+.hero{
+  background:linear-gradient(135deg,#d95682,#ef8aaa);
+  color:white;padding:22px;border-radius:25px;
+  box-shadow:0 8px 25px #e5c3ce;margin-bottom:15px
+}
+.hero h1{margin:0;font-size:30px}
+.hero p{margin:7px 0}
+.weather{font-size:20px;font-weight:700}
+.quote{
+  margin-top:12px;padding:12px;background:#ffffff28;
+  border-radius:15px;font-style:italic
+}
+.card{
+  background:white;border-radius:22px;padding:17px;
+  margin:14px 0;box-shadow:0 4px 16px #eadde2
+}
+h2{margin:0 0 10px;color:#c74772;font-size:21px}
+.big{font-size:27px;font-weight:800}
+.muted{color:#7d7378;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{
+  background:#fff5f8;padding:13px;border-radius:15px;text-align:center
+}
+button{
+  border:0;border-radius:14px;padding:11px 13px;
+  font-size:15px;cursor:pointer
+}
+.primary{background:#d95682;color:white}
+.secondary{background:#f8dce6;color:#8c3150}
+.mic{
+  display:block;margin:10px auto;width:70px;height:70px;
+  border-radius:50%;font-size:30px;background:#d95682;color:white
+}
+input{
+  width:100%;padding:11px;border:1px solid #ddd;
+  border-radius:11px;margin:5px 0;font-size:16px
+}
+.row{display:flex;gap:7px}
+.row>*{flex:1}
+.progress{
+  height:12px;background:#f2e7eb;border-radius:20px;
+  overflow:hidden;margin:8px 0
+}
+.bar{height:100%;background:#d95682;width:0%}
+.nudge{
+  background:#fff2cc;border-radius:15px;padding:12px;
+  margin-top:10px;line-height:1.4
+}
+.good{
+  background:#eaf7ec;border-radius:15px;padding:12px;margin-top:10px
+}
+.log{
+  padding:9px 0;border-bottom:1px solid #eee;font-size:14px
+}
+.checks label{
+  display:block;background:#fff5f8;padding:10px;
+  border-radius:12px;margin:7px 0
+}
+#heard{
+  text-align:center;min-height:22px;color:#a33c61;
+  font-weight:600
+}
+details{margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:#c74772}
+.smallbtn{padding:7px 9px;font-size:13px}
 </style>
 </head>
 
 <body>
 <div class="wrap">
-<h1>Afternooners Challenge</h1>
-<p class="sub">Small choices. Strong women. 💕</p>
 
-<div class="card">
-<label>Your name</label>
-<input id="name" placeholder="Heather, Kate, Karen...">
-
-<div style="text-align:center;margin:16px">
-<button class="mic" id="mic">🎤</button>
-<p id="status">Tap the microphone and tell me about your day</p>
-</div>
-
-<textarea id="voice" rows="4" placeholder="Example: I had eggs and toast for breakfast, drank 4 glasses of water and walked 6,000 steps."></textarea>
+<div class="hero">
+  <div id="greeting">Good morning 💕</div>
+  <h1>Afternooners Challenge</h1>
+  <p class="weather" id="weather">🌤️ Mitchell weather loading…</p>
+  <p id="date"></p>
+  <div class="quote" id="quote"></div>
 </div>
 
 <div class="card">
-<h3>💧 Water</h3>
-<div class="row">
-<button onclick="water(-1)">−</button>
-<button id="water">0 glasses</button>
-<button onclick="water(1)">+</button>
-</div>
-</div>
-
-<div class="card">
-<h3>🚶 Movement</h3>
-<input id="steps" type="number" placeholder="Steps today">
-<input id="exercise" placeholder="Exercise — walk, workout, gardening...">
+  <h2>🎤 Tell me about your day</h2>
+  <p class="muted" style="text-align:center">
+    Try “I drank 500 mL of water”, “I ate two eggs and toast”,
+    “I walked 6,000 steps” or “I slept 7 hours”.
+  </p>
+  <button class="mic" id="mic">🎤</button>
+  <div id="heard">Tap the microphone and talk.</div>
 </div>
 
 <div class="card">
-<h3>🥗 Food</h3>
-<textarea id="food" rows="3" placeholder="What did you eat today?"></textarea>
+  <h2>💧 Water</h2>
+  <div class="big"><span id="waterTotal">0</span> mL</div>
+  <div class="progress"><div class="bar" id="waterBar"></div></div>
+  <p class="muted">Daily guide in this app: 2,000 mL. Your needs can vary.</p>
+  <div class="row">
+    <button class="secondary" onclick="addWater(250)">+250 mL</button>
+    <button class="secondary" onclick="addWater(500)">+500 mL</button>
+  </div>
 </div>
 
 <div class="card">
-<h3>😴 Sleep</h3>
-<input id="sleep" type="number" step=".5" placeholder="Hours of sleep">
+  <h2>🍎 Food & Nutrition</h2>
+  <div class="big">≈ <span id="calories">0</span> calories</div>
+  <p class="muted">Calories are estimates, not medical or dietary prescriptions.</p>
+
+  <div class="row">
+    <input id="foodText" placeholder="e.g. 2 eggs and toast">
+    <button class="primary" onclick="manualFood()">Add</button>
+  </div>
+
+  <div id="foodLog"></div>
+
+  <div class="nudge" id="foodNudge">
+    Log some food and I’ll give you a gentle Food Guide nudge.
+  </div>
 </div>
 
 <div class="card">
-<h3>⚖️ Progress</h3>
-<input id="weight" type="number" step=".1" placeholder="Weight — optional">
+  <h2>🚶 Movement</h2>
+  <div class="grid">
+    <div class="stat">
+      <div class="big" id="steps">0</div>
+      <div class="muted">steps</div>
+    </div>
+    <div class="stat">
+      <div class="big" id="exercise">0</div>
+      <div class="muted">exercise minutes</div>
+    </div>
+  </div>
+  <div class="row">
+    <input id="stepInput" type="number" placeholder="Steps">
+    <button class="secondary" onclick="manualSteps()">Add steps</button>
+  </div>
 </div>
 
 <div class="card">
-<h3>💗 Today's nudge</h3>
-<p id="nudge">Log your day and I'll give you a little nudge — no guilt, just progress.</p>
+  <h2>😴 Sleep</h2>
+  <div class="big"><span id="sleep">0</span> hours</div>
+  <div class="row">
+    <input id="sleepInput" type="number" step=".5" placeholder="Hours slept">
+    <button class="secondary" onclick="manualSleep()">Save</button>
+  </div>
+
+  <h3>🌙 Sleep Help</h3>
+  <div class="checks">
+    <label><input type="checkbox" data-sleep="Meditation"> 🧘 Meditation</label>
+    <label><input type="checkbox" data-sleep="Gentle stretching"> 🤸 Gentle stretching</label>
+    <label><input type="checkbox" data-sleep="Toe & foot stretches"> 🦶 Toe & foot stretches</label>
+    <label><input type="checkbox" data-sleep="Breathing"> 🌬️ Slow breathing</label>
+    <label><input type="checkbox" data-sleep="Screen-free wind-down"> 📵 Screen-free wind-down</label>
+  </div>
 </div>
 
-<button class="save" onclick="save()">Save My Day</button>
-<p id="saved" style="text-align:center"></p>
+<div class="card">
+  <h2>⚖️ Weight</h2>
+  <div class="big"><span id="weight">—</span> lb</div>
+  <div class="row">
+    <input id="weightInput" type="number" step=".1" placeholder="Today's weight">
+    <button class="secondary" onclick="manualWeight()">Save</button>
+  </div>
+</div>
+
+<div class="card">
+  <h2>💗 Today's Nudge</h2>
+  <div class="good" id="dailyNudge">
+    Small choices count. Tell me what you’ve done today.
+  </div>
+</div>
+
+<div class="card">
+  <h2>📅 My History</h2>
+  <p class="muted">Your previous days stay saved on this device.</p>
+  <details>
+    <summary>View saved history</summary>
+    <div id="history"></div>
+  </details>
+</div>
+
 </div>
 
 <script>
-let glasses=Number(localStorage.getItem("water")||0);
-const fields=["name","voice","steps","exercise","food","sleep","weight"];
+const quotes=[
+ "Small choices add up to big changes. 💕",
+ "Progress, not perfection.",
+ "Do something today your future self will thank you for.",
+ "A little movement is always better than none.",
+ "Drink the water. Take the walk. Keep going.",
+ "Strong women support strong women. 💗",
+ "You don't need a perfect day to make progress."
+];
 
-function showWater(){
- document.getElementById("water").textContent=glasses+" glasses";
+const foodDB={
+ "egg":78,
+ "eggs":78,
+ "toast":100,
+ "bread":100,
+ "banana":105,
+ "apple":95,
+ "orange":65,
+ "yogurt":120,
+ "greek yogurt":130,
+ "coffee":5,
+ "milk":120,
+ "chicken":220,
+ "chicken breast":220,
+ "salad":120,
+ "rice":205,
+ "potato":160,
+ "oatmeal":150,
+ "oats":150,
+ "cheese":110,
+ "peanut butter":95,
+ "avocado":240,
+ "pasta":300,
+ "pizza":285,
+ "hamburger":350,
+ "burger":350,
+ "sandwich":300,
+ "soup":180
+};
+
+function key(){
+ return new Date().toLocaleDateString("en-CA");
 }
-function water(n){
- glasses=Math.max(0,glasses+n);
- localStorage.setItem("water",glasses);
- showWater();
- nudge();
+
+function blankDay(){
+ return {
+  date:key(),
+  water:0,
+  calories:0,
+  food:[],
+  steps:0,
+  exercise:0,
+  sleep:0,
+  sleepHelp:[],
+  weight:null
+ };
 }
+
+let today=loadToday();
+
+function loadToday(){
+ const saved=JSON.parse(localStorage.getItem("afternoonersToday")||"null");
+
+ if(saved && saved.date===key()) return saved;
+
+ if(saved){
+   let history=JSON.parse(localStorage.getItem("afternoonersHistory")||"[]");
+   if(!history.some(x=>x.date===saved.date)){
+     history.unshift(saved);
+     localStorage.setItem("afternoonersHistory",JSON.stringify(history));
+   }
+ }
+
+ const fresh=blankDay();
+ localStorage.setItem("afternoonersToday",JSON.stringify(fresh));
+ return fresh;
+}
+
 function save(){
- fields.forEach(id=>localStorage.setItem(id,document.getElementById(id).value));
- localStorage.setItem("water",glasses);
- document.getElementById("saved").textContent="Saved 💕";
- nudge();
+ localStorage.setItem("afternoonersToday",JSON.stringify(today));
+ render();
 }
-function nudge(){
- let msg="You're showing up — that counts. 💕";
- let steps=Number(document.getElementById("steps").value||0);
- let food=document.getElementById("food").value.toLowerCase();
- if(glasses<5) msg="💧 A little low on water — grab a glass when you can.";
- else if(steps>0&&steps<5000) msg="🚶 A short walk could give today's movement a boost.";
- else if(food&&!/(fruit|apple|banana|berry|berries|vegetable|salad|broccoli|carrot)/.test(food))
-   msg="🥕 Could you sneak in a fruit or veggie today?";
- document.getElementById("nudge").textContent=msg;
-}
-fields.forEach(id=>{
- let el=document.getElementById(id);
- el.value=localStorage.getItem(id)||"";
- el.addEventListener("input",()=>localStorage.setItem(id,el.value));
-});
-showWater();
-nudge();
 
-const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-const mic=document.getElementById("mic");
+function checkNewDay(){
+ if(today.date!==key()){
+   today=loadToday();
+   render();
+ }
+}
+
+setInterval(checkNewDay,60000);
+
+function addWater(amount){
+ today.water+=amount;
+ save();
+ flash(`💧 Added ${amount} mL of water.`);
+}
+
+function manualSteps(){
+ const n=Number(document.getElementById("stepInput").value);
+ if(n>0){
+   today.steps+=n;
+   document.getElementById("stepInput").value="";
+   save();
+ }
+}
+
+function manualSleep(){
+ const n=Number(document.getElementById("sleepInput").value);
+ if(n>0){
+   today.sleep=n;
+   document.getElementById("sleepInput").value="";
+   save();
+ }
+}
+
+function manualWeight(){
+ const n=Number(document.getElementById("weightInput").value);
+ if(n>0){
+   today.weight=n;
+   document.getElementById("weightInput").value="";
+   save();
+ }
+}
+
+function manualFood(){
+ const text=document.getElementById("foodText").value.trim();
+ if(text){
+   addFood(text);
+   document.getElementById("foodText").value="";
+ }
+}
+
+function wordNumber(word){
+ const nums={
+  "a":1,"an":1,"one":1,"two":2,"three":3,"four":4,
+  "five":5,"six":6
+ };
+ return nums[word]||Number(word)||1;
+}
+
+function estimateFood(text){
+ const lower=text.toLowerCase();
+ let total=0;
+ let found=[];
+
+ const entries=Object.keys(foodDB).sort((a,b)=>b.length-a.length);
+ let used=lower;
+
+ entries.forEach(food=>{
+   if(used.includes(food)){
+     const pattern=new RegExp("(\\d+|one|two|three|four|five|six|a|an)?\\s*"+food.replace(" ","\\s+"),"i");
+     const match=used.match(pattern);
+
+     if(match){
+       const qty=wordNumber(match[1]||"one");
+       const cals=Math.round(foodDB[food]*qty);
+       total+=cals;
+       found.push(`${qty} ${food}`);
+       used=used.replace(match[0]," ");
+     }
+   }
+ });
+
+ return {calories:total,found};
+}
+
+function foodGroups(text){
+ const t=text.toLowerCase();
+
+ const vegFruit=[
+  "apple","banana","orange","berry","berries","salad",
+  "vegetable","vegetables","broccoli","carrot","pepper",
+  "avocado","fruit"
+ ];
+
+ const protein=[
+  "egg","eggs","chicken","fish","beef","turkey","yogurt",
+  "cheese","beans","lentils","tofu","peanut butter"
+ ];
+
+ const whole=[
+  "oatmeal","oats","whole grain","whole wheat","brown rice",
+  "quinoa"
+ ];
+
+ return {
+  vegFruit:vegFruit.some(x=>t.includes(x)),
+  protein:protein.some(x=>t.includes(x)),
+  whole:whole.some(x=>t.includes(x))
+ };
+}
+
+function addFood(text){
+ const estimate=estimateFood(text);
+ const groups=foodGroups(text);
+
+ let calories=estimate.calories;
+
+ if(calories===0){
+   const answer=prompt(
+     `I don't have a reliable built-in calorie estimate for "${text}". `+
+     `If you know the approximate calories, enter them here. Otherwise leave blank.`
+   );
+   calories=Number(answer)||0;
+ }
+
+ today.food.push({
+   text:text,
+   calories:calories,
+   groups:groups,
+   time:new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})
+ });
+
+ today.calories+=calories;
+ save();
+
+ flash(
+   calories
+   ? `🍎 Added "${text}" — about ${calories} calories.`
+   : `🍎 Added "${text}" to today's food log.`
+ );
+}
+
+function nutritionNudge(){
+ if(today.food.length===0){
+   return "Log what you eat and I’ll help you notice the overall balance.";
+ }
+
+ let veg=false,protein=false,whole=false;
+
+ today.food.forEach(f=>{
+   if(f.groups?.vegFruit) veg=true;
+   if(f.groups?.protein) protein=true;
+   if(f.groups?.whole) whole=true;
+ });
+
+ let missing=[];
+
+ if(!veg) missing.push("vegetables or fruit");
+ if(!protein) missing.push("a protein food");
+ if(!whole) missing.push("a whole-grain food");
+
+ if(missing.length){
+   return "🥕 You may be a little light on "+missing.join(", ")+
+   " today. Consider adding some at your next meal.";
+ }
+
+ return "🌿 Nice variety so far. Keep aiming for plenty of vegetables and fruit, whole grains and protein foods.";
+}
+
+function dailyNudge(){
+ if(today.water<750){
+   return "💧 Water looks a little low so far. A glass now would be an easy win.";
+ }
+
+ if(today.steps<3000){
+   return "🚶 A short walk could give today's movement a little boost.";
+ }
+
+ if(today.sleep && today.sleep<7){
+   return "🌙 Sleep was on the shorter side. Try one of the wind-down tools tonight.";
+ }
+
+ return "💕 You're building your day one choice at a time. Keep going.";
+}
+
+document.querySelectorAll("[data-sleep]").forEach(box=>{
+ box.addEventListener("change",()=>{
+   const item=box.dataset.sleep;
+
+   if(box.checked && !today.sleepHelp.includes(item)){
+     today.sleepHelp.push(item);
+   }
+
+   if(!box.checked){
+     today.sleepHelp=today.sleepHelp.filter(x=>x!==item);
+   }
+
+   save();
+ });
+});
+
+function render(){
+ document.getElementById("waterTotal").textContent=today.water;
+ document.getElementById("waterBar").style.width=
+   Math.min(100,(today.water/2000)*100)+"%";
+
+ document.getElementById("calories").textContent=today.calories;
+ document.getElementById("steps").textContent=today.steps.toLocaleString();
+ document.getElementById("exercise").textContent=today.exercise;
+ document.getElementById("sleep").textContent=today.sleep||0;
+ document.getElementById("weight").textContent=today.weight??"—";
+
+ document.getElementById("foodLog").innerHTML=
+   today.food.length
+   ? today.food.map(f=>
+      `<div class="log">🍽️ ${escapeHTML(f.text)}
+       ${f.calories?` — ≈ ${f.calories} cal`:""}
+       <span class="muted"> ${f.time||""}</span></div>`
+     ).join("")
+   : `<p class="muted">Nothing logged yet today.</p>`;
+
+ document.getElementById("foodNudge").textContent=nutritionNudge();
+ document.getElementById("dailyNudge").textContent=dailyNudge();
+
+ document.querySelectorAll("[data-sleep]").forEach(box=>{
+   box.checked=today.sleepHelp.includes(box.dataset.sleep);
+ });
+
+ renderHistory();
+}
+
+function escapeHTML(str){
+ return String(str).replace(/[&<>"']/g,m=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#039;"
+ })[m]);
+}
+
+function renderHistory(){
+ const history=JSON.parse(localStorage.getItem("afternoonersHistory")||"[]");
+ const el=document.getElementById("history");
+
+ if(!history.length){
+   el.innerHTML="<p class='muted'>Your first completed day will appear here.</p>";
+   return;
+ }
+
+ el.innerHTML=history.slice(0,30).map(d=>
+  `<div class="log">
+   <strong>${escapeHTML(d.date)}</strong><br>
+   💧 ${d.water||0} mL · 🍎 ≈${d.calories||0} cal ·
+   🚶 ${(d.steps||0).toLocaleString()} steps ·
+   😴 ${d.sleep||0} hrs
+   ${d.weight?` · ⚖️ ${d.weight} lb`:""}
+   </div>`
+ ).join("");
+}
+
+function flash(message){
+ const el=document.getElementById("heard");
+ el.textContent=message;
+ setTimeout(()=>{el.textContent="Tap the microphone and talk.";},5000);
+}
+
+function parseSpeech(text){
+ const t=text.toLowerCase();
+
+ let m=t.match(/(\d+(?:\.\d+)?)\s*(ml|millilit(?:er|re)s?)/i);
+ if(m && /(water|drink|drank|drinking)/i.test(t)){
+   addWater(Number(m[1]));
+   return;
+ }
+
+ m=t.match(/(\d+(?:\.\d+)?)\s*(litre|liter|litres|liters|l)\b/i);
+ if(m && /(water|drink|drank|drinking)/i.test(t)){
+   addWater(Number(m[1])*1000);
+   return;
+ }
+
+ m=t.match(/(?:walked|did|got)?\s*([\d,]+)\s*steps/i);
+ if(m){
+   today.steps+=Number(m[1].replace(/,/g,""));
+   save();
+   flash(`🚶 Added ${m[1]} steps.`);
+   return;
+ }
+
+ m=t.match(/(?:exercised|exercise|worked out|workout)(?: for)?\s*(\d+)\s*(?:minutes|mins)/i);
+ if(m){
+   today.exercise+=Number(m[1]);
+   save();
+   flash(`💪 Added ${m[1]} exercise minutes.`);
+   return;
+ }
+
+ m=t.match(/(?:slept|sleep)(?: for)?\s*(\d+(?:\.\d+)?)\s*(?:hours|hrs)/i);
+ if(m){
+   today.sleep=Number(m[1]);
+   save();
+   flash(`😴 Saved ${m[1]} hours of sleep.`);
+   return;
+ }
+
+ m=t.match(/(?:weigh|weight|weighed)(?: is| was)?\s*(\d+(?:\.\d+)?)\s*(?:lb|lbs|pounds)?/i);
+ if(m){
+   today.weight=Number(m[1]);
+   save();
+   flash(`⚖️ Saved weight: ${m[1]} lb.`);
+   return;
+ }
+
+ if(/meditat/i.test(t)){
+   if(!today.sleepHelp.includes("Meditation")) today.sleepHelp.push("Meditation");
+   save(); flash("🧘 Meditation logged."); return;
+ }
+
+ if(/toe|foot stretch/i.test(t)){
+   if(!today.sleepHelp.includes("Toe & foot stretches"))
+     today.sleepHelp.push("Toe & foot stretches");
+   save(); flash("🦶 Toe & foot stretches logged."); return;
+ }
+
+ if(/stretch/i.test(t)){
+   if(!today.sleepHelp.includes("Gentle stretching"))
+     today.sleepHelp.push("Gentle stretching");
+   save(); flash("🤸 Stretching logged."); return;
+ }
+
+ if(/\b(ate|had|breakfast|lunch|dinner|snack)\b/i.test(t)){
+   let cleaned=text
+    .replace(/^(i\s+)?(ate|had)\s+/i,"")
+    .replace(/\s+(for\s+)?(breakfast|lunch|dinner|snack).*$/i,"")
+    .trim();
+
+   addFood(cleaned||text);
+   return;
+ }
+
+ flash(`I heard: "${text}" — I couldn't confidently categorize that yet.`);
+}
+
+const SpeechRecognition=
+ window.SpeechRecognition||window.webkitSpeechRecognition;
+
 if(SpeechRecognition){
  const recognition=new SpeechRecognition();
  recognition.lang="en-CA";
- recognition.continuous=false;
  recognition.interimResults=false;
 
- mic.onclick=()=>{
-   document.getElementById("status").textContent="Listening… 🎤";
-   recognition.start();
+ document.getElementById("mic").onclick=()=>{
+   document.getElementById("heard").textContent="Listening… 🎤";
+   try{recognition.start()}catch(e){}
  };
+
  recognition.onresult=e=>{
-   const words=e.results[0][0].transcript;
-   const box=document.getElementById("voice");
-   box.value+=(box.value?" ":"")+words;
-   localStorage.setItem("voice",box.value);
-   document.getElementById("status").textContent="Got it! 💕 Tap again to add more.";
+   const text=e.results[0][0].transcript;
+   document.getElementById("heard").textContent=`I heard: "${text}"`;
+   parseSpeech(text);
  };
+
  recognition.onerror=e=>{
-   document.getElementById("status").textContent="Microphone error: "+e.error;
- };
- recognition.onend=()=>{
-   if(document.getElementById("status").textContent==="Listening… 🎤")
-      document.getElementById("status").textContent="Tap the microphone to keep talking";
+   document.getElementById("heard").textContent=
+     "Microphone didn't catch that. Please try again.";
  };
 }else{
- mic.disabled=true;
- document.getElementById("status").textContent="Voice isn't supported in this browser.";
+ document.getElementById("mic").onclick=()=>{
+   alert("Speech recognition isn't supported in this browser. Try Chrome or Safari.");
+ };
 }
+
+function setupHeader(){
+ const hour=new Date().getHours();
+ let greeting="Good evening";
+
+ if(hour<12) greeting="Good morning";
+ else if(hour<17) greeting="Good afternoon";
+
+ document.getElementById("greeting").textContent=greeting+" 💕";
+ document.getElementById("date").textContent=
+   new Date().toLocaleDateString("en-CA",{
+     weekday:"long",month:"long",day:"numeric"
+   });
+
+ const qIndex=new Date().getDate()%quotes.length;
+ document.getElementById("quote").textContent=quotes[qIndex];
+}
+
+async function loadWeather(){
+ try{
+   const url=
+    "https://api.open-meteo.com/v1/forecast?latitude=43.47&longitude=-81.20&current=temperature_2m,weather_code&temperature_unit=celsius";
+
+   const r=await fetch(url);
+   const data=await r.json();
+   const temp=Math.round(data.current.temperature_2m);
+
+   document.getElementById("weather").textContent=
+     `🌤️ Mitchell, Ontario · ${temp}°C`;
+ }catch(e){
+   document.getElementById("weather").textContent=
+     "📍 Mitchell, Ontario";
+ }
+}
+
+setupHeader();
+loadWeather();
+render();
 </script>
+
 </body>
 </html>
