@@ -279,7 +279,7 @@ grid-template-columns:repeat(2,1fr)}
 <div class="wrap">
 <div class="hero">
 <h1 class="brand">Afternooners</h1>
-<div class="tag">Healthy Girls &bull; Happier Days</div>
+<div class="tag">Healthy Girls &#8226; Happier Days</div>
 </div>
 
 <div id="homePage" class="page active">
@@ -295,7 +295,7 @@ grid-template-columns:repeat(2,1fr)}
 <h2>Tell me about your day</h2>
 <button class="mic" id="micButton" onclick="startListening()" aria-label="Microphone">&#127897;</button>
 <div id="heard">Tap the microphone and just talk normally.</div>
-<div class="small">Food &bull; Water &bull; Movement &bull; Sleep &bull; Weight &bull; Wellness</div>
+<div class="small">Food &#8226; Water &#8226; Movement &#8226; Sleep &#8226; Weight &#8226; Wellness</div>
 </div>
 <div class="progressGrid">
 <div class="progress">
@@ -455,8 +455,8 @@ grid-template-columns:repeat(2,1fr)}
 </div>
 <div style="margin-top:20px">
 <strong>&#128241; Save Afternooners Like an App</strong>
-<div class="voiceNote"><b>iPhone/iPad:</b> Open Afternooners in Safari &rarr; tap Share &rarr; Add to Home Screen &rarr; Add.<br><br>
-<b>Android/Samsung:</b> Open Afternooners in your browser &rarr; browser menu &rarr; Add to Home screen or Install app.</div>
+<div class="voiceNote"><b>iPhone/iPad:</b> Open Afternooners in Safari &#8594; tap Share &#8594; Add to Home Screen &#8594; Add.<br><br>
+<b>Android/Samsung:</b> Open Afternooners in your browser &#8594; browser menu &#8594; Add to Home screen or Install app.</div>
 </div>
 <button class="btn danger" style="width:100%;
 margin-top:20px" onclick="resetProfile()">Reset My Profile</button>
@@ -931,7 +931,7 @@ p.activity}
  \u2022 ${
 m}
  minutes`)}
-else respond("About how many minutes?","\u23F1\uFE0F About how many minutes?");
+else respond("About how many minutes?","\u23F1 About how many minutes?");
 return true}
 
 if(pending.type==="steps"){
@@ -1023,7 +1023,7 @@ type:"movementTime",activity:a,wellness:w}
 ;
 respond(`Nice. About how many minutes did you do ${
 a}
-?`,`\u23F1\uFE0F ${
+?`,`\u23F1 ${
 a}
  \u2014 how many minutes?`)}
 return true}
@@ -1120,7 +1120,7 @@ today.weight=n;
 saveToday();
 respond(`Got it. ${
 n}
- pounds.`,`\u2696\uFE0F Weight saved \u2022 ${
+ pounds.`,`\u2696 Weight saved \u2022 ${
 n}
  lb`);
 return true}
@@ -1245,7 +1245,7 @@ async function startSound(type,b){
 stopSound(false);
 document.querySelectorAll(".sound").forEach(x=>x.classList.remove("active"));
 b.classList.add("active");
-soundStatus.textContent=type==="rain"?"\uD83C\uDF27\uFE0F Real rain on a metal roof":type==="ocean"?"\uD83C\uDF0A Real ocean waves":type==="nature"?"\uD83C\uDF32 Real forest ambience":type==="fire"?"\uD83D\uDD25 Real crackling fireplace":"\u2601\uFE0F Smooth white noise";
+soundStatus.textContent=type==="rain"?"\uD83C\uDF27\uFE0F Real rain on a metal roof":type==="ocean"?"\uD83C\uDF0A Real ocean waves":type==="nature"?"\uD83C\uDF32 Real forest ambience":type==="fire"?"\uD83D\uDD25 Real crackling fireplace":"\u2601 Smooth white noise";
 try{
 if(type==="white")startWhite();
 else{
@@ -1297,7 +1297,7 @@ function runRoutineStep(){
 if(routinePaused||!currentRoutine||routineIndex>=routineQueue.length)return;
 let step=routineQueue[routineIndex++];
 speak(step.text,true);
-if(document.getElementById("routineStatus"))routineStatus.textContent="\u25B6\uFE0F "+currentRoutine+" in progress";
+if(document.getElementById("routineStatus"))routineStatus.textContent="\u25B6 "+currentRoutine+" in progress";
 if(routineIndex<routineQueue.length)routineTimers.push(setTimeout(runRoutineStep,step.wait));
 else routineTimers.push(setTimeout(()=>{if(document.getElementById("routineStatus"))routineStatus.textContent="\u2728 Routine complete.";currentRoutine=null},step.wait));
 }
@@ -1310,7 +1310,7 @@ if(document.getElementById("routineStatus"))routineStatus.textContent="\u23F8 Ro
 function resumeRoutine(){
 if(!currentRoutine||!routinePaused)return;
 routinePaused=false;
-if(document.getElementById("routineStatus"))routineStatus.textContent="\u25B6\uFE0F "+currentRoutine+" resumed";
+if(document.getElementById("routineStatus"))routineStatus.textContent="\u25B6 "+currentRoutine+" resumed";
 runRoutineStep();
 }
 function startRoutine(type){
