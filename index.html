@@ -220,8 +220,8 @@ justify-content:center;
 z-index:20;
 padding-bottom:env(safe-area-inset-bottom)}
 .bottom button{
-width:20%;
-max-width:130px;
+width:16.666%;
+max-width:110px;
 border:0;
 background:white;
 padding:11px 2px;
@@ -427,6 +427,15 @@ grid-template-columns:repeat(2,1fr)}
 </div>
 </div>
 </div>
+<div id="challengePage" class="page">
+<div class="section">
+<h2>&#127942; Afternooners Challenge</h2>
+<div class="sub">Only Challenge points are shared. Food, weight, water, sleep and other personal details stay private on each device.</div>
+<div id="challengeBoard" style="margin-top:14px"></div>
+<div class="voiceNote" style="margin-top:14px"><b>Six girls:</b> Heather, Kate, Kathy, Pauline, Cheri and Karen.<br><br>This version prepares the scoreboard on each phone. Live cross-phone syncing will turn on after the shared database connection is added; your private tracking will not be uploaded.</div>
+</div>
+</div>
+
 <div id="settingsPage" class="page">
 <div class="section">
 <h2>&#9881;&#65039; Settings</h2>
@@ -473,6 +482,8 @@ margin-top:20px" onclick="resetProfile()">Reset My Profile</button>
 <span class="ico">&#127769;</span>Sleep</button>
 <button onclick="showPage('historyPage')">
 <span class="ico">&#128214;</span>History</button>
+<button onclick="showPage('challengePage')">
+<span class="ico">&#127942;</span>Challenge</button>
 <button onclick="showPage('settingsPage')">
 <span class="ico">&#9881;&#65039;</span>Settings</button>
 </div>
@@ -484,7 +495,7 @@ margin-top:20px" onclick="resetProfile()">Reset My Profile</button>
 </audio>
 
 <script>
-/* Afternooners full rebuild \u2014 daily/weekly/monthly points, Food Guide nudges, restaurant follow-ups, and stoppable routines. */
+/* Afternooners Sept 30 controlled update \u2014 daily/weekly/monthly points, Food Guide nudges, restaurant follow-ups, and stoppable routines. */
 const PROFILE_KEY="afternoonersProfileV2",TODAY_KEY="afternoonersTodayV2",HISTORY_KEY="afternoonersHistoryV2";
 
 function loadJSON(k,f){
@@ -671,10 +682,16 @@ return null}
 
 
 const FOOD=[
+["big mac",590,"other"],["quarter pounder",520,"other"],["cheeseburger",300,"other"],["mcnuggets",250,"protein"],["chicken nuggets",250,"protein"],["tim hortons chili",330,"protein"],["timmies chili",330,"protein"],["chili",300,"protein"],["tomato soup",160,"veg"],["vegetable soup",140,"veg"],["mushroom soup",180,"veg"],["cream of mushroom soup",220,"veg"],["cream of chicken soup",220,"protein"],["cream of broccoli soup",210,"veg"],["cream of celery soup",190,"veg"],["stew",350,"protein"],
+["spaghetti with meat sauce",500,"mixed"],["spaghetti",350,"grain"],["lasagna",450,"mixed"],["noodles",220,"grain"],["mac and cheese",350,"grain"],["fettuccine alfredo",650,"grain"],["ravioli",400,"grain"],["pasta",220,"grain"],
+["fish tacos",220,"mixed"],["shrimp tacos",220,"mixed"],["chicken tacos",210,"mixed"],["beef tacos",220,"mixed"],["taco salad",450,"mixed"],["tacos",200,"mixed"],["taco",200,"mixed"],["burrito",500,"mixed"],["quesadilla",500,"mixed"],["nachos",550,"other"],
+["stuffed mushrooms",180,"veg"],["stuffed peppers",350,"mixed"],["stuffed pepper",350,"mixed"],["stuffed potato",350,"mixed"],
 ["celery stick",6,"veg"],["celery",10,"veg"],["red pepper",30,"veg"],["green pepper",30,"veg"],["yellow pepper",30,"veg"],["bell pepper",30,"veg"],["cherry tomatoes",30,"veg"],["tomato",22,"veg"],["carrots",35,"veg"],["carrot",25,"veg"],["cucumber",30,"veg"],["broccoli",55,"veg"],["cauliflower",30,"veg"],["lettuce",10,"veg"],["spinach",20,"veg"],["peas",65,"veg"],["green beans",40,"veg"],["corn",90,"veg"],["potato",160,"veg"],["sweet potato",115,"veg"],["banana",105,"fruit"],["apple",95,"fruit"],["orange",65,"fruit"],["pear",100,"fruit"],["peach",60,"fruit"],["plum",30,"fruit"],["kiwi",45,"fruit"],["grapes",60,"fruit"],["strawberries",50,"fruit"],["blueberries",85,"fruit"],["raspberries",65,"fruit"],["blackberries",60,"fruit"],["watermelon",85,"fruit"],["cantaloupe",55,"fruit"],["pineapple",80,"fruit"],["mango",100,"fruit"],["avocado",240,"veg"],
-["granola bar",150,"other"],["protein bar",200,"protein"],["scrambled eggs",180,"protein"],["boiled egg",75,"protein"],["eggs",150,"protein"],["egg",75,"protein"],["greek yogurt",130,"protein"],["yogurt",120,"protein"],["cottage cheese",120,"protein"],["cheese slice",80,"protein"],["cheese",110,"protein"],["milk",120,"protein"],["almond milk",40,"other"],["chicken breast",220,"protein"],["chicken",220,"protein"],["turkey",100,"protein"],["ham",120,"protein"],["beef",250,"protein"],["steak",350,"protein"],["pork chop",250,"protein"],["salmon",230,"protein"],["tuna",140,"protein"],["shrimp",120,"protein"],["tofu",150,"protein"],["beans",200,"protein"],
-["whole wheat toast",90,"grain"],["toast",90,"grain"],["whole wheat bread",85,"grain"],["bread",80,"grain"],["bagel",280,"grain"],["english muffin",130,"grain"],["tortilla",140,"grain"],["brown rice",215,"grain"],["rice",205,"grain"],["pasta",220,"grain"],["oatmeal",160,"grain"],["cereal",160,"grain"],["crackers",120,"grain"],["popcorn",100,"grain"],
-["pizza slice",285,"other"],["pizza",285,"other"],["hamburger",400,"other"],["burger",400,"other"],["hot dog",290,"other"],["french fries",365,"other"],["fries",365,"other"],["soup",150,"other"],["caesar salad",350,"veg"],["salad",100,"veg"],["peanut butter",95,"protein"],["almond butter",100,"protein"],["nuts",170,"protein"],["almonds",165,"protein"],["walnuts",185,"protein"],["chips",160,"other"],["cookie",90,"other"],["cookies",180,"other"],["brownie",220,"other"],["cake",300,"other"],["ice cream",270,"other"],["chocolate",150,"other"],["coffee",5,"other"],["latte",150,"other"],["cappuccino",100,"other"],["orange juice",110,"fruit"],["apple juice",115,"fruit"],["smoothie",200,"fruit"]].sort((a,b)=>b[0].length-a[0].length);
+["granola bar",150,"other"],["protein bar",200,"protein"],["scrambled eggs",180,"protein"],["boiled egg",75,"protein"],["eggs",150,"protein"],["egg",75,"protein"],["greek yogurt",130,"protein"],["yogurt",120,"protein"],["cottage cheese",120,"protein"],["cheese slice",80,"protein"],["cheese",110,"protein"],["milk",120,"protein"],["almond milk",40,"other"],["chicken breast",220,"protein"],["chicken wings",450,"protein"],["chicken",220,"protein"],["turkey",100,"protein"],["ham",120,"protein"],["beef",250,"protein"],["steak",350,"protein"],["pork chop",250,"protein"],["pork",250,"protein"],["salmon",230,"protein"],["fish",200,"protein"],["tuna",140,"protein"],["shrimp",120,"protein"],["tofu",150,"protein"],["beans",200,"protein"],
+["whole wheat toast",90,"grain"],["toast",90,"grain"],["whole wheat bread",85,"grain"],["bread",80,"grain"],["bagel",280,"grain"],["english muffin",130,"grain"],["tortilla",140,"grain"],["brown rice",215,"grain"],["rice",205,"grain"],["oatmeal",160,"grain"],["cereal",160,"grain"],["crackers",120,"grain"],["popcorn",100,"grain"],
+["pizza slice",285,"other"],["pizza",285,"other"],["hamburger",400,"other"],["burger",400,"other"],["hot dog",290,"other"],["french fries",365,"other"],["fries",365,"other"],["caesar salad",350,"veg"],["salad",100,"veg"],["peanut butter",95,"protein"],["almond butter",100,"protein"],["nuts",170,"protein"],["almonds",165,"protein"],["walnuts",185,"protein"],["chips",160,"other"],["cookie",90,"other"],["cookies",180,"other"],["brownie",220,"other"],["cake",300,"other"],["ice cream",270,"other"],["chocolate",150,"other"],["latte",150,"other"],["cappuccino",100,"other"],["orange juice",110,"fruit"],["apple juice",115,"fruit"],["smoothie",200,"fruit"],
+["bud light",110,"other"],["michelob ultra",95,"other"],["coors light",102,"other"],["craft beer",180,"other"],["beer",150,"other"],["cooler",180,"other"],["vodka soda",100,"other"],["rum and coke",180,"other"],["rye and ginger",180,"other"],["caesar cocktail",180,"other"],["vodka",100,"other"],["rum",100,"other"],["whisky",100,"other"],["whiskey",100,"other"],["rye",100,"other"],["gin",100,"other"],["tequila",100,"other"]
+].sort((a,b)=>b[0].length-a[0].length);
 
 
 function addFood(name,cal,group="other"){
@@ -770,7 +787,23 @@ cal}
 return true}
 
 function parseFood(text){
-let t=text.toLowerCase().replace(/bananas/g,"banana").replace(/apples/g,"apple");
+let t=text.toLowerCase().replace(/bananas/g,"banana").replace(/apples/g,"apple").replace(/chilli/g,"chili");
+
+/* Recognize obvious restaurant items without making the user repeat the restaurant name. */
+if(/\bbig mac\b/.test(t)){ addFood("McDonald's Big Mac",590,"other"); respond("Got it. I added a McDonald's Big Mac. About 590 calories.","ð Big Mac added â¢ ~590 cal"); return true; }
+if(/(?:tim hortons|timmies).*\bchili\b|\btim hortons chili\b|\btimmies chili\b/.test(t)){ addFood("Tim Hortons chili",330,"protein"); respond("Got it. I added Tim Hortons chili as an estimate.","ð¥£ Tim Hortons chili added â¢ ~330 cal"); return true; }
+
+/* Coffee: a plain coffee needs one useful follow-up; detailed coffee can be logged directly. */
+if(/\bcoffee\b/.test(t)){
+ if(!/(black|cream|milk|sugar|double double|triple triple|sweetener)/.test(t)){ pending={type:"coffee"}; respond("What did you have in your coffee?","â What did you have in it?"); return true; }
+ let cal=5,parts=["coffee"];
+ let cm=t.match(/(one|two|three|four|1|2|3|4)\s*cream/), sm=t.match(/(one|two|three|four|1|2|3|4)\s*sugar/);
+ let num=x=>({one:1,two:2,three:3,four:4}[x]||Number(x)||1);
+ if(/double double/.test(t)){cal+=92;parts.push("2 cream + 2 sugar");}
+ else if(/triple triple/.test(t)){cal+=138;parts.push("3 cream + 3 sugar");}
+ else { if(/cream/.test(t)){let q=cm?num(cm[1]):1;cal+=30*q;parts.push(q+" cream");} if(/milk/.test(t)){cal+=25;parts.push("milk");} if(/sugar/.test(t)){let q=sm?num(sm[1]):1;cal+=16*q;parts.push(q+" sugar");} }
+ addFood(parts.join(" + "),cal,"other"); respond(`Got it. About ${cal} calories.`,`â Coffee added â¢ ~${cal} cal`); return true;
+}
 
 /* Common Canadian restaurant language. Ask a short follow-up when the item is too vague. */
 if(/mcdonald'?s|mcdonalds|wendy'?s|wendys|tim hortons|timmies/.test(t)){
@@ -822,13 +855,6 @@ return finishSandwich(t,{
 type:"sandwich",...s}
 )}
 
-if(/\bcoffee\b/.test(t)&&!/(black|cream|milk|sugar|latte|cappuccino)/.test(t)){
-pending={
-type:"coffee"}
-;
-respond("Got it. Was your coffee black, or did you have cream, milk or sugar?","\u2615 Black, cream, milk or sugar?");
-return true}
-
 if(/\bsalad\b/.test(t)&&!/(caesar|dressing|ranch|chicken|tomato|lettuce|cucumber|pepper)/.test(t)){
 pending={
 type:"salad"}
@@ -847,7 +873,11 @@ found.push({
 name,cal,group}
 )}
 if(!found.length)return false;
-found.forEach(f=>addFood(f.name,f.cal,f.group));
+found=found.map(f=>{
+ let rx=new RegExp("(?:^|\\b)(one|two|three|four|five|six|1|2|3|4|5|6)\\s+(?:[a-z]+\\s+){0,2}"+f.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+ let m=t.match(rx), q=m?qtyWord(m[1]):1; q=q||1; return {...f,qty:q,cal:f.cal*q};
+});
+found.forEach(f=>addFood((f.qty>1?f.qty+" Ã ":"")+f.name,f.cal,f.group));
 let c=found.reduce((s,f)=>s+f.cal,0);
 respond(`Got it. I added ${
 found.map(f=>f.name).join(" and ")}
@@ -898,23 +928,18 @@ return true}
 
 if(pending.type==="coffee"){
 let cal=5,parts=["coffee"];
-if(/cream/.test(t)){
-cal+=30;
-parts.push("cream")}
-if(/milk/.test(t)){
-cal+=25;
-parts.push("milk")}
-if(/sugar/.test(t)){
-cal+=16;
-parts.push("sugar")}
-addFood(parts.join(" + "),cal);
-pending=null;
-respond(`Got it. About ${
-cal}
- calories.`,`\u2615 Coffee added \u2022 ~${
-cal}
- cal`);
-return true}
+let num=x=>({one:1,two:2,three:3,four:4}[x]||Number(x)||1);
+if(/black/.test(t)){parts.push("black");}
+else if(/double double/.test(t)){cal+=92;parts.push("2 cream + 2 sugar");}
+else if(/triple triple/.test(t)){cal+=138;parts.push("3 cream + 3 sugar");}
+else {
+ let cm=t.match(/(one|two|three|four|1|2|3|4)\s*cream/),sm=t.match(/(one|two|three|four|1|2|3|4)\s*sugar/);
+ if(/cream/.test(t)){let q=cm?num(cm[1]):1;cal+=30*q;parts.push(q+" cream");}
+ if(/milk/.test(t)){cal+=25;parts.push("milk");}
+ if(/sugar/.test(t)){let q=sm?num(sm[1]):1;cal+=16*q;parts.push(q+" sugar");}
+}
+addFood(parts.join(" + "),cal,"other"); pending=null; respond(`Got it. About ${cal} calories.`,`â Coffee added â¢ ~${cal} cal`); return true}
+
 
 if(pending.type==="movementTime"){
 let m=durationMinutes(t);
@@ -1391,6 +1416,13 @@ if(document.getElementById("scoreBreakdown"))scoreBreakdown.innerHTML=
 <div class="scoreLine">\uD83D\uDD25 Today <b>${sc.total}/100</b></div>`;
 }
 
+const CHALLENGE_NAMES=["Heather","Kate","Kathy","Pauline","Cheri","Karen"];
+function renderChallenge(){
+ const box=document.getElementById("challengeBoard"); if(!box)return;
+ const mine=profile?.name||""; const myPoints=daysForPeriod("month").reduce((a,d)=>a+scoreDay(d).total,0);
+ box.innerHTML=CHALLENGE_NAMES.map(n=>`<div class="historyItem"><span><strong>${n}</strong>${n.toLowerCase()===mine.toLowerCase()?" â¢ You":""}</span><span><strong>${n.toLowerCase()===mine.toLowerCase()?myPoints:"â"}</strong> pts</span></div>`).join("");
+}
+
 function saveGoal(){
 if(!profile)return;
 let s=Number(startWeightSetting.value),g=Number(goalWeightSetting.value);
@@ -1526,7 +1558,11 @@ renderHistory();
 renderWeight();
 renderSettings();
 updateNudge();
-renderScores()}
+renderScores();
+renderChallenge()}
+
+document.addEventListener("visibilitychange",()=>{if(document.hidden){stopRoutine(false);stopSound();}});
+window.addEventListener("pagehide",()=>{stopRoutine(false);stopSound();});
 
 ensureToday();
 render();
