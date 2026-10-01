@@ -454,6 +454,8 @@ grid-template-columns:repeat(2,1fr)}
 <input id="startWeightSetting" type="number" step=".1" placeholder="Starting weight">
 <input id="goalWeightSetting" type="number" step=".1" placeholder="Goal weight">
 <button class="btn" onclick="saveGoal()">Save Goal</button>
+<button class="btn" style="width:100%;margin-top:10px" onclick="openWeightLossPlan()">&#127919; Weight-Loss Plan</button>
+<div id="weightLossSummary" class="voiceNote" style="margin-top:10px">Set up your personal calorie and step targets.</div>
 </div>
 <div style="margin-top:18px">
 <strong>Fix Today's Entries</strong>
@@ -803,6 +805,29 @@ if(/\bcoffee\b/.test(t)){
  else if(/triple triple/.test(t)){cal+=138;parts.push("3 cream + 3 sugar");}
  else { if(/cream/.test(t)){let q=cm?num(cm[1]):1;cal+=30*q;parts.push(q+" cream");} if(/milk/.test(t)){cal+=25;parts.push("milk");} if(/sugar/.test(t)){let q=sm?num(sm[1]):1;cal+=16*q;parts.push(q+" sugar");} }
  addFood(parts.join(" + "),cal,"other"); respond(`Got it. About ${cal} calories.`,`â Coffee added â¢ ~${cal} cal`); return true;
+}
+
+/* Pita Pit Canada â recognize the restaurant and common current menu/signature wording.
+   Exact builds vary, so custom pitas/bowls ask for details rather than pretending every combination is identical. */
+if(/pita pit/.test(t)){
+  const signatures=[
+    ["spicy falafel",410],["cajun chicken caesar",320],["chicken bruschetta",400],["zesty chicken and bacon",420],["zesty chicken & bacon",420]
+  ];
+  for(const [item,base] of signatures){
+    if(t.includes(item)){
+      let cal=base,format="signature filling";
+      if(/regular|large|pita/.test(t)){cal+=200;format="regular pita";}
+      else if(/small pita|small/.test(t)){cal+=120;format="small pita";}
+      else if(/rice bowl|bowl/.test(t)){cal+=180;format="regular rice bowl";}
+      else if(/salad/.test(t)){cal+=50;format="regular salad";}
+      addFood(`Pita Pit ${item} â¢ ${format}`,cal,"mixed");
+      respond(`Got it. I added your Pita Pit ${item} as an estimate. About ${cal} calories.`,`ð¥ Pita Pit added â¢ ~${cal} cal`);
+      return true;
+    }
+  }
+  pending={type:"restaurant",brand:"Pita Pit",item:"custom order"};
+  respond("Pita Pit â got it. What did you have? Tell me the pita, salad or rice bowl, the protein, size, toppings and sauce if you know them.","ð¥ What was in your Pita Pit order?");
+  return true;
 }
 
 /* Common Canadian restaurant language. Ask a short follow-up when the item is too vague. */
@@ -1423,6 +1448,51 @@ function renderChallenge(){
  box.innerHTML=CHALLENGE_NAMES.map(n=>`<div class="historyItem"><span><strong>${n}</strong>${n.toLowerCase()===mine.toLowerCase()?" â¢ You":""}</span><span><strong>${n.toLowerCase()===mine.toLowerCase()?myPoints:"â"}</strong> pts</span></div>`).join("");
 }
 
+function openWeightLossPlan(){
+if(!profile)return;
+let ft=profile.heightFt||"",inch=profile.heightIn||"",age=profile.age||"",activity=profile.activityLevel||"light",steps=profile.stepGoal||7500;
+showModal(`<h2>&#127919; Weight-Loss Plan</h2>
+<div class="sub">Set this once and change it anytime. Your information stays on this device.</div>
+<label class="small">Age</label><input id="planAge" type="number" min="18" max="100" inputmode="numeric" value="${age}" placeholder="Age">
+<div class="row"><div style="flex:1"><label class="small">Height â feet</label><input id="planFt" type="number" min="4" max="7" inputmode="numeric" value="${ft}" placeholder="ft"></div><div style="flex:1"><label class="small">inches</label><input id="planIn" type="number" min="0" max="11" inputmode="numeric" value="${inch}" placeholder="in"></div></div>
+<label class="small">Current weight (lb)</label><input id="planCurrent" type="number" step=".1" value="${today.weight||profile.startingWeight||""}" placeholder="Current weight">
+<label class="small">Goal weight (lb)</label><input id="planGoal" type="number" step=".1" value="${profile.goalWeight||""}" placeholder="Goal weight">
+<label class="small">Usual activity level</label><select id="planActivity"><option value="sedentary" ${activity==="sedentary"?"selected":""}>Mostly sitting / little exercise</option><option value="light" ${activity==="light"?"selected":""}>Lightly active</option><option value="moderate" ${activity==="moderate"?"selected":""}>Moderately active</option><option value="very" ${activity==="very"?"selected":""}>Very active</option></select>
+<label class="small">Daily step goal</label><select id="planSteps"><option value="6000" ${steps==6000?"selected":""}>6,000</option><option value="7500" ${steps==7500?"selected":""}>7,500</option><option value="10000" ${steps==10000?"selected":""}>10,000</option><option value="10001" ${steps==10001?"selected":""}>10,000+</option></select>
+<button class="primary" style="width:100%;margin-top:10px" onclick="saveWeightLossPlan()">Save My Plan</button>
+<div class="small" style="margin-top:10px">Calorie targets are estimates, not medical advice. Activity is built into the estimate, so exercise calories are not automatically added back to your food target.</div>`);
+}
+
+function caloriePlan(){
+if(!profile?.age||profile.heightFt==null||profile.heightIn==null)return null;
+let lb=Number(today.weight||profile.startingWeight),age=Number(profile.age),cm=(Number(profile.heightFt)*12+Number(profile.heightIn))*2.54;
+if(!lb||!age||!cm)return null;
+let kg=lb*0.45359237;
+let bmr=10*kg+6.25*cm-5*age-161;
+let mult={sedentary:1.2,light:1.375,moderate:1.55,very:1.725}[profile.activityLevel]||1.375;
+let maintenance=Math.round(bmr*mult/10)*10;
+let losing=profile.goalWeight&&Number(profile.goalWeight)<lb;
+let target=losing?Math.max(1200,Math.round((maintenance-500)/10)*10):maintenance;
+return {maintenance,target};
+}
+
+function saveWeightLossPlan(){
+let age=Number(document.getElementById("planAge")?.value),ft=Number(document.getElementById("planFt")?.value),inch=Number(document.getElementById("planIn")?.value),current=Number(document.getElementById("planCurrent")?.value),goal=Number(document.getElementById("planGoal")?.value),activity=document.getElementById("planActivity")?.value,steps=Number(document.getElementById("planSteps")?.value);
+if(!age||age<18||!ft||inch<0||inch>11||!current||!goal){showHeard("Please add age, height, current weight and goal weight.");return;}
+profile.age=age;profile.heightFt=ft;profile.heightIn=inch;profile.activityLevel=activity;profile.stepGoal=steps;
+if(!profile.startingWeight)profile.startingWeight=current;
+profile.goalWeight=goal;today.weight=current;saveProfile();saveToday();closeModal();render();
+let cp=caloriePlan();
+if(cp)speak(`Your plan is saved. Your estimated daily calorie target is about ${cp.target} calories, and your step goal is ${steps===10001?"ten thousand plus":steps.toLocaleString()} steps.`);
+}
+
+function renderWeightLossSummary(){
+let el=document.getElementById("weightLossSummary");if(!el)return;let cp=caloriePlan();
+if(!cp){el.textContent="Set up your personal calorie and step targets.";return;}
+let sg=Number(profile.stepGoal)||7500,remaining=Math.max(0,(sg===10001?10000:sg)-(Number(today.steps)||0));
+el.innerHTML=`<strong>Daily calorie target: ~${cp.target.toLocaleString()}</strong><br>Estimated maintenance: ~${cp.maintenance.toLocaleString()} cal â¢ Step goal: ${sg===10001?"10,000+":sg.toLocaleString()}${remaining?` â¢ ${remaining.toLocaleString()} steps to goal`:" â¢ Step goal reached!"}`;
+}
+
 function saveGoal(){
 if(!profile)return;
 let s=Number(startWeightSetting.value),g=Number(goalWeightSetting.value);
@@ -1543,6 +1613,7 @@ escapeHTML(profile.name)}
 <br>Your settings are saved on this device.`;
 startWeightSetting.value=profile.startingWeight||"";
 goalWeightSetting.value=profile.goalWeight||"";
+renderWeightLossSummary();
 updateVoiceButton()}
 
 function render(){
@@ -1551,6 +1622,11 @@ header();
 calTotal.textContent=foodTotal();
 waterTotal.textContent=today.water||0;
 stepTotal.textContent=(today.steps||0).toLocaleString();
+let cp=caloriePlan();
+let calLabel=calTotal.parentElement?.querySelector(".label");
+if(calLabel)calLabel.textContent=cp?`Calories / ~${cp.target.toLocaleString()}`:"Calories";
+let stepLabel=stepTotal.parentElement?.querySelector(".label"),sg=Number(profile?.stepGoal)||0;
+if(stepLabel)stepLabel.textContent=sg?`Steps / ${sg===10001?"10,000+":sg.toLocaleString()}`:"Steps";
 sleepTotal.textContent=today.sleep!=null?today.sleep+"h":"\u2014";
 renderFood();
 renderMovement();
