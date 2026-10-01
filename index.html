@@ -688,8 +688,8 @@ const FOOD=[
 ["spaghetti with meat sauce",500,"mixed"],["spaghetti",350,"grain"],["lasagna",450,"mixed"],["noodles",220,"grain"],["mac and cheese",350,"grain"],["fettuccine alfredo",650,"grain"],["ravioli",400,"grain"],["pasta",220,"grain"],
 ["fish tacos",220,"mixed"],["shrimp tacos",220,"mixed"],["chicken tacos",210,"mixed"],["beef tacos",220,"mixed"],["taco salad",450,"mixed"],["tacos",200,"mixed"],["taco",200,"mixed"],["burrito",500,"mixed"],["quesadilla",500,"mixed"],["nachos",550,"other"],
 ["stuffed mushrooms",180,"veg"],["stuffed peppers",350,"mixed"],["stuffed pepper",350,"mixed"],["stuffed potato",350,"mixed"],
-["celery stick",6,"veg"],["celery",10,"veg"],["red pepper",30,"veg"],["green pepper",30,"veg"],["yellow pepper",30,"veg"],["bell pepper",30,"veg"],["cherry tomatoes",30,"veg"],["tomato",22,"veg"],["carrots",35,"veg"],["carrot",25,"veg"],["cucumber",30,"veg"],["broccoli",55,"veg"],["cauliflower",30,"veg"],["lettuce",10,"veg"],["spinach",20,"veg"],["peas",65,"veg"],["green beans",40,"veg"],["corn",90,"veg"],["potato",160,"veg"],["sweet potato",115,"veg"],["banana",105,"fruit"],["apple",95,"fruit"],["orange",65,"fruit"],["pear",100,"fruit"],["peach",60,"fruit"],["plum",30,"fruit"],["kiwi",45,"fruit"],["grapes",60,"fruit"],["strawberries",50,"fruit"],["blueberries",85,"fruit"],["raspberries",65,"fruit"],["blackberries",60,"fruit"],["watermelon",85,"fruit"],["cantaloupe",55,"fruit"],["pineapple",80,"fruit"],["mango",100,"fruit"],["avocado",240,"veg"],
-["granola bar",150,"other"],["protein bar",200,"protein"],["scrambled eggs",180,"protein"],["boiled egg",75,"protein"],["eggs",150,"protein"],["egg",75,"protein"],["greek yogurt",130,"protein"],["yogurt",120,"protein"],["cottage cheese",120,"protein"],["cheese slice",80,"protein"],["cheese",110,"protein"],["milk",120,"protein"],["almond milk",40,"other"],["chicken breast",220,"protein"],["chicken wings",450,"protein"],["chicken",220,"protein"],["turkey",100,"protein"],["ham",120,"protein"],["beef",250,"protein"],["steak",350,"protein"],["pork chop",250,"protein"],["pork",250,"protein"],["salmon",230,"protein"],["fish",200,"protein"],["tuna",140,"protein"],["shrimp",120,"protein"],["tofu",150,"protein"],["beans",200,"protein"],
+["celery stick",6,"veg"],["celery",10,"veg"],["red pepper",30,"veg"],["green pepper",30,"veg"],["yellow pepper",30,"veg"],["bell pepper",30,"veg"],["cherry tomatoes",30,"veg"],["tomato",22,"veg"],["carrots",35,"veg"],["carrot",25,"veg"],["cucumber",30,"veg"],["broccoli",55,"veg"],["cauliflower",30,"veg"],["lettuce",10,"veg"],["spinach",20,"veg"],["peas",65,"veg"],["green beans",40,"veg"],["corn",90,"veg"],["scalloped potatoes",250,"veg"],["scallop potatoes",250,"veg"],["mashed potatoes",210,"veg"],["roasted potatoes",180,"veg"],["boiled potatoes",135,"veg"],["potato",160,"veg"],["sweet potato",115,"veg"],["banana",105,"fruit"],["apple",95,"fruit"],["orange",65,"fruit"],["pear",100,"fruit"],["peach",60,"fruit"],["plum",30,"fruit"],["kiwi",45,"fruit"],["grapes",60,"fruit"],["strawberries",50,"fruit"],["blueberries",85,"fruit"],["raspberries",65,"fruit"],["blackberries",60,"fruit"],["watermelon",85,"fruit"],["cantaloupe",55,"fruit"],["pineapple",80,"fruit"],["mango",100,"fruit"],["avocado",240,"veg"],
+["organic granola bites",100,"other"],["cheerios energy chewy bar",140,"other"],["cheerio energy chewy bar",140,"other"],["granola bar",150,"other"],["protein bar",200,"protein"],["scrambled eggs",180,"protein"],["boiled egg",75,"protein"],["eggs",150,"protein"],["egg",75,"protein"],["greek yogurt",130,"protein"],["yogurt",120,"protein"],["cottage cheese",120,"protein"],["cheese slice",80,"protein"],["cheese",110,"protein"],["milk",120,"protein"],["almond milk",40,"other"],["chicken breast",220,"protein"],["chicken wings",450,"protein"],["chicken",220,"protein"],["turkey",100,"protein"],["ham",120,"protein"],["beef",250,"protein"],["steak",350,"protein"],["pork chop",250,"protein"],["pork",250,"protein"],["salmon",230,"protein"],["fish",200,"protein"],["tuna",140,"protein"],["shrimp",120,"protein"],["tofu",150,"protein"],["beans",200,"protein"],
 ["whole wheat toast",90,"grain"],["toast",90,"grain"],["whole wheat bread",85,"grain"],["bread",80,"grain"],["bagel",280,"grain"],["english muffin",130,"grain"],["tortilla",140,"grain"],["brown rice",215,"grain"],["rice",205,"grain"],["oatmeal",160,"grain"],["cereal",160,"grain"],["crackers",120,"grain"],["popcorn",100,"grain"],
 ["pizza slice",285,"other"],["pizza",285,"other"],["hamburger",400,"other"],["burger",400,"other"],["hot dog",290,"other"],["french fries",365,"other"],["fries",365,"other"],["caesar salad",350,"veg"],["salad",100,"veg"],["peanut butter",95,"protein"],["almond butter",100,"protein"],["nuts",170,"protein"],["almonds",165,"protein"],["walnuts",185,"protein"],["chips",160,"other"],["cookie",90,"other"],["cookies",180,"other"],["brownie",220,"other"],["cake",300,"other"],["ice cream",270,"other"],["chocolate",150,"other"],["latte",150,"other"],["cappuccino",100,"other"],["orange juice",110,"fruit"],["apple juice",115,"fruit"],["smoothie",200,"fruit"],
 ["bud light",110,"other"],["michelob ultra",95,"other"],["coors light",102,"other"],["craft beer",180,"other"],["beer",150,"other"],["cooler",180,"other"],["vodka soda",100,"other"],["rum and coke",180,"other"],["rye and ginger",180,"other"],["caesar cocktail",180,"other"],["vodka",100,"other"],["rum",100,"other"],["whisky",100,"other"],["whiskey",100,"other"],["rye",100,"other"],["gin",100,"other"],["tequila",100,"other"]
@@ -805,6 +805,20 @@ if(/\bcoffee\b/.test(t)){
  else if(/triple triple/.test(t)){cal+=138;parts.push("3 cream + 3 sugar");}
  else { if(/cream/.test(t)){let q=cm?num(cm[1]):1;cal+=30*q;parts.push(q+" cream");} if(/milk/.test(t)){cal+=25;parts.push("milk");} if(/sugar/.test(t)){let q=sm?num(sm[1]):1;cal+=16*q;parts.push(q+" sugar");} }
  addFood(parts.join(" + "),cal,"other"); respond(`Got it. About ${cal} calories.`,`â Coffee added â¢ ~${cal} cal`); return true;
+}
+
+/* Bagels: ask for the kind and topping/spread before estimating. */
+if(/\bbagel\b/.test(t) && !/(cream cheese|butter|cheddar|peanut butter|\bjam\b|plain)/.test(t)){
+  pending={type:"bagel",brand:/tim hortons|timmies/.test(t)?"Tim Hortons":""};
+  respond("What kind of bagel was it, and what did you have on it â cream cheese, butter, cheddar, peanut butter, jam, plain, or something else?","ð¥¯ What kind of bagel and what was on it?");
+  return true;
+}
+
+/* A vague potato entry needs preparation before calories are estimated. */
+if(/\bpotatoes?\b/.test(t) && !/(mashed|scalloped|scallop|roasted|boiled|baked|fries|french fries|stuffed|sweet potato)/.test(t)){
+  pending={type:"potato"};
+  respond("What kind of potatoes â mashed, scalloped, roasted or boiled?","ð¥ Mashed, scalloped, roasted or boiled?");
+  return true;
 }
 
 /* Pita Pit Canada â recognize the restaurant and common current menu/signature wording.
@@ -933,6 +947,43 @@ if(pending.type==="restaurant"){
   pending=null;
   respond("Perfect. I logged that restaurant meal as an estimate. You can always delete it and re-add it if you want to change the details.","\uD83C\uDF7D\uFE0F Restaurant meal logged \u2022 estimated");
   return true;
+}
+
+if(pending.type==="bagel"){
+  let cal=280,parts=[];
+  if(/everything/.test(t))parts.push("everything bagel");
+  else if(/sesame/.test(t))parts.push("sesame bagel");
+  else if(/cinnamon raisin/.test(t))parts.push("cinnamon raisin bagel");
+  else if(/whole wheat|whole grain/.test(t))parts.push("whole wheat bagel");
+  else if(/plain bagel|\bplain\b/.test(t))parts.push("plain bagel");
+  else parts.push("bagel");
+  let extras=[];
+  if(/cream cheese/.test(t)){cal+=100;extras.push("cream cheese");}
+  if(/\bbutter\b/.test(t)){cal+=70;extras.push("butter");}
+  if(/cheddar/.test(t)){cal+=110;extras.push("cheddar");}
+  if(/peanut butter/.test(t)){cal+=95;extras.push("peanut butter");}
+  if(/\bjam\b/.test(t)){cal+=50;extras.push("jam");}
+  let label=(pending.brand?pending.brand+" ":"")+parts[0]+(extras.length?" with "+extras.join(" + "):"");
+  addFood(label,cal,"grain"); pending=null;
+  respond(`Got it. I added ${label}. About ${cal} calories.`,`ð¥¯ Bagel added â¢ ~${cal} cal`); return true;
+}
+
+if(pending.type==="potato"){
+  let cal=160,name="potatoes";
+  if(/mashed/.test(t)){cal=210;name="mashed potatoes";}
+  else if(/scalloped|scallop/.test(t)){cal=250;name="scalloped potatoes";}
+  else if(/roasted/.test(t)){cal=180;name="roasted potatoes";}
+  else if(/boiled/.test(t)){cal=135;name="boiled potatoes";}
+  else {respond("Was that mashed, scalloped, roasted or boiled?","ð¥ Mashed, scalloped, roasted or boiled?");return true;}
+  let extras=[];
+  if(/\bbutter\b/.test(t)){cal+=70;extras.push("butter");}
+  if(/gravy/.test(t)){cal+=50;extras.push("gravy");}
+  if(/sour cream/.test(t)){cal+=60;extras.push("sour cream");}
+  if(/\bcheese\b|cheddar/.test(t)){cal+=110;extras.push("cheese");}
+  if(/\boil\b/.test(t)){cal+=40;extras.push("oil");}
+  let label=name+(extras.length?" with "+extras.join(" + "):"");
+  addFood(label,cal,"veg"); pending=null;
+  respond(`Got it. I added ${label}. About ${cal} calories.`,`ð¥ Potatoes added â¢ ~${cal} cal`); return true;
 }
 
 if(pending.type==="sandwich")return finishSandwich(t,pending);
