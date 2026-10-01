@@ -821,12 +821,12 @@ if(/pita pit/.test(t)){
       else if(/rice bowl|bowl/.test(t)){cal+=180;format="regular rice bowl";}
       else if(/salad/.test(t)){cal+=50;format="regular salad";}
       addFood(`Pita Pit ${item} â¢ ${format}`,cal,"mixed");
-      respond(`Got it. I added your Pita Pit ${item} as an estimate. About ${cal} calories.`,`ð¥ Pita Pit added â¢ ~${cal} cal`);
+      respond(`Got it. I added your Pita Pit ${item} as an estimate. About ${cal} calories.`,`\uD83E\uDD59 Pita Pit added \u2022 ~${cal} cal`);
       return true;
     }
   }
   pending={type:"restaurant",brand:"Pita Pit",item:"custom order"};
-  respond("Pita Pit â got it. What did you have? Tell me the pita, salad or rice bowl, the protein, size, toppings and sauce if you know them.","ð¥ What was in your Pita Pit order?");
+  respond("Pita Pit â got it. What did you have? Tell me the pita, salad or rice bowl, the protein, size, toppings and sauce if you know them.",String.fromCodePoint(0x1F959)+" What was in your Pita Pit order?");
   return true;
 }
 
@@ -1445,7 +1445,7 @@ const CHALLENGE_NAMES=["Heather","Kate","Kathy","Pauline","Cheri","Karen"];
 function renderChallenge(){
  const box=document.getElementById("challengeBoard"); if(!box)return;
  const mine=profile?.name||""; const myPoints=daysForPeriod("month").reduce((a,d)=>a+scoreDay(d).total,0);
- box.innerHTML=CHALLENGE_NAMES.map(n=>`<div class="historyItem"><span><strong>${n}</strong>${n.toLowerCase()===mine.toLowerCase()?" â¢ You":""}</span><span><strong>${n.toLowerCase()===mine.toLowerCase()?myPoints:"â"}</strong> pts</span></div>`).join("");
+ box.innerHTML=CHALLENGE_NAMES.map(n=>`<div class="historyItem"><span><strong>${n}</strong>${n.toLowerCase()===mine.toLowerCase()?" &#8226; You":""}</span><span><strong>${n.toLowerCase()===mine.toLowerCase()?myPoints:"&#8212;"}</strong> pts</span></div>`).join("");
 }
 
 function openWeightLossPlan(){
